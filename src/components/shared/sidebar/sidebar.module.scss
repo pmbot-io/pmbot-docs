@@ -1,0 +1,125 @@
+.wrapper {
+  position: relative;
+  padding: 30px 30px 30px 0;
+  width: 310px;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(180deg, #f8f5ff 0%, $color-tertiary 100%);
+    z-index: -1;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      $color-additional-1 0%,
+      rgba(238, 236, 249, 0) 100%
+    );
+  }
+}
+
+.nav {
+  margin-top: 30px;
+  & > * + * {
+    margin-top: 20px;
+  }
+}
+
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  &-main {
+    padding-bottom: 25px;
+    &::after {
+      content: '';
+      position: absolute;
+      right: -30px;
+      bottom: 0;
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(
+        270.19deg,
+        $color-additional-1 0%,
+        rgba(238, 236, 249, 0) 100%
+      );
+    }
+    .title {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.menu {
+  & > * + * {
+    margin-top: 10px;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: $font-size-xs - 1;
+  line-height: 120%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $color-primary;
+  text-decoration: none;
+  transition: color $transition-base;
+  &:hover {
+    color: $color-secondary;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-size: $font-size-xs;
+  color: $color-secondary;
+  text-decoration: none;
+  font-weight: normal;
+  text-transform: initial;
+  transition: color $transition-base;
+  &-active {
+    color: $color-accent-secondary;
+    .arrow {
+      transform: rotate(-90deg);
+    }
+  }
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.dropdown {
+  display: none;
+  flex-direction: column;
+  padding-left: 15px;
+  margin-top: 10px;
+  & > * + * {
+    margin-top: 10px;
+  }
+  &-active {
+    display: flex;
+  }
+  .link-active {
+    &::before {
+      content: '●';
+      position: absolute;
+      left: -15px;
+      color: $color-accent-secondary;
+    }
+  }
+}

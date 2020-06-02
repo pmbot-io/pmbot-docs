@@ -1,0 +1,29 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  outline: none;
+  padding: 14px 15px 14px 45px;
+  line-height: 1;
+  background: $color-tertiary;
+  border: 2px solid $color-additional-1;
+  width: 100%;
+  transition: border-color $transition-base;
+  &::placeholder {
+    color: $color-secondary;
+  }
+  &:hover {
+    border-color: #a894d1;
+  }
+  &:focus {
+    border-color: $color-accent-primary;
+  }
+}
+
+.icon {
+  position: absolute;
+  left: 15px;
+}
