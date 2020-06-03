@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: $font-size-xs - 1;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: $color-accent-secondary;
+  text-decoration: none;
+  transition: color $transition-base;
+  &:hover {
+    color: $color-accent-primary;
+  }
+  &-active {
+    color: $color-primary;
+  }
+}
+
+.icon {
+  margin: 0 10px;
+}
