@@ -1,11 +1,100 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import styles from './sidebar.module.scss';
 import Search from 'components/shared/search';
-import { Link } from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 import ArrowSvg from 'images/arrow.inline.svg';
+import { slugify } from 'utils';
 
-const Sidebar = props => (
+const doesPathnameMatch = path => {
+  const maybePrefixedPath = withPrefix(path);
+  const doesPathMatchLocation = maybePrefixedPath === window.location.pathname;
+
+  return doesPathMatchLocation;
+};
+
+// renders sidebar nodes from passed children prop, recursively
+const SidebarNode = ({
+  node: {
+    meta: { path, title },
+    name,
+  },
+}) => {
+  const [isActive, setIsActive] = useState(false);
+  const isLink = !!path;
+
+  useEffect(() => {
+    setIsActive(doesPathnameMatch(path));
+  }, []);
+
+  return (
+    <>
+      {isLink ? (
+        <Link
+          to={path}
+          className={`${styles.link} ${isActive ? styles.linkActive : ''}`}
+        >
+          {title || name}
+        </Link>
+      ) : (
+        <span className={styles.title}>{title || name}</span>
+      )}
+    </>
+  );
+};
+
+const Sidebar = ({ sidebar, pageSlug }) => {
+  const pathContainsCategory = (path, category) => path.includes(category);
+  return (
+    <div className={styles.wrapper}>
+      <Search />
+      <nav className={styles.nav}>
+        {Object.values(sidebar).map(
+          ({ meta: { title, path }, name, children }, i) =>
+            i === 0 ? (
+              <div
+                key={name}
+                className={cn(styles.section, styles.sectionMain)}
+              >
+                <span className={styles.title}>{title || name}</span>
+                <div className={styles.menu}>
+                  {Object.values(children).map(node => (
+                    <SidebarNode node={node} key={node.name} />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div key={name} className={styles.section}>
+                <span
+                  onClick={e =>
+                    e.target.nextSibling.classList.toggle(styles.dropdownActive)
+                  }
+                  className={styles.title}
+                >
+                  {title || name}
+                  <ArrowSvg className={styles.arrow} />
+                </span>
+                <div
+                  className={cn(styles.dropdown, {
+                    [styles.dropdownActive]: pathContainsCategory(
+                      pageSlug,
+                      name
+                    ),
+                  })}
+                >
+                  {Object.values(children).map(node => (
+                    <SidebarNode node={node} key={node.name} />
+                  ))}
+                </div>
+              </div>
+            )
+        )}
+      </nav>
+    </div>
+  );
+};
+
+const Sidebar_ = props => (
   <div className={styles.wrapper}>
     <Search />
     <nav className={styles.nav}>
@@ -13,7 +102,7 @@ const Sidebar = props => (
         <span className={styles.title}>Documentation</span>
         <div className={styles.menu}>
           <Link
-            to={'#'}
+            to={'/docs/'}
             className={styles.link}
             activeClassName={styles.linkActive}
           >
@@ -41,7 +130,7 @@ const Sidebar = props => (
           className={styles.title}
           activeClassName={styles.linkActive}
         >
-          Recipes <ArrowSvg className={styles.arrow} />
+          Recipes
         </Link>
         <div className={styles.dropdown}>
           <Link

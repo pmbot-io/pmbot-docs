@@ -1,11 +1,10 @@
 require('dotenv').config();
 
 module.exports = {
+  pathPrefix: '/docs',
   siteMetadata: {
-    siteTitle:
-      'Pixel Point Gatsby Starter', // <title>
-    siteDescription:
-      'Site Description',
+    siteTitle: 'Pixel Point Gatsby Starter', // <title>
+    siteDescription: 'Site Description',
     // pathPrefix: "",
     siteImage: '/images/sample-image.png',
     siteLanguage: 'en',
@@ -43,15 +42,36 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'data',
+        path: `${__dirname}/src/data/`,
+      },
+    },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              showLineNumbers: true,
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-svgr-svgo',
       options: {
         inlineSvgOptions: [
           {
             test: /\.inline.svg$/,
             svgoConfig: {
-              plugins: [{
-                removeViewBox: false,
-              },
+              plugins: [
+                {
+                  removeViewBox: false,
+                },
               ],
             },
           },
@@ -60,9 +80,11 @@ module.exports = {
           {
             test: /\.svg$/,
             svgoConfig: {
-              plugins: [{
-                removeViewBox: false,
-              }],
+              plugins: [
+                {
+                  removeViewBox: false,
+                },
+              ],
             },
           },
         ],
@@ -72,11 +94,9 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sass',
       options: {
-        data: '@import "./src/styles/variables.scss" , "./src/styles/mixins.scss";',
+        data:
+          '@import "./src/styles/variables.scss" , "./src/styles/mixins.scss";',
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 };
