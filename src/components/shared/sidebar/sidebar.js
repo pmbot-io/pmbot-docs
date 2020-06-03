@@ -13,7 +13,7 @@ const Sidebar = props => (
         <span className={styles.title}>Documentation</span>
         <div className={styles.menu}>
           <Link
-            to={'#'}
+            to={'/docs/'}
             className={styles.link}
             activeClassName={styles.linkActive}
           >
