@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
+  pathPrefix: '/docs',
   siteMetadata: {
     siteTitle: 'Pixel Point Gatsby Starter', // <title>
     siteDescription: 'Site Description',
@@ -45,13 +46,6 @@ module.exports = {
       options: {
         name: 'data',
         path: `${__dirname}/src/data/`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'markdown',
-        path: `${__dirname}/src/data/markdown`,
       },
     },
     {
@@ -104,8 +98,5 @@ module.exports = {
           '@import "./src/styles/variables.scss" , "./src/styles/mixins.scss";',
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 };

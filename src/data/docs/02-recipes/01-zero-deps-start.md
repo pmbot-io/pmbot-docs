@@ -1,6 +1,5 @@
 ---
-path: '/docs/'
-title: 'Welcome'
+title: 'Zero-deps start'
 excerpt: ''
 ---
 

@@ -1,21 +1,24 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './breadcrumbs.module.scss';
 import { Link } from 'gatsby';
 import ArrowSvg from 'images/arrow.inline.svg';
+import styles from './breadcrumbs.module.scss';
 
-const Breadcrumbs = props => (
-  <div className={styles.wrapper}>
-    <Link to={'#'} className={styles.link}>
-      Docs <ArrowSvg className={styles.icon} />
-    </Link>
-    <Link to={'#'} className={styles.link}>
-      Reference Guides <ArrowSvg className={styles.icon} />
-    </Link>
-    <span className={cn(styles.link, styles.linkActive)}>
-      Deploying & Hosting
-    </span>
-  </div>
-);
+const Breadcrumbs = ({ breadcrumbs }) =>
+  breadcrumbs.length ? (
+    <div className={styles.wrapper}>
+      {breadcrumbs.map(({ path, name }, i) =>
+        i !== breadcrumbs.length - 1 ? (
+          <Link key={path} to={path} className={styles.link}>
+            {name} <ArrowSvg className={styles.icon} />
+          </Link>
+        ) : (
+          <span key={path} className={cn(styles.link, styles.linkActive)}>
+            {name}
+          </span>
+        )
+      )}
+    </div>
+  ) : null;
 
 export default Breadcrumbs;

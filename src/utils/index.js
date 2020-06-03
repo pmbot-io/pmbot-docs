@@ -1,3 +1,1 @@
-export {
-  createMetaImagePath,
-} from './utils';
+export { createMetaImagePath, slugify } from './utils';
