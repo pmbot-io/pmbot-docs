@@ -135,8 +135,8 @@ table {
     display: flex;
     align-items: center;
     padding: 14px 54px 14px 20px;
-    background: #ffffff;
-    border: 2px solid #eeecf9;
+    background: $color-tertiary;
+    border: 2px solid $color-additional-1;
     box-sizing: border-box;
     border-radius: 4px;
     font-weight: 600;
@@ -168,10 +168,14 @@ table {
     margin: 0;
   }
   code {
-    font-family: 'Oxygen Mono';
+    font-family: $font-family-secondary;
     display: block;
     color: $color-tertiary;
     padding: 20px 20px 14px 30px;
+    white-space: break-spaces !important;
+    @include xs-down {
+      font-size: $font-size-xs - 1;
+    }
     .string {
       color: $color-accent-secondary;
     }
@@ -181,7 +185,7 @@ table {
   }
   .line-numbers {
     .line-numbers-rows {
-      font-family: 'Oxygen Mono';
+      font-family: $font-family-secondary;
       padding: 20px 8px 14px 20px;
       border-right: none;
       background-color: rgba($color-tertiary, 0.05);
@@ -201,4 +205,8 @@ table {
       padding-left: 0;
     }
   }
+}
+
+.table {
+  overflow: auto;
 }

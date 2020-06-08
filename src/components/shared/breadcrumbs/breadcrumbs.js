@@ -1,7 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
 import { Link } from 'gatsby';
-import ArrowSvg from 'images/arrow.inline.svg';
 import styles from './breadcrumbs.module.scss';
 
 const Breadcrumbs = ({ breadcrumbs }) =>
@@ -10,7 +9,7 @@ const Breadcrumbs = ({ breadcrumbs }) =>
       {breadcrumbs.map(({ path, name }, i) =>
         i !== breadcrumbs.length - 1 ? (
           <Link key={path} to={path} className={styles.link}>
-            {name} <ArrowSvg className={styles.icon} />
+            {name}
           </Link>
         ) : (
           <span key={path} className={cn(styles.link, styles.linkActive)}>

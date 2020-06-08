@@ -12,11 +12,9 @@ const Main = ({ children, seoMetadata, sidebar = false }) => (
     <Header />
     <main>
       <div className="container">
-        <div className="columns is-multiline">
+        <div className={`columns ${styles.columns}`}>
           <div className="column is-narrow">
-            {!!sidebar && (
-              <Sidebar sidebar={sidebar} pageSlug={seoMetadata.slug} />
-            )}
+            {!!sidebar && <Sidebar sidebar={sidebar} slug={seoMetadata.slug} />}
           </div>
           <div className="column">
             <div className={styles.inner}>{children}</div>

@@ -1,12 +1,34 @@
-import React from 'react';
-import styles from './content.module.scss';
+import React, { useRef } from 'react';
+import { useElementsReplacement } from 'hooks';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+import styles from './content.module.scss';
 import './content.scss';
 
-const Content = ({ content }) => (
-  <div className={styles.wrapper}>
-    <div dangerouslySetInnerHTML={{ __html: content }} />
-  </div>
-);
+const components = {
+  table: ({ mdBlockContent }) => (
+    <div className={styles.tableWrapper}>
+      <table dangerouslySetInnerHTML={{ __html: mdBlockContent }} />
+    </div>
+  ),
+};
+
+const Content = ({ content }) => {
+  const containerRef = useRef(null);
+
+  useElementsReplacement(
+    {
+      containerRef,
+      components,
+    },
+    [content]
+  );
+  return (
+    <div
+      ref={containerRef}
+      className={styles.wrapper}
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
+  );
+};
 
 export default Content;
