@@ -94,7 +94,6 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
         slug: entryPath,
         content: html,
         sidebarTree: getTreePart(['docs']),
-        s: getTree(),
         breadcrumbs,
       },
     });

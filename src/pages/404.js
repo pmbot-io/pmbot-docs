@@ -1,12 +1,16 @@
 import React from 'react';
-import LayoutMain from 'layouts/layout-main';
-import Seo from 'components/shared/seo';
+import { default as LayoutMain } from 'layouts/main';
 
 const NotFoundPage = () => (
-  <LayoutMain>
-    <Seo title="404: Not found" />
+  <LayoutMain
+    seoMetadata={{
+      title: '404: Not Found | Pmbot',
+      content: 'The page does not exist',
+      slug: '/404',
+    }}
+  >
     <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadaaaaaness.</p>
+    <p>You just hit a route that doesn&#39;t exist.</p>
   </LayoutMain>
 );
 

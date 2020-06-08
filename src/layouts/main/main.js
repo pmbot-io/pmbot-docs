@@ -4,9 +4,9 @@ import Header from 'components/shared/header';
 import Footer from 'components/shared/footer';
 import Sidebar from 'components/shared/sidebar';
 import Seo from 'components/shared/seo';
-import styles from './layout-main.module.scss';
+import styles from './main.module.scss';
 
-const LayoutMain = ({ children, seoMetadata, sidebar }) => (
+const Main = ({ children, seoMetadata, sidebar = false }) => (
   <>
     <Seo {...seoMetadata} />
     <Header />
@@ -14,7 +14,9 @@ const LayoutMain = ({ children, seoMetadata, sidebar }) => (
       <div className="container">
         <div className="columns is-multiline">
           <div className="column is-narrow">
-            <Sidebar sidebar={sidebar} pageSlug={seoMetadata.slug} />
+            {!!sidebar && (
+              <Sidebar sidebar={sidebar} pageSlug={seoMetadata.slug} />
+            )}
           </div>
           <div className="column">
             <div className={styles.inner}>{children}</div>
@@ -26,8 +28,8 @@ const LayoutMain = ({ children, seoMetadata, sidebar }) => (
   </>
 );
 
-LayoutMain.propTypes = {
+Main.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default LayoutMain;
+export default Main;

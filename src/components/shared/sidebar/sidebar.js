@@ -4,7 +4,6 @@ import styles from './sidebar.module.scss';
 import Search from 'components/shared/search';
 import { Link, withPrefix } from 'gatsby';
 import ArrowSvg from 'images/arrow.inline.svg';
-import { slugify } from 'utils';
 
 const doesPathnameMatch = path => {
   const maybePrefixedPath = withPrefix(path);

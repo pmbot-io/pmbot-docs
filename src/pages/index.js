@@ -1,12 +1,10 @@
-import React from 'react';
+import { navigate } from 'gatsby';
 
-import LayoutMain from 'layouts/layout-main';
-import Seo from 'components/shared/seo';
-
-const IndexPage = () => (
-  <LayoutMain>
-    <Seo />
-  </LayoutMain>
-);
+const IndexPage = () => {
+  if (typeof window !== 'undefined') {
+    navigate('/documentation/introduction');
+  }
+  return null;
+};
 
 export default IndexPage;
