@@ -13,12 +13,18 @@ const {
 // creating-docs-pages-specific function; extracts the category after
 // 'docs'; e.g. /whatever/some-more -> whatever
 // getDocSection(str: String) -> String
-const getDocTopLevelSection = str => [str.replace(/^(.*?)\/.*$/, '$1')];
+const getDocTopLevelSection = str => str.replace(/^\/(.*?)\/.*$/, '$1');
 
 const stripDocRoot = str => str.replace(/^\/docs/, '');
 
+const isSectionPage = path => {
+  return path === getDocTopLevelSection(path);
+};
+
 // main doc page template
 const docPageTemplate = path.resolve(`src/templates/doc-page.js`);
+// aux doc page template
+const sectionPageTemplate = path.resolve(`src/templates/doc-section-page.js`);
 
 async function createDocPages({ actions: { createPage }, graphql, reporter }) {
   // doc pages query
@@ -46,7 +52,7 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
   `);
 
   // Tree-structure handlers
-  const { getTree, getTreePart, addNode } = buildFileTree(buildFileTreeNode);
+  const { getTreePart, addNode } = buildFileTree(buildFileTreeNode);
 
   // first iteration, build our tree
   data.allFile.nodes.forEach(({ name, relativeDirectory, children }) => {
@@ -84,10 +90,11 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
 
     // build the breadcrumbs data
     const breadcrumbs = buildBreadcrumbs(entryPath);
-
     createPage({
       path: entryPath,
-      component: docPageTemplate,
+      component: isSectionPage(entryPath)
+        ? sectionPageTemplate
+        : docPageTemplate,
       context: {
         title: title || unorderify(name),
         excerpt,
@@ -95,18 +102,19 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
         content: html,
         sidebarTree: getTreePart(['docs']),
         breadcrumbs,
+        sectionLinks: isSectionPage(entryPath)
+          ? Object.values(getTreePart(['docs', unorderify(name)])).map(
+              ({ meta }) => meta
+            )
+          : undefined,
       },
     });
   });
-
-  // @TODO: generate a bunch of stub pages for top level non file categories
-  // like documentation in order to get every breadcrumb working right
 }
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
   // Adding default values for some fields and moving them under node.fields
-  // because that how createNodeField works
   if (node.frontmatter) {
     createNodeField({
       node,
