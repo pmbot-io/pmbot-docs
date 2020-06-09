@@ -30,7 +30,7 @@ We're now ready to implement the authentication feature. We'll start with an ove
 
 Serialization is a process that happens before objects are returned in a network response. This is an appropriate place to provide rules for transforming and sanitizing the data to be returned to the client.
 
-<div class="notes notes-info">
+<div class="blockquote">
 This approach is not the best fit if you are using CSS-in-JS for styling your site, in which case a layout page with all the shared components should be used. This is covered in the next recipe.
 </div>
 
@@ -38,7 +38,7 @@ Serialization is a process that happens before objects are returned in a network
 
 Plugins enable you to extend Apollo Server's core functionality by performing custom operations in response to certain events. Currently, these events correspond to individual phases of the GraphQL request lifecycle, and to the startup of Apollo Server itself (read more here). For example, a basic logging plugin might log the GraphQL query string associated with each request that's sent to Apollo Server.
 
-<div class="notes notes-attention">
+<div class="blockquote" data-props='{ "mod": "warning" }'>
 As explained on the csurf middleware page, the csurf module requires either session middleware or a cookie-parser to be initialized first. Please see that documentation for further instructions.
 </div>
 
