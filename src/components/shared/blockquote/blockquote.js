@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export const Blockquote = ({ mdBlockContent, mod }) => {
+const Blockquote = ({ mdBlockContent, mod }) => {
   // prevent nesting blockquote tags
   const blockquoteInner = mdBlockContent.replace(/<\/?blockquote>/g, '');
 
@@ -16,3 +16,5 @@ export const Blockquote = ({ mdBlockContent, mod }) => {
     />
   );
 };
+
+export default Blockquote;

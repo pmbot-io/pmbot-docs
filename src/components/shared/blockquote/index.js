@@ -1,1 +1,3 @@
-export { Blockquote } from './blockquote';
+import Blockquote from './blockquote';
+
+export default Blockquote;

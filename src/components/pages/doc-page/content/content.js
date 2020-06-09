@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useElementsReplacement, useScrollToAnchor } from 'hooks';
 import HeadingMark from 'components/shared/heading-mark';
-import { Blockquote } from 'components/shared/blockquote';
+import Blockquote from 'components/shared/blockquote';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import styles from './content.module.scss';
 import './content.scss';
