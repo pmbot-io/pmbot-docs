@@ -1,1 +1,1 @@
-export { createMetaImagePath, slugify } from './utils';
+export { compose, createMetaImagePath, slugify } from './utils';
