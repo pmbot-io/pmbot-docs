@@ -8,6 +8,7 @@ import LinksBlock from 'components/shared/links-block';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import styles from './content.module.scss';
 import './content.scss';
+import PageContentTable from '../page-content-table';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +22,7 @@ const components = {
   ),
   '.blockquote': Blockquote,
   '.links-block': LinksBlock,
+  '.table-of-content': PageContentTable,
 };
 
 const Content = ({ className, content }) => {

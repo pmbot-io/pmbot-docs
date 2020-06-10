@@ -76,5 +76,4 @@ const CodeGroup = ({
     </div>
   );
 };
-
 export default CodeGroup;

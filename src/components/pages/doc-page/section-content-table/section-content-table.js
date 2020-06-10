@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import styles from './content-table.module.scss';
+import styles from './section-content-table.module.scss';
 
-const ContentTable = ({ sectionLinks }) => {
+const SectionContentTable = ({ sectionLinks }) => {
   return (
     <div className={styles.wrapper}>
-      <h2 id="table-of-content">Table of Content</h2>
+      <h2>Table of Content</h2>
       <ul>
         {sectionLinks.map(({ path, title }, i) => (
           <li key={`lr-${i}`}>
@@ -19,4 +19,4 @@ const ContentTable = ({ sectionLinks }) => {
   );
 };
 
-export default ContentTable;
+export default SectionContentTable;

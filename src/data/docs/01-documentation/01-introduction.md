@@ -5,9 +5,7 @@ excerpt: ''
 
 # Deploying & Hosting
 
-- <strong>Using a plugin</strong>
-- <strong>Creating a new plugin</strong>
-- <strong>Installation Guides</strong>
+<div class="table-of-content"></div>
 
 ## Using a plugin
 
