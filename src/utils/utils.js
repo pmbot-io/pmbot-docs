@@ -100,6 +100,13 @@ const buildBreadcrumbs = path => {
   });
 };
 
+// makes a consequence of random digits in form of a string to be served as a key prop
+// getRandomKey() -> String
+const getRandomKey = () =>
+  `k${Math.random()
+    .toString()
+    .replace('.', '')}`;
+
 module.exports = {
   createMetaImagePath,
   slugify,
@@ -108,4 +115,5 @@ module.exports = {
   unorderify,
   compose,
   buildBreadcrumbs,
+  getRandomKey,
 };

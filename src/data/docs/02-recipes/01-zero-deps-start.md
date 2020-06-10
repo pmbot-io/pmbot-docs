@@ -23,7 +23,7 @@ You can use the concepts described here to implement any Passport strategy to cu
 
 We're now ready to implement the authentication feature. We'll start with an overview of the process used for any Passport strategy.
 
-1. The elegance of the framework is that it abstracts the authentication process into a few basic steps that. <span class="code-line">pmbot-source-filesystem</span>
+1. The elegance of the framework is that it abstracts the authentication process into a few basic steps that. `pmbot-source-filesystem`
 1. We're now ready to [implement](https://site) the authentication feature. We'll start with an overview of the process used for any Passport strategy. It's helpful to think of Passport as a mini framework in itself.
 
    2. In the Pipes chapter, we went through the process of building simple pipes and binding them to controllers, methods or to the global app to demonstrate.
@@ -44,10 +44,10 @@ As explained on the csurf middleware page, the csurf module requires either sess
 
 Task scheduling allows you to schedule arbitrary code (methods/functions) to execute at a fixed date/time, at recurring intervals, or once after a specified interval. In the Linux world, this is often handled by packages like cron at the OS level.
 
-- <span class="code-line">name: string</span>
-- <span class="code-line">limiter: RateLimiter</span>
-- <span class="code-line">redis: RedisOpts</span>
-- <span class="code-line">prefix: string</span>
+- `name: string`
+- `limiter: RateLimiter`
+- `redis: RedisOpts`
+- `prefix: string`
 
 You can tell Nest to use your extended logger for system logging by passing an instance of it via the logger property of the application options object (as shown in the Custom implementation section above), or by using the technique shown in the Dependency Injection section below.
 
@@ -60,7 +60,7 @@ You can tell Nest to use your extended logger for system logging by passing an i
 
 Since Bull operates in a distributed (multi-node) environment, it defines the concept of event locality. This concept recognizes that events may be triggered either entirely within a single process, or on shared queues from different processes.
 
-<div class="code-group code-group-line-numbbers-none">
+<div class="code-group">
 
 ```shell
 $ npm install --save @pmbotjs/bull bull
@@ -71,15 +71,15 @@ $ npm install --save-dev @types/bull
 
 You can tell Nest to use your extended logger for system logging by passing an instance of it via the logger property of the application options object (as shown in the Custom implementation section above), or by using the technique shown in the Dependency Injection section below.
 
-| Parametr                                | Type                                                  | Description                                                                                                                                            |
-| --------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <span class="code-line">type</span>     | <span class="code-line code-line-light">int</span>    | TypeScript's metadata reflection system has several limitations which make it impossible to, for instance, determine what properties a class consists. |
-| <span class="code-line">nullable</span> | <span class="code-line code-line-light">true</span>   | TWhile not a significant issue with medium-sized projects, it becomes verbose & hard to maintain.                                                      |
-| <span class="code-line">options</span>  | <span class="code-line code-line-light">string</span> | TWith what we've learned so far, you have to duplicate a lot of code to let the package know how your type.                                            |
+| Parametr   | Type     | Description                                                                                                                                            |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`     | `int`    | TypeScript's metadata reflection system has several limitations which make it impossible to, for instance, determine what properties a class consists. |
+| `nullable` | `true`   | TWhile not a significant issue with medium-sized projects, it becomes verbose & hard to maintain.                                                      |
+| `options`  | `string` | TWith what we've learned so far, you have to duplicate a lot of code to let the package know how your type.                                            |
 
 Since Bull operates in a distributed (multi-node) environment, it defines the concept of event locality. This concept recognizes that events may be triggered either entirely within a single process, or on shared queues from different processes.
 
-<div class="code-group" >
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ```yaml
 version: '1'
@@ -101,7 +101,7 @@ updates:
 
 You can tell Nest to use your extended logger for system logging by passing an instance of it via the logger property of the application options object (as shown in the Custom implementation section above), or by using the technique shown in the Dependency Injection section below.
 
-<div class="code-group code-group-line-numbbers-none" data-props='{ "labels": ["pmbot-config.js"] }'>
+<div class="code-group" data-props='{ "labels": ["pmbot-config.js"]  }'>
 
 ```shell
 new my-plugin https://github.com/pmbotjs/pmbot-starter-plugin
@@ -114,7 +114,9 @@ Since Bull operates in a distributed (multi-node) environment, it defines the co
 ## Installation Guides
 
 <div class="links-block">
-<a class="links-block-item">Preparing a Site for Deployment</a>
-<a class="links-block-item">Deploying to Netlify</a>
-<a class="links-block-item">Deploying to AWS Amplify</a>
+
+[Preparing a Site for Deployment](https://site)
+[Deploying to Netlify](https://site)
+[Deploying to AWS Amplify](https://site)
+
 </div>

@@ -1,0 +1,62 @@
+.code {
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto;
+  @include no-scrollbars;
+  * {
+    &::selection {
+      background-color: $color-accent-primary;
+    }
+  }
+}
+
+.codeContainer {
+  :global {
+    pre {
+      margin: 0;
+    }
+    code {
+      flex-grow: 1;
+      display: block;
+      font-family: $font-family-secondary;
+      color: $color-tertiary;
+      padding: 20px 20px 14px 30px;
+
+      @include xs-down {
+        font-size: $font-size-xs - 1;
+      }
+    }
+
+    .token {
+      &.boolean,
+      &.string {
+        color: $color-accent-secondary;
+      }
+    }
+
+    .line-numbers-rows {
+      font-family: $font-family-secondary;
+      padding: 20px 8px 14px 20px;
+      border-right: none !important;
+      background-color: rgba($color-tertiary, 0.05);
+      border-radius: 5px 0 0 5px;
+      span {
+        &::before {
+          color: rgba($color-tertiary, 0.25);
+        }
+      }
+    }
+  }
+}
+
+// to override existing padding settings in case of no line numbers required
+.no-line-numbers {
+  :global {
+    .line-numbers-rows {
+      display: none;
+    }
+    pre {
+      padding-left: 0 !important;
+    }
+  }
+}

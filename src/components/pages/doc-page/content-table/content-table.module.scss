@@ -2,6 +2,13 @@
   margin-bottom: 120px;
 }
 
-.table-wrapper {
-  overflow: auto;
+.link {
+  font-size: $font-size-sm - 2;
+  font-weight: normal;
+  color: $color-primary;
+  text-decoration: none;
+  transition: color $transition-base;
+  &:hover {
+    color: $color-accent-secondary;
+  }
 }

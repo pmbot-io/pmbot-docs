@@ -8,8 +8,8 @@ const ContentTable = ({ sectionLinks }) => {
       <h2 id="table-of-content">Table of Content</h2>
       <ul>
         {sectionLinks.map(({ path, title }, i) => (
-          <li>
-            <Link to={path} key={`lr-${i}`}>
+          <li key={`lr-${i}`}>
+            <Link to={path} className={styles.link}>
               {title}
             </Link>
           </li>
