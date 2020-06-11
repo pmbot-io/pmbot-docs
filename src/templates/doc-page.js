@@ -11,7 +11,7 @@ export default function({
       seoMetadata={{ title, content: excerpt, slug }}
       sidebar={sidebarTree}
     >
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      {/* <Breadcrumbs breadcrumbs={breadcrumbs} /> */}
       <Content content={content} />
     </LayoutMain>
   );

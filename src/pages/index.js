@@ -2,7 +2,7 @@ import { navigate } from 'gatsby';
 
 const IndexPage = () => {
   if (typeof window !== 'undefined') {
-    navigate('/documentation/introduction');
+    navigate('/introduction');
   }
   return null;
 };

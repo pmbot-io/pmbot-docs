@@ -65,7 +65,7 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
       slugify,
       unorderify,
       stripDocRoot
-    )(`/${relativeDirectory}/${title || name}`);
+    )(`/${title || name}`);
 
     // populate our tree representation with actual nodes
     addNode(unorderify(relativeDirectory), unorderify(name), {
@@ -82,19 +82,13 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
     } = children[0];
 
     // build a proper path
-    const entryPath = compose(
-      slugify,
-      unorderify,
-      stripDocRoot
-    )(`/${relativeDirectory}/${title || name}`);
+    const entryPath = compose(slugify, unorderify)(`/${title || name}`);
 
     // build the breadcrumbs data
     const breadcrumbs = buildBreadcrumbs(entryPath);
     createPage({
       path: entryPath,
-      component: isSectionPage(entryPath)
-        ? sectionPageTemplate
-        : docPageTemplate,
+      component: docPageTemplate,
       context: {
         title: title || unorderify(name),
         excerpt,
@@ -102,11 +96,6 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
         content: html,
         sidebarTree: getTreePart(['docs']),
         breadcrumbs,
-        sectionLinks: isSectionPage(entryPath)
-          ? Object.values(getTreePart(['docs', unorderify(name)])).map(
-              ({ meta }) => meta
-            )
-          : undefined,
       },
     });
   });

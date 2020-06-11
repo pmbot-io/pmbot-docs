@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Media from 'react-media';
-import cn from 'classnames';
+import classNames from 'classnames/bind';
 import styles from './sidebar.module.scss';
 import Search from 'components/shared/search';
 import { Link, withPrefix } from 'gatsby';
 import ArrowSvg from 'images/arrow.inline.svg';
 import { navigate } from 'gatsby';
+
+const cx = classNames.bind(styles);
 
 const doesPathnameMatch = path => {
   const maybePrefixedPath = withPrefix(path);
@@ -65,7 +67,8 @@ const OptionsGroup = ({
 };
 
 const Sidebar = ({ sidebar, slug }) => {
-  const pathContainsCategory = (path, category) => path.includes(category);
+  const isActivePath = children =>
+    Object.values(children).some(({ meta: { path } }) => slug === path);
 
   const selectMenu = useRef();
 
@@ -73,52 +76,49 @@ const Sidebar = ({ sidebar, slug }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Search />
+      {/* <Search /> */}
       <Media
         query="(min-width: 768px)"
         render={() => (
           <nav className={styles.nav}>
             {Object.values(sidebar).map(
-              ({ meta: { title, path }, name, children }, i) =>
-                i === 0 ? (
-                  <div
-                    key={name}
-                    className={cn(styles.section, styles.sectionMain)}
+              ({ meta: { title }, name, children }, i) => (
+                <div
+                  key={name}
+                  className={cx('section', {
+                    'section-main': i === 0,
+                  })}
+                >
+                  <span
+                    onClick={({ target }) => {
+                      const control = target.closest('span');
+                      control.nextSibling.classList.toggle(
+                        styles.dropdownActive
+                      );
+                      control.firstElementChild.classList.toggle(
+                        styles.arrowActive
+                      );
+                    }}
+                    className={styles.title}
                   >
-                    <span className={styles.title}>{title || name}</span>
-                    <div className={styles.menu}>
-                      {Object.values(children).map(node => (
-                        <SidebarNode node={node} key={node.name} />
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div key={name} className={styles.section}>
-                    <span
-                      onClick={e =>
-                        e.target.nextSibling.classList.toggle(
-                          styles.dropdownActive
-                        )
-                      }
-                      className={styles.title}
-                    >
-                      {title || name}
-                      <ArrowSvg className={styles.arrow} />
-                    </span>
-                    <div
-                      className={cn(styles.dropdown, {
-                        [styles.dropdownActive]: pathContainsCategory(
-                          slug,
-                          name
-                        ),
+                    {title || name}
+                    <ArrowSvg
+                      className={cx('arrow', {
+                        [styles.arrowActive]: isActivePath(children),
                       })}
-                    >
-                      {Object.values(children).map(node => (
-                        <SidebarNode node={node} key={node.name} />
-                      ))}
-                    </div>
+                    />
+                  </span>
+                  <div
+                    className={cx('dropdown', {
+                      [styles.dropdownActive]: isActivePath(children),
+                    })}
+                  >
+                    {Object.values(children).map(node => (
+                      <SidebarNode node={node} key={node.name} />
+                    ))}
                   </div>
-                )
+                </div>
+              )
             )}
           </nav>
         )}
