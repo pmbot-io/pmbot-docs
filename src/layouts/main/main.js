@@ -16,7 +16,7 @@ const Main = ({ children, seoMetadata, sidebar = false }) => (
           <div className="column is-narrow">
             {!!sidebar && <Sidebar sidebar={sidebar} slug={seoMetadata.slug} />}
           </div>
-          <div className="column">
+          <div className={`column ${styles.right}`}>
             <div className={styles.inner}>{children}</div>
           </div>
         </div>

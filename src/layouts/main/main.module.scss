@@ -13,3 +13,10 @@
   margin-left: 0;
   margin-right: 0;
 }
+
+.right {
+  max-width: calc(100% - 334px);
+  @include sm-down {
+    max-width: 100%;
+  }
+}
