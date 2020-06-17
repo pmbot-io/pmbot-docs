@@ -65,18 +65,8 @@ const Footer = props => (
         </div>
       </div>
       <div className={styles.copyright}>
-        <div className={styles.company}>
-          Design by{' '}
-          <a
-            href="https://pixelpoint.io/"
-            className={`link ${styles.companyLink}`}
-            target="_blank"
-          >
-            Pixel Point
-          </a>
-        </div>
         <div className={styles.footerCopyrightText}>
-          PM Bot &copy; {new Date().getFullYear()} - All rights reserved
+          <a href="https://pmbot.io">Pmbot</a> &copy; {new Date().getFullYear()} - All rights reserved
         </div>
       </div>
     </div>

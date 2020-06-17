@@ -29,25 +29,25 @@ const Header = props => {
           ) : (
             <>
               <div className={styles.headerMenu}>
-                <Link to="/" className={`link ${styles.menuLink}`}>
+                <a href="/" className={`link ${styles.menuLink}`}>
                   How it works
-                </Link>
-                <Link to="/" className={`link ${styles.menuLink}`}>
+                </a>
+                <a href="/" className={`link ${styles.menuLink}`}>
                   Feautures
-                </Link>
-                <Link to="/" className={`link ${styles.menuLink}`}>
+                </a>
+                <a href="/" className={`link ${styles.menuLink}`}>
                   Plugins
-                </Link>
-                <Link to="/" className={`link ${styles.menuLink}`}>
+                </a>
+                <a href="/" className={`link ${styles.menuLink}`}>
                   Pricing
-                </Link>
+                </a>
                 <span className={styles.menuBorder}></span>
-                <Link to="/" className={`link ${styles.menuLink}`}>
+                <a href="/" className={`link ${styles.menuLink}`}>
                   Blog
-                </Link>
-                <Link to="/" className={`link ${styles.menuLink}`}>
+                </a>
+                <a href="/" className={`link ${styles.menuLink}`}>
                   Documentation
-                </Link>
+                </a>
               </div>
               <button className={`button ${styles.button}`}>Preorder</button>
             </>

@@ -1,8 +1,8 @@
 ---
-title: 'Recipes'
+title: 'CI providers'
 excerpt: ''
 ---
 
-# Recipes
+# Installation
 
 Tens of recipes that will make you life using PMbot much easier. Proven, robust solutions and established community patterns.

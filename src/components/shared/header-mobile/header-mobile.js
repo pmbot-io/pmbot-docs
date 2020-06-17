@@ -97,24 +97,24 @@ const HeaderMobile = props => {
                 className={styles.navWrapper}
                 custom={1}
               >
-                <Link to="/" className={`link ${styles.link}`}>
+                <a href="https://pmbot.io" className={`link ${styles.link}`}>
                   How it works
-                </Link>
-                <Link to="/" className={`link ${styles.link}`}>
+                </a>
+                <a href="https://pmbot.io" className={`link ${styles.link}`}>
                   Feautures
-                </Link>
-                <Link to="/" className={`link ${styles.link}`}>
+                </a>
+                <a href="https://pmbot.io" className={`link ${styles.link}`}>
                   Plugins
-                </Link>
-                <Link to="/" className={`link ${styles.link}`}>
+                </a>
+                <a href="https://pmbot.io" className={`link ${styles.link}`}>
                   Pricing
-                </Link>
-                <Link to="/" className={`link ${styles.link}`}>
+                </a>
+                <a href="https://blog.pmbot.io" className={`link ${styles.link}`}>
                   Blog
-                </Link>
-                <Link to="/" className={`link ${styles.link}`}>
+                </a>
+                <a href="https://docs.pmbot.io" className={`link ${styles.link}`}>
                   Documentation
-                </Link>
+                </a>
                 <button className={`button ${styles.navButton}`}>
                   Preorder
                 </button>

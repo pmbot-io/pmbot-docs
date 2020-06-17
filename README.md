@@ -9,3 +9,7 @@
 
 This repository contains the sources of  [https://docs.pmbot.io](https://docs.pmbot.io). Feel free to improve it !
 
+## Get started
+
+1. Install dependencies `npm run install`
+1. Install dependencies `npm start`
