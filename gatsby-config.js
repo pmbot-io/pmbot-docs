@@ -15,7 +15,6 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
-
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -59,6 +58,19 @@ module.exports = {
               showLineNumbers: true,
             },
           },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+             options: {
+               elements: [`h1`, `h2`, `h3`, `h4`, `h5`],
+             }
+          }
         ],
       },
     },

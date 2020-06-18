@@ -13,7 +13,7 @@ import PageContentTable from '../page-content-table';
 const cx = classNames.bind(styles);
 
 const components = {
-  h2: ({ mdBlockContent }) => <HeadingMark content={mdBlockContent} />,
+  // h2: ({ mdBlockContent }) => <HeadingMark content={mdBlockContent} />,
   '.code-group': CodeGroup,
   table: ({ mdBlockContent }) => (
     <div className={styles.tableWrapper}>

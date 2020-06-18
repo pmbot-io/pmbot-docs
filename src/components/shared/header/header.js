@@ -15,7 +15,7 @@ const Header = props => {
         <div className={styles.inner}>
           <div className="header-logo">
             <Link className={styles.headerLogoLink} to="/">
-              <LogoInlineSvg />
+              <LogoInlineSvg /> <span className={styles.headerLogoSubtitle}>Docs</span>
             </Link>
           </div>
           <Media
@@ -29,27 +29,14 @@ const Header = props => {
           ) : (
             <>
               <div className={styles.headerMenu}>
-                <a href="/" className={`link ${styles.menuLink}`}>
-                  How it works
-                </a>
-                <a href="/" className={`link ${styles.menuLink}`}>
-                  Feautures
-                </a>
-                <a href="/" className={`link ${styles.menuLink}`}>
-                  Plugins
-                </a>
-                <a href="/" className={`link ${styles.menuLink}`}>
-                  Pricing
-                </a>
-                <span className={styles.menuBorder}></span>
-                <a href="/" className={`link ${styles.menuLink}`}>
+                <a href="https://blog.pmbot.io" className={`link ${styles.menuLink}`}>
                   Blog
                 </a>
-                <a href="/" className={`link ${styles.menuLink}`}>
-                  Documentation
+                <a href="https://pmbot.io" className={`link ${styles.menuLink}`}>
+                  pmbot.io
                 </a>
               </div>
-              <button className={`button ${styles.button}`}>Preorder</button>
+              {/*<button className={`button ${styles.button}`}>Preorder</button>*/}
             </>
           )}
         </div>

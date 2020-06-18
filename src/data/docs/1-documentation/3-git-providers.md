@@ -9,25 +9,24 @@ excerpt: ''
 
 ## Add a git provider
 
-1. At the top of the app, click `Git Providers`
-    <img src="images/git-providers/header-link.png"/>
+1. At the top of the app, click **Git Providers**
+    <img src="../../../images/git-providers/header-link.png"/>
 1. In the Git provider list, click "Add"
     <img src="images/git-providers/add-button.png"/>
 1. Select a type of Git provider
     <img src="images/git-providers/select-type.png"/>
 1. Configure OAuth by filling the **Client ID** and **CLient Secret**
     <img src="images/git-providers/configure-oauth.png"/>
-1. Test that the connection works by clicking "Run test". Pmbot checks that the settings are correct by signing you in the Git provider. This will open a dialog in which you will be asked by your Git provider to authorize Pmbot.
+1. Test that the connection works by clicking **Run test**. Pmbot checks that the settings are correct by signing you in the Git provider. This will open a dialog in which you will be asked by your Git provider to authorize Pmbot.
     <div class="blockquote" data-props='{ "mod": "info" }'>
         If you run the test several times, you may only be asked once to authorize Pmbot. Github, Gitlab and other providers remember that you have granted access to your account. 
     </div>
-    TODO add image
-1. Configure [organization settings]()
+1. Configure settings specific to your git provider organization [organization settings](#git-provider-organization-settings).
+1. Click **Save**
 
+## OAuth configuration
 
-### OAuth configuration
-
-#### Gitlab
+### Gitlab
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
     Checkout our [video]() on how to configure Gitlab as a Git provider.
@@ -43,7 +42,7 @@ From your **[admin area](https://docs.gitlab.com/ee/integration/oauth_provider.h
 
 After creating the application, Gitlab will give you both the **Client ID** and **Client Secret**, which they respectively name **Application ID** and **Application Secret**.
 
-#### Github
+### Github
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
     Checkout our [video]() on how to configure Github as a Git provider.
@@ -51,18 +50,19 @@ After creating the application, Gitlab will give you both the **Client ID** and 
 
 From your admin area, [add an OAuth application](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/) with the following settings:
 
-### Organization lock
 
-#### Gitlab
+## Git provider organization settings
 
-#### Github
+### Gitlab
+
+### Github
 
 With Github, you have to grant access to each organization separately for it to be seen.
 1. Settings -> Applications -> Authorized OAuth Apps -> Pmbot -> Revoke access
 2. Disconnect provider and try connect again, this time click "grant" on the organization you want to see in the list
 3. Or, if your want to revoke access to a specific org, go to your organization Setting -> Third Party Access -> revoke access
 
-### Sign in and out of a git provider
+## Sign in and out of a git provider
 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
     You only see projects for git providers that you are signed into
