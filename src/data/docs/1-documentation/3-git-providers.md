@@ -23,7 +23,7 @@ excerpt: ''
         Once the Git provider is created, you won't be able to change its type.
     </div>
     
-1. Configure **General Settings**
+1. Configure **General Settings**. See [here](#git-provider-settings) for settings specific to the type of Git provider selected.
 
     ![](../../../images/git-providers/general-configuration.png)
 
@@ -82,6 +82,20 @@ excerpt: ''
     ![](../../../images/git-providers/confirm-delete.png)
     
     Once the provider is deleted, you will be redirected to the Git provider list.
+
+## Git provider settings
+
+### Gitlab
+
+Gitlab URL
+
+TODO
+
+### Github
+
+Github Enterprise URL
+
+TODO
 
 ## OAuth configuration
 
@@ -148,7 +162,7 @@ This setting allows you to limit projects to a given group. Pmbot will list the 
         This action will **delete** all projects that belong to that group. You will loose all updates, schedules and configurations of these projects.
     </div> 
 
-##### Clearing the group lock
+##### Disable group lock
 
 If you want to remove the group lock, you need to:
 
@@ -162,10 +176,26 @@ If you want to remove the group lock, you need to:
 
 ### Github
 
-With Github, you have to grant access to each organization separately for it to be seen.
+#### Lock projects to a Github Organization
+
+This setting allows you to limit projects to a given Github organization. Pmbot will list the organizations to which you belong and you may select one of them using the given dropdown.
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+You have to grant access to each organization separately for it to appear in the dropdown.
+</div>
+
+If you want to revoke access from the Pmbot app to a Github organization:
 1. Settings -> Applications -> Authorized OAuth Apps -> Pmbot -> Revoke access
 2. Disconnect provider and try connect again, this time click "grant" on the organization you want to see in the list
 3. Or, if your want to revoke access to a specific org, go to your organization Setting -> Third Party Access -> revoke access
+
+##### Enable organization lock
+
+TODO
+
+##### Disable organization lock
+
+TODO
 
 ## Sign in and out of a git provider
 
@@ -211,3 +241,25 @@ To sign out of a Git provider, you can:
 1. By clicking the **Sign in** button in the Git provider page
 
     ![](../../../images/git-providers/sign-out-button-page.png)
+
+## Synchronize Git providers
+
+When you sign in a Git provider, we automatically fetch all your Git repositories and permissions. However, sometimes, you may need to resynchronize your repositories, as Pmbot does not perform this task periodically to prevent overloading third party APIs.
+
+To manually synchronize:
+
+1. At the top of the app, in the nav bar, click **Sync**
+
+    ![](../../../images/git-providers/sync.png)
+    
+1. Wait for the synchronization to complete. You can view the progress of the synchronization as the number of Git providers synchronized/
+
+    ![](../../../images/git-providers/sync-cancel.png)
+    
+You cancel a synchronization by clicking **Cancel**
+
+![](../../../images/git-providers/sync-cancel.png)
+
+<div class="blockquote" data-props='{ "mod": "info" }'>
+    Any sync starts by deleting all of your permissions (not the projects), hence you may have an empty project list after cancelling the sync. Synchronize again and all of your projects should show up.
+</div>
