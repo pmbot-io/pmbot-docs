@@ -111,5 +111,18 @@ module.exports = {
           '@import "./src/styles/variables.scss" , "./src/styles/mixins.scss";',
       },
     },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+            },
+          },
+        ],
+      },
+    },
   ],
 };

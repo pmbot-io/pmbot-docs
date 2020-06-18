@@ -10,13 +10,17 @@ excerpt: ''
 ## Add a git provider
 
 1. At the top of the app, click **Git Providers**
-    <img src="../../../images/git-providers/header-link.png"/>
+
+    ![](../../../images/git-providers/header-link.png)
 1. In the Git provider list, click "Add"
-    <img src="images/git-providers/add-button.png"/>
+
+    ![](../../../images/git-providers/add-button.png)
 1. Select a type of Git provider
-    <img src="images/git-providers/select-type.png"/>
+
+    ![](../../../images/git-providers/select-type.png)
 1. Configure OAuth by filling the **Client ID** and **CLient Secret**
-    <img src="images/git-providers/configure-oauth.png"/>
+
+    ![](../../../images/git-providers/configure-oauth.png)
 1. Test that the connection works by clicking **Run test**. Pmbot checks that the settings are correct by signing you in the Git provider. This will open a dialog in which you will be asked by your Git provider to authorize Pmbot.
     <div class="blockquote" data-props='{ "mod": "info" }'>
         If you run the test several times, you may only be asked once to authorize Pmbot. Github, Gitlab and other providers remember that you have granted access to your account. 
