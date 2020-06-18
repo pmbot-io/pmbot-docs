@@ -38,7 +38,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        icon: 'src/images/favicon.png', // This path is relative to the root of the site.
       },
     },
     {
@@ -58,19 +58,16 @@ module.exports = {
               showLineNumbers: true,
             },
           },
-        ],
-      },
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
           {
             resolve: `gatsby-remark-autolink-headers`,
-             options: {
-               elements: [`h1`, `h2`, `h3`, `h4`, `h5`],
-             }
-          }
+            options: {
+              elements: [`h1`, `h2`, `h3`, `h4`, `h5`],
+            }
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {},
+          },
         ],
       },
     },
@@ -109,19 +106,6 @@ module.exports = {
       options: {
         data:
           '@import "./src/styles/variables.scss" , "./src/styles/mixins.scss";',
-      },
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 800,
-            },
-          },
-        ],
       },
     },
   ],

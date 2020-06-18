@@ -43,3 +43,7 @@ Project updates are the core of Pmbot. They represent a group of dependency upda
 ## .pmbot.yml
 
 To configure a given project is updated, you place at it's root a `.pmbot.yml` file. It allows you to define which package managers to use and fine tune how dependencies of a given package manager are updated. We have made sure that you can set things like commit messages, version policies, etc.  
+
+## Users
+
+When you register a Pmbot account, you are assigned an organization. Users of your company can sign up and sign in your organization's workspace. Once signed in, they can connect with any of the Git providers you have created in your Pmbot organization. They will then be able to see their Git repositories and configure them. If someone has already configured one of their repositories, they will be able to see access it and view the updates, schedules, etc.
