@@ -15,13 +15,11 @@ These options are available regardless of the command you are using.
 
 #### debug
 
-CLI Option: `--debug [true|false]`, `-d [true|false]`
+**CLI Option:** `--debug [true|false]`, `-d [true|false]`
 
-Environment variable: `PMBOT_DEBUG`
+**Environment variable:** `PMBOT_DEBUG`
 
-Type: `boolean`
-
-Default: `false`
+**Default:** `false`
 
 Enable the debug mode. This will print more information in the logs.
 
@@ -29,11 +27,11 @@ This is useful when things go wrong but can unnecessarily bloat your logs otherw
 
 #### sentry
 
-CLI Option: `--sentry [true|false]`, `-s [true|false]`
+**CLI Option:** `--sentry [true|false]`, `-s [true|false]`
 
-Environment variable: `PMBOT_SENTRY`
+**Environment variable:** `PMBOT_SENTRY`
 
-Default: `true`
+**Default:** `true`
 
 Enable [Sentry](https://sentry.io/) error reporting.
 
@@ -47,51 +45,51 @@ The update command is the default command. It is used inside your CI jobs in ord
 
 #### token
 
-CLI Option: `--token <token>`, `-t <token>`
+**CLI Option:** `--token <token>`, `-t <token>`
 
-Environment variable: `PMBOT_TOKEN`
+**Environment variable:** `PMBOT_TOKEN`
 
-Default: none, **required**
+**Default:** none, **required**
 
 Token used to authenticate with the [API](#url).
 
 #### ssh-private-key
 
-CLI Option: `--ssh-private-key <path>`, `-k <path>`
+**CLI Option:** `--ssh-private-key <path>`, `-k <path>`
 
-Environment variable: `PMBOT_SSH_PRIVATE_KEY`
+**Environment variable:** `PMBOT_SSH_PRIVATE_KEY`
 
-Default: none, **required**
+**Default:** none, **required**
 
 Path to the SSH private key for pushing to the git current repository.
 
 #### url
 
-CLI Option: `--url <url>`, `-u <url>`
+**CLI Option:** `--url <url>`, `-u <url>`
 
-Environment variable: `PMBOT_URL`
+**Environment variable:** `PMBOT_URL`
 
-Default: `https://app.pmbot.io`
+**Default:** `https://app.pmbot.io`
 
 The URL to the instance of Pmbot used for the update (e.g. `https://pmbot.company.com` or `https://company.com/pmbot`)
 
 #### disable-host-key-verification
 
-CLI Option: `--disable-host-key-verification [true|false]`
+**CLI Option:** `--disable-host-key-verification [true|false]`
 
-Environment variable: `PMBOT_DISABLE_HOST_KEY_VERIFICATION`
+**Environment variable:** `PMBOT_DISABLE_HOST_KEY_VERIFICATION`
 
-Default: `false`
+**Default:** `false`
 
 Disable host key verification when using git over SSH.
 
 #### trusted-ca
 
-CLI Option: `--trusted-ca <path>`, `-a <path>`
+**CLI Option:** `--trusted-ca <path>`, `-a <path>`
 
-Environment variable: `PMBOT_TRUSTED_CA`
+**Environment variable:** `PMBOT_TRUSTED_CA`
 
-Default: none
+**Default:** none
 
 If you are using self-signed certificates to secure your servers (i.e. Pmbot, package repositories...),
 this options allows you to specify the **path** to a trusted Certification Authority certificate to validate those certificates.
@@ -113,11 +111,11 @@ fQ+WljzA1PldDsGyspFWPpwqw3qSo9Uj
 
 #### plugins
 
-CLI Option: `--plugins <name> [--plugins <name>] ...`, `-p <name> [-p <name>] ...`
+**CLI Option:** `--plugins <name> [--plugins <name>] ...`, `-p <name> [-p <name>] ...`
 
-Environment variable: `PMBOT_PLUGINS`
+**Environment variable:** `PMBOT_PLUGINS`
 
-Default: none
+**Default:** none
 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
@@ -128,30 +126,30 @@ If you need to use multiple plugins, please use CLI arguments.
 
 #### config
 
-CLI Option: `--config <path>`, `-c <path>`
+**CLI Option:** `--config <path>`, `-c <path>`
 
-Environment variable: `PMBOT_CONFIG`
+**Environment variable:** `PMBOT_CONFIG`
 
-Default: `.pmbot.yml`
+**Default:** `.pmbot.yml`
 
 Path to the Pmbot config file.
 
 #### workdir
 
-CLI Option: `--workdir <workdir>`, `-w <workdir>`
+**CLI Option:** `--workdir <workdir>`, `-w <workdir>`
 
-Environment variable: `PMBOT_WORKDIR`
+**Environment variable:** `PMBOT_WORKDIR`
 
-Default: `.`
+**Default:** `.`
 
 The directory where Pmbot will find the cloned repository of the project to update.
 
 #### update-id
 
-CLI Option: `--update-id <id>`, `-i <id>`
+**CLI Option:** `--update-id <id>`, `-i <id>`
 
-Environment variable: `PMBOT_UPDATE_ID`
+**Environment variable:** `PMBOT_UPDATE_ID`
 
-Default: *(passed by Pmbot when triggering the ci)*
+**Default:** *(passed by Pmbot when triggering the ci)*
 
 The ID of the project update being ran.
