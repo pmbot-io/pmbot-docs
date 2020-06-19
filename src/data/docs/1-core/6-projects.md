@@ -231,14 +231,14 @@ To change the CI used for this project:
 
 ### CI provider project configuration
  
-### Gitlab
+#### Gitlab
 
 | Field | Description |
 | --- | --- |
 | Gitlab project ID | The ID of your Gitlab project, available under **Settings / General** in your Gitlab project. |
 | Pipeline trigger token | This token allows Pmbot to trigger a pipeline in Gitlab CI. You can created them in **Settings / CI/CD / Pipeline Triggers** in your Gitlab project. Checkout [the official Gitlab docs](https://docs.gitlab.com/ee/ci/triggers/#adding-a-new-trigger) for more info. |
 
-### Circle CI
+#### Circle CI
 
 | Field | Config version | Description |
 | --- | --- | --- |

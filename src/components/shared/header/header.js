@@ -32,6 +32,9 @@ const Header = props => {
                 <a href="https://blog.pmbot.io" className={`link ${styles.menuLink}`}>
                   Blog
                 </a>
+                <a href="https://github.com/pmbot-io/issues/issues" className={`link ${styles.menuLink}`}>
+                  Issues
+                </a>
                 <a href="https://pmbot.io" className={`link ${styles.menuLink}`}>
                   pmbot.io
                 </a>
