@@ -3,8 +3,8 @@ require('dotenv').config();
 module.exports = {
   pathPrefix: '/docs',
   siteMetadata: {
-    siteTitle: 'Pixel Point Gatsby Starter', // <title>
-    siteDescription: 'Site Description',
+    siteTitle: 'Pmbot Docs', // <title>
+    siteDescription: 'Pmbot documentation',
     // pathPrefix: "",
     siteImage: '/images/sample-image.png',
     siteLanguage: 'en',
