@@ -97,6 +97,9 @@ const HeaderMobile = props => {
                 className={styles.navWrapper}
                 custom={1}
               >
+                <a href="https://docs.pmbot.io" className={`link ${styles.menuLink}`}>
+                  Documentation
+                </a>
                 <a href="https://blog.pmbot.io" className={`link ${styles.link}`}>
                   Blog
                 </a>

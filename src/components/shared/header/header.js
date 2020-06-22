@@ -29,6 +29,9 @@ const Header = props => {
           ) : (
             <>
               <div className={styles.headerMenu}>
+                <a href="https://docs.pmbot.io" className={`link ${styles.menuLink}`}>
+                  Documentation
+                </a>
                 <a href="https://blog.pmbot.io" className={`link ${styles.menuLink}`}>
                   Blog
                 </a>
