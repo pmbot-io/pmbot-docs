@@ -58,7 +58,6 @@ module.exports = {
   }, 
   parser: config => config,
   validator: config => Promise.resolve([]),
-  configClass: Object,
 };
 ````
 
