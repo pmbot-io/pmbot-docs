@@ -1,12 +1,12 @@
 ---
-slug: '/plugins/create-issue'
-title: 'Create issue'
+slug: '/plugins/create-merge-request'
+title: 'Create merge request'
 excerpt: ''
 ---
 
 # Create issue
 
-This plugin allows you to open an issue.
+This plugin allows you to open a merge request.
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
@@ -14,13 +14,16 @@ This plugin allows you to open an issue.
 version: '1'
 updates:
 - packageManager:
-    name: create-issue
+    name: create-merge-request
     config:
       title: 'Automated update of {{slug}} {{statusEmoji}}'
       additionalText: ''
       assignees:
         - ...
       closeOpen: true
+      squash: true
+      deleteSourceBranch: true
+      maintainerCanModify: true
 ````
 
 </div>
@@ -53,30 +56,6 @@ This [handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) template i
 | `status` | Status of the package manager update |
 | `statusEmoji` |  Emoji corresponding to the package manager update status |
 
-## squash
-
-Whether to squash commits into a single one. This ensures a clean Git history.
-
-## commitMessage
-
-The commit message used for the merge/squash commit.
-
-This [handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) template is passed the following context:
-
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
-
-```json
-{
-  "slug": "npm-0"
-}
-```
-
-</div>
-
-| Property | Description |
-| --- | --- |
-| `slug` | Key that identifies the update in your configuration. For example, "npm", or, "npm-0" when there are multiple `packageManagerUpdates` configured with `npm` as the `packageManager.name`. |
-
 ## additionalText
 
 Additional text to embed in the issue description.
@@ -88,3 +67,33 @@ Usernames to assign to the issue created. Note that Gitlab CE only allows one as
 ## closeOpen
 
 Close open issues that were created by Pmbot. This option prevents multiple issues open simultaneously when you don't have the time to look at them.
+
+## squash
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+Only applies to **Gitlab**
+
+</div>
+
+Whether commits of the merge request source branch should be squashed.
+
+## deleteSourceBranch
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+Only applies to **Gitlab**
+
+</div>
+
+Whether the merge request source branch should be deleted.
+
+## maintainerCanModify
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+Only applies to **Gitlab**
+
+</div>
+
+Whether maintainers can modify the created pull request.

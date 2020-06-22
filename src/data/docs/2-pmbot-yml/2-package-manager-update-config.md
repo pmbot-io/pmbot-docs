@@ -28,7 +28,7 @@ Available package managers:
 - [Npm](/plugins/npm)
 - [Go](/plugins/go)
 - [Go](/plugins/maven)
-- ... can't find your favorite package manager here ? Open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request !
+- ... can't find your favorite package manager here ? You can [create your own package manager plugin](#plugins/custom) or open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request !
 
 ## ci
 
@@ -116,7 +116,7 @@ Available actions are:
 - [mattermost](/plugins/mattermost)
 - [slack](/plugins/slack)
 - [webhook](/plugins/webhook)
-- ... can't find what you need ? You can [write your own actions]() as a Pmbot plugin. Otherwise, you can open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request !
+- ... can't find what you need ? You can [write your own actions](#plugins/custom) as a Pmbot plugin. Otherwise, you can open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request !
 
 ### name
 

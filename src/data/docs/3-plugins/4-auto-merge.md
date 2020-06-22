@@ -6,7 +6,7 @@ excerpt: ''
 
 # Auto merge
 
-This plugins allows you to automatically merge the update branch into the source branch.
+This plugin allows you to automatically merge the update branch into the source branch.
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
