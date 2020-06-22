@@ -103,8 +103,8 @@ const HeaderMobile = props => {
                 <a href="https://github.com/pmbot-io/issues/issues" className={`link ${styles.link}`}>
                   Issues
                 </a>
-                <a href="https://pmbot.io" className={`link ${styles.link}`}>
-                  pmbot.io
+                <a className={`button ${styles.navButton}`} href="https://pmbot.io">
+                  Preorder
                 </a>
               </motion.div>
             </motion.nav>

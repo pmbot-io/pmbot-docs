@@ -65,6 +65,16 @@ const Footer = props => (
         </div>
       </div>
       <div className={styles.copyright}>
+        <div className={styles.company}>
+          Created by{' '}
+          <a
+            href="https://charlie-bravo.be/"
+            className={`link ${styles.companyLink}`}
+            target="_blank"
+          >
+            Charlie Bravo
+          </a>
+        </div>
         <div className={styles.footerCopyrightText}>
           <a href="https://pmbot.io">Pmbot</a> &copy; {new Date().getFullYear()} - All rights reserved
         </div>
