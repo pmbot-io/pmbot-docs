@@ -10,7 +10,7 @@ Pmbot is a self hosted platform that performs automated dependency updates of yo
 <div class="links-block">
 
 [Installation](/installation)
-[Deploying to Netlify](https://site)
-[Deploying to AWS Amplify](https://site)
+[.pmbot.yml reference](/pmbotyml)
+[Create custom plugins](/plugins/custom)
 
 </div>
