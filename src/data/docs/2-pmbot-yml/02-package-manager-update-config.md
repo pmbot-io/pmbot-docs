@@ -13,13 +13,13 @@ Configure which package manager to use and fine tune the settings. This is an ob
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
-````yaml
+```yaml
 version: '1'
 updates:
   - packageManager:
       name: ... # npm | go
       config: ... # config of your package manager
-````
+```
 
 </div>
 
@@ -36,12 +36,12 @@ Allows you to configure CI behavior
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
-````yaml
+```yaml
 version: '1'
 updates:
   - ci:
       enabled: true # defaults to true
-````
+```
 
 </div>
 
@@ -69,19 +69,19 @@ This [handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) template i
 
 ```json
 {
-    "dependency": "chalk",
-    "versionBefore": "1.0.0",
-    "versionAfter": "1.0.1"
+  "dependency": "chalk",
+  "versionBefore": "1.0.0",
+  "versionAfter": "1.0.1"
 }
 ```
 
-| Property | Description |
-| --- | --- |
-| `dependency` | Name of the dependency |
-| `versionBefore` | Version before the update |
-| `versionAfter` | Version after the update |
-
 </div>
+
+| Property        | Description               |
+| --------------- | ------------------------- |
+| `dependency`    | Name of the dependency    |
+| `versionBefore` | Version before the update |
+| `versionAfter`  | Version after the update  |
 
 ## ignore
 
@@ -95,15 +95,15 @@ Configure which package manager to use and fine tune the settings. This is an ob
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
-````yaml
+```yaml
 version: '1'
 updates:
   - ...
     actions:
-      name: ... 
+      name: ...
       config: ...
       on: ...
-````
+```
 
 </div>
 
