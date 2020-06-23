@@ -7,6 +7,8 @@ excerpt: ''
 
 Projects allow run update for a given Git repository on a specific CI platform and with specific schedules.
 
+<div class="table-of-content"></div>
+
 ## Add a project
 
 1. In the top nav bar, click **Projects**

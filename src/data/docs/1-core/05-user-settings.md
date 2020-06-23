@@ -5,6 +5,12 @@ excerpt: ''
 
 # User settings
 
+User settings allow you to manager settings for your Pmbot account, such as changing your password or disconnecting from all devices.
+
+<div class="table-of-content"></div>
+
+## View user settings
+
 To access user settings:
 
 1. Click **Settings** in the user dropdown menu at the top right of the UI:
