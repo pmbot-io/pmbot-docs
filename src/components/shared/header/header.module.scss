@@ -16,33 +16,30 @@
 .inner {
   display: flex;
   align-items: center;
-  height: 100px;
+  justify-content: space-between;
+  height: 70px;
   width: 100%;
-  @include lg-down {
-    justify-content: space-between;
-  }
 }
 
 .header-menu {
   display: flex;
   align-items: center;
-  margin-left: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  justify-content: center;
   will-change: transform;
-  @include lg-down {
-    margin-left: 0;
-  }
   @include md-down {
     display: none;
   }
 }
 
 .header-logo-link {
+  position: relative;
   display: flex;
   align-items: center;
-  @include md-down {
-    position: relative;
-    z-index: 1;
-  }
+  text-decoration: none;
+  z-index: 1;
 }
 
 .header-logo-subtitle {
@@ -52,14 +49,17 @@
   margin-left: 10px;
 }
 
-.menu-link {
+.link {
   position: relative;
-  padding: 35px 0;
+  padding: 20px 0;
   color: $color-tertiary;
   margin-right: 30px;
   transition: color $transition-base;
+  &-active {
+    color: $color-accent-secondary;
+  }
   &:after {
-    bottom: 35px;
+    bottom: 22px;
   }
   &:nth-child(4) {
     margin-right: 0;
@@ -86,16 +86,11 @@
   margin: 0 30px;
 }
 
-.menu-link-active {
-  color: $color-accent-secondary;
-}
-
 .button {
-  margin-left: 142px;
   will-change: transform;
+  font-size: $font-size-xs;
+  padding: 13px 30px;
   @include lg-down {
-    font-size: 14px;
     padding: 13px 20px;
-    margin-left: 0;
   }
 }

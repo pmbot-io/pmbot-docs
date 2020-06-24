@@ -4,11 +4,11 @@
   width: 310px;
   min-height: 100%;
   @include md-down {
-    padding: 30px;
+    padding-top: 30px;
   }
   @include sm-down {
+    padding: 30px 0 0;
     width: 100%;
-    @include default-section-padding;
   }
   &::before {
     content: '';
@@ -20,7 +20,7 @@
     background: linear-gradient(180deg, #f8f5ff 0%, $color-tertiary 100%);
     z-index: -1;
     @include sm-down {
-      right: -10px;
+      display: none;
     }
   }
   &::after {
@@ -36,11 +36,7 @@
       rgba(238, 236, 249, 0) 100%
     );
     @include sm-down {
-      height: 2px;
-      width: 100vw;
-      top: auto;
-      bottom: 0;
-      right: -10px;
+      display: none;
     }
   }
 }

@@ -1,9 +1,10 @@
-.link {
-  font-weight: bold;
-  color: $color-primary;
-  text-decoration: none;
-  transition: color $transition-base;
-  &:hover {
-    color: $color-accent-secondary;
+.wrapper {
+  .link {
+    font-weight: bold;
+    color: $color-primary;
+    text-decoration: none;
+    &:hover {
+      color: $color-accent-secondary;
+    }
   }
 }

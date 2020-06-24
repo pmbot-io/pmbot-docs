@@ -5,7 +5,7 @@ import { useLandmark } from 'hooks';
 const PageContentTable = () => {
   const links = useLandmark();
   return (
-    <ul>
+    <ul className={styles.wrapper}>
       {links.map(({ path, title }, i) => (
         <li key={`lr-${i}`}>
           <a href={`#${path}`} className={styles.link}>

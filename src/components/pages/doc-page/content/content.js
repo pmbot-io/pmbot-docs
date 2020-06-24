@@ -5,10 +5,10 @@ import HeadingMark from 'components/shared/heading-mark';
 import CodeGroup from 'components/shared/code-group';
 import Blockquote from 'components/shared/blockquote';
 import LinksBlock from 'components/shared/links-block';
+import PageContentTable from '../page-content-table';
+
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import styles from './content.module.scss';
-import './content.scss';
-import PageContentTable from '../page-content-table';
 
 const cx = classNames.bind(styles);
 

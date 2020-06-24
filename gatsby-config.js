@@ -4,7 +4,8 @@ module.exports = {
   pathPrefix: '/docs',
   siteMetadata: {
     siteTitle: 'Pmbot Docs', // <title>
-    siteDescription: 'Pmbot documentation',
+    siteDescription:
+      'The Pmbot documentation helps you to learn how to automate dependency updates with our solution.',
     // pathPrefix: "",
     siteImage: '/images/sample-image.png',
     siteLanguage: 'en',
@@ -62,13 +63,11 @@ module.exports = {
             resolve: `gatsby-remark-autolink-headers`,
             options: {
               elements: [`h1`, `h2`, `h3`, `h4`, `h5`],
-            }
+            },
           },
           {
             resolve: `gatsby-remark-images`,
-            options: {
-
-            },
+            options: {},
           },
         ],
       },

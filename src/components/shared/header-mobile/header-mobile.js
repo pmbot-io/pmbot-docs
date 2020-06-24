@@ -97,16 +97,28 @@ const HeaderMobile = props => {
                 className={styles.navWrapper}
                 custom={1}
               >
-                <a href="https://docs.pmbot.io" className={`link ${styles.menuLink}`}>
+                <a
+                  href="https://docs.pmbot.io"
+                  className={`link ${styles.link} ${styles.linkActive}`}
+                >
                   Documentation
                 </a>
-                <a href="https://blog.pmbot.io" className={`link ${styles.link}`}>
+                <a
+                  href="https://blog.pmbot.io"
+                  className={`link ${styles.link}`}
+                >
                   Blog
                 </a>
-                <a href="https://github.com/pmbot-io/issues/issues" className={`link ${styles.link}`}>
+                <a
+                  href="https://github.com/pmbot-io/issues/issues"
+                  className={`link ${styles.link}`}
+                >
                   Issues
                 </a>
-                <a className={`button ${styles.navButton}`} href="https://pmbot.io">
+                <a
+                  className={`button ${styles.navButton}`}
+                  href="https://pmbot.io"
+                >
                   Preorder
                 </a>
               </motion.div>

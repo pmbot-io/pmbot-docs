@@ -43,6 +43,7 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
               frontmatter {
                 title
                 excerpt
+                isHomePage
               }
             }
           }
@@ -57,7 +58,7 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
   // first iteration, build our tree
   data.allFile.nodes.forEach(({ name, relativeDirectory, children }) => {
     const {
-      frontmatter: { title },
+      frontmatter: { title, isHomePage },
     } = children[0];
     // build a proper path
 
@@ -65,40 +66,66 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
       slugify,
       unorderify,
       stripDocRoot
-    )(`/${title || name}`);
+    )(`/${relativeDirectory}/${title || name}`);
 
     // populate our tree representation with actual nodes
     addNode(unorderify(relativeDirectory), unorderify(name), {
-      path: entryPath,
+      path: isHomePage ? '/' : entryPath,
       title,
     });
   });
 
   // second iteration, create actual doc pages
-  data.allFile.nodes.forEach(({ name, relativeDirectory, children }) => {
-    const {
-      html,
-      frontmatter: { title, excerpt },
-    } = children[0];
+  data.allFile.nodes.forEach(
+    ({ name, relativeDirectory, children, children: [remarkNode] }) => {
+      // for debuggin purpose in case there are errors in md/html syntax
+      if (typeof remarkNode === 'undefined') {
+        console.log('remarkNode is', remarkNode);
+        console.log('children is', children);
+        console.log(
+          '\nmarkup is broken! check the following file: \n\n',
+          `${relativeDirectory}/${name}`
+        );
+        return;
+      }
+      const { title, isHomePage } = remarkNode.frontmatter;
 
-    // build a proper path
-    const entryPath = compose(slugify, unorderify)(`/${title || name}`);
+      // build a proper path
+      const entryPath = isHomePage
+        ? '/'
+        : compose(
+            slugify,
+            unorderify,
+            stripDocRoot
+          )(`/${relativeDirectory}/${title || name}`);
 
-    // build the breadcrumbs data
-    const breadcrumbs = buildBreadcrumbs(entryPath);
-    createPage({
-      path: entryPath,
-      component: docPageTemplate,
-      context: {
-        title: title || unorderify(name),
-        excerpt,
-        slug: entryPath,
-        content: html,
-        sidebarTree: getTreePart(['docs']),
-        breadcrumbs,
-      },
-    });
-  });
+      const extendedRemarkNode = {
+        ...remarkNode,
+        frontmatter: {
+          ...remarkNode.frontmatter,
+          slug: entryPath,
+          // injection of a link to an article in git repo
+          fileOrigin: encodeURI(
+            process.env.GATSBY_GITHUB_DOCS_URL +
+              `/${relativeDirectory}/${name}.md`
+          ),
+        },
+      };
+
+      // build the breadcrumbs data
+      const breadcrumbs = buildBreadcrumbs(entryPath);
+      createPage({
+        path: entryPath,
+        component: docPageTemplate,
+        context: {
+          remarkNode: extendedRemarkNode,
+          title: title || unorderify(name),
+          sidebarTree: getTreePart(['docs']),
+          breadcrumbs,
+        },
+      });
+    }
+  );
 }
 
 exports.onCreateNode = ({ node, actions }) => {

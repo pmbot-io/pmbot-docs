@@ -1,6 +1,7 @@
 ---
 title: 'Introduction'
 excerpt: ''
+isHomePage: true
 ---
 
 # Introduction

@@ -1,17 +1,22 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .inner {
+  flex: 1;
+  @include default-section-padding;
+}
+
+.right-wrapper {
   padding: 45px 0 0 65px;
   @include lg-down {
     padding: 45px 0 0;
   }
   @include sm-down {
     padding-top: 0;
-    @include default-section-padding;
   }
-}
-
-.columns {
-  margin-left: 0;
-  margin-right: 0;
 }
 
 .right {

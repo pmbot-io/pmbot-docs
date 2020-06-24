@@ -6,23 +6,27 @@ import Sidebar from 'components/shared/sidebar';
 import Seo from 'components/shared/seo';
 import styles from './main.module.scss';
 
-const Main = ({ children, seoMetadata, sidebar = false }) => (
+const Main = ({ children, pageMetadata, sidebar = false }) => (
   <>
-    <Seo {...seoMetadata} />
-    <Header />
-    <main>
-      <div className="container">
-        <div className={`columns ${styles.columns}`}>
-          <div className="column is-narrow">
-            {!!sidebar && <Sidebar sidebar={sidebar} slug={seoMetadata.slug} />}
-          </div>
-          <div className={`column ${styles.right}`}>
-            <div className={styles.inner}>{children}</div>
+    <Seo {...pageMetadata} />
+    <div className={styles.wrapper}>
+      <Header />
+      <main className={styles.inner}>
+        <div className="container">
+          <div className="columns">
+            <div className="column is-narrow">
+              {!!sidebar && (
+                <Sidebar sidebar={sidebar} slug={pageMetadata.data.slug} />
+              )}
+            </div>
+            <div className={`column ${styles.right}`}>
+              <div className={styles.rightWrapper}>{children}</div>
+            </div>
           </div>
         </div>
-      </div>
-    </main>
-    <Footer />
+      </main>
+      <Footer />
+    </div>
   </>
 );
 
