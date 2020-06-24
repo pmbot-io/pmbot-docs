@@ -9,7 +9,6 @@ Unlike Npm, some package managers do not offer a way to control how dependency v
 
 For this reason, we have introduced a generic bump configuration that follows the [semantic versioning](https://semver.org/) concepts. You can set a default bump rule and fine tune how each dependency is bumped using patterns.  
 
-Usage:
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ````yaml

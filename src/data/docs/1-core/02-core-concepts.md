@@ -5,7 +5,11 @@ excerpt: ''
 
 # Core concepts
 
+Our approach to automated dependency updates is relatively new, but reading this page should make you understand most of it.
+
 <div class="table-of-content"></div>
+
+## How it works
 
 When we developed Pmbot, we tried to replicate how we updated our own projects manually. In practice, a developer would:
 - clone the project
@@ -32,11 +36,11 @@ CI providers are used by Pmbot to trigger updates of specific Git repositories o
 
 Projects allow you to configure how to update a given project on a given CI platform. They allow you to track updates and set schedules.
 
-### Schedules
+## Schedules
 
 Project schedules allow you to define which branches to update, and when. You can configure the timezone and select predefined schedules or use custom cron sequences. 
 
-### Updates
+## Updates
 
 Project updates are the core of Pmbot. They represent a group of dependency updates for various package managers, on a given project.
 

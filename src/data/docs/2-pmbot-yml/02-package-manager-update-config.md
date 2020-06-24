@@ -130,7 +130,8 @@ Configuration of the action. See available actions above for specific options.
 
 When to trigger this action:
 
-| Value | Description |
+| Value     | Description                                          |
+| --------- | ---------------------------------------------------- |
 | `success` | When all dependencies have been updated successfully |
-| `partial` | When some dependencies succeeded and some failed |
-| `failure` | When all dependencies failed to update |
+| `partial` | When some dependencies succeeded and some failed     |
+| `failure` | When all dependencies failed to update               |

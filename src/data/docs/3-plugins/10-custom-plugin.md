@@ -6,25 +6,9 @@ excerpt: ''
 
 # Custom plugins
 
-By default, Pmbot embeds the following plugins:
-
-**Actions**
-- [auto-merge](/plugins/auto-merge)
-- [create-issue](/plugins/create-issue)
-- [create-merge-request](/plugins/create-merge-request)
-- [email](/plugins/email)
-- [mattermost](/plugins/mattermost)
-- [slack](/plugins/slack)
-- [webhook](/plugins/webhook)
-
-**Package managers**
-- [Npm](/plugins/npm)
-- [Go](/plugins/go)
-- [Go](/plugins/maven)
-
-When you don't find what you need in the native bundle, we suggest one of the folloing things:
+When you don't find what you need in the [native plugins](/plugins/plugin-list), we suggest one of the folloing things:
+- create a custom plugin and reference it in your [`.pmbot.yml`](#pmbotyml)
 - open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request
-- create a custom plugin and reference it in your [`.pmbot.yml`](#pmbotyml).
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 

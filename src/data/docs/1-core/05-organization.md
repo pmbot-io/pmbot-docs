@@ -7,6 +7,8 @@ excerpt: ''
 
 When you register a Pmbot account, we create an organization an assign you as the owner.
 
+<div class="table-of-content"></div>
+
 ## Organization settings
 
 To access your organization settings:

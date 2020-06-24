@@ -7,8 +7,6 @@ excerpt: ''
 
 The `.pmbot.yml` file allows you to configure how the `pmbot` CLI performs updates.
 
-<div class="table-of-content"></div>
-
 ## version
 
 Tells version of your `.pmbot.yml` file. The only value at this time is `1`
