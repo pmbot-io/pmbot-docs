@@ -6,7 +6,7 @@ import CodeGroup from 'components/shared/code-group';
 import Blockquote from 'components/shared/blockquote';
 import LinksBlock from 'components/shared/links-block';
 import PageContentTable from '../page-content-table';
-
+import Banner from 'components/shared/banner';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import styles from './content.module.scss';
 
@@ -25,7 +25,7 @@ const components = {
   '.table-of-content': PageContentTable,
 };
 
-const Content = ({ className, content }) => {
+const Content = ({ className, content, articleSrc }) => {
   const containerRef = useRef(null);
   useElementsReplacement(
     {
@@ -36,11 +36,14 @@ const Content = ({ className, content }) => {
   );
   useScrollToAnchor();
   return (
-    <div
-      ref={containerRef}
-      className={cx('wrapper', className)}
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
+    <>
+      <div
+        ref={containerRef}
+        className={cx('wrapper', className)}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+      <Banner articleSrc={articleSrc} />
+    </>
   );
 };
 

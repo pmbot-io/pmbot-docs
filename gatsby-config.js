@@ -7,7 +7,7 @@ module.exports = {
     siteDescription:
       'The Pmbot documentation helps you to learn how to automate dependency updates with our solution.',
     // pathPrefix: "",
-    siteImage: '/images/sample-image.png',
+    siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
     /* author */

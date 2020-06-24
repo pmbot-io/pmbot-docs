@@ -23,7 +23,7 @@ export default function(props) {
   return (
     <LayoutMain pageMetadata={pageMetadata} sidebar={sidebarTree}>
       {/* <Breadcrumbs breadcrumbs={breadcrumbs} /> */}
-      <Content content={html} />
+      <Content content={html} articleSrc={frontmatter.fileOrigin} />
     </LayoutMain>
   );
 }

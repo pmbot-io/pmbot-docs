@@ -10,8 +10,8 @@ Pmbot is a self hosted platform that performs automated dependency updates of yo
 
 <div class="links-block">
 
-[Installation](/installation)
-[.pmbot.yml reference](/pmbotyml)
-[Create custom plugins](/plugins/custom)
+[Installation](/core/installation)
+[.pmbot.yml reference](/pmbot-yml/pmbotyml)
+[Create custom plugins](/plugins/custom-plugin)
 
 </div>
