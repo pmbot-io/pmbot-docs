@@ -85,6 +85,7 @@ interface UpdateRunData {
   project: {
     id: string;
     gitProviderProjectId: string;
+    name: string;
   };
   gitProvider: {
     type: 'GITLAB' | 'GITHUB';
