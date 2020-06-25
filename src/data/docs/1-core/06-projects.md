@@ -329,8 +329,6 @@ update:
     variables:
       - $PMBOT == "true"
   script:
-    # required when you self-host pmbot with a self-signed SSL certificate
-    - export NODE_EXTRA_CA_CERTS="${PMBOT_CA}"
     # run the update
     - pmbot update --url https://pmbot.company.com --token $PMBOT_TOKEN
 
@@ -346,6 +344,14 @@ test:
 ```
 
 </div>
+
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+If you are using a self signed certificate on your private Npm registry, make sure to pass `--trustedCa` to the `pmbot` CLI or define an environment variable named `PMBOT_TRUSTED_CA`.
+
+</div>
+
+
 
 #### Circle CI
 
