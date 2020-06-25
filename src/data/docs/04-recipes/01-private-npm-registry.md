@@ -63,3 +63,40 @@ update:
 ```
 
 </div>
+
+Here is another example `.gitlab-ci.yml` configuration file that leverages the global `before_script`:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+# cache things pmbot needs to access during the update
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID-$CI_COMMIT_REF_NAME"
+  paths:
+    - node_modules/
+
+# global before script
+before_script:
+- echo "//npm.domain.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+
+setup:
+  stage: setup
+  script:
+    - npm ci
+
+update:
+  stage: update
+  image: registry.dev.pmbot/bot:geoffroy
+  dependencies:
+    - setup
+  only:
+    variables:
+      - $PMBOT == "true"
+  script:
+    - pmbot update --url "$PMBOT_URL" --token "$PMBOT_TOKEN"
+
+# ... your other jobs
+```
+
+</div>
