@@ -347,7 +347,7 @@ test:
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 
-If you are using a self signed certificate on your private Npm registry, make sure to pass `--trustedCa` to the `pmbot` CLI or define an environment variable named `PMBOT_TRUSTED_CA`.
+If you are using a self signed certificate on your private Npm registry, make sure to pass [`--trusted-ca`](/core/pmbot-cli#trusted-ca) to the `pmbot` CLI or define an environment variable named `PMBOT_TRUSTED_CA`.
 
 </div>
 
