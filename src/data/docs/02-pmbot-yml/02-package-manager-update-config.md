@@ -135,3 +135,9 @@ When to trigger this action:
 | `success` | When all dependencies have been updated successfully |
 | `partial` | When some dependencies succeeded and some failed     |
 | `failure` | When all dependencies failed to update               |
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+No actions are executed when all dependency updates have status `skipped`.
+
+</div>
