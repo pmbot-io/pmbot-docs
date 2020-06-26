@@ -16,17 +16,12 @@ updates:
 - packageManager:
     name: auto-merge
     config:
-      rebase: true
       squash: true
       commitMessage: 'chore: update {{slug}} dependencies'
       removeUpdateBranch: true
 ````
 
 </div>
-
-## rebase
-
-Tells pmbot to rebase the update branch onto the source branch instead of merging. This allows a cleaner Git history.
 
 ## squash
 
