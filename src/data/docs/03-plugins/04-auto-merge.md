@@ -23,6 +23,12 @@ updates:
 
 </div>
 
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+When a dependency update fails, Pmbot reverts it. For this reason, this plugin will **not** work when `failure` is used in the [`on`](https://docs.pmbot.io/pmbot-yml/package-manager-update-config#on) property.  
+
+</div>
+
 ## squash
 
 Whether to squash commits into a single one. This ensures a clean Git history.
