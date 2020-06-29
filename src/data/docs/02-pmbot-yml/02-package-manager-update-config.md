@@ -141,3 +141,7 @@ When to trigger this action:
 No actions are executed when all dependency updates have status `skipped`.
 
 </div>
+
+## keepUpdateBranchOnFailure
+
+By default, after all actions have been executed, Pmbot deletes the update branch when the status of the package manager update is `failure`. To disable this behavior and keep the update branch, set this to `true`.
