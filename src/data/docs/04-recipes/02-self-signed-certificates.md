@@ -22,4 +22,4 @@ fQ+WljzA1PldDsGyspFWPpwqw3qSo9Uj
 
 ## Gitlab
 
-With Gitlab, we recommend setting a [CI/CD variable](https://docs.gitlab.com/ee/ci/variables/) of type [**file**](https://docs.gitlab.com/ee/ci/variables/#custom-environment-variables-of-type-file) at [the group level](https://docs.gitlab.com/ee/ci/variables/#group-level-environment-variables) with your certificate authority. Our CLI will pick the variable up automatically. 
+With Gitlab, we recommend setting a [CI/CD variable](https://docs.gitlab.com/ee/ci/variables/) of type [**file**](https://docs.gitlab.com/ee/ci/variables/#custom-environment-variables-of-type-file) at [the group level](https://docs.gitlab.com/ee/ci/variables/#group-level-environment-variables) or the [instance level]() with your certificate authority. Our CLI will pick the variable up automatically. More info about on this topic [in our recipes](/recipes/gitlab-ci). 

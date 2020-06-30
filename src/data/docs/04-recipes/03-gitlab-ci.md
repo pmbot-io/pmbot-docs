@@ -15,3 +15,7 @@ If you forced push to the update source branch, for example `master`, you may ex
 This will ensure that the workspace is clean for each run.
 
 ![](../../../images/gitlab-clone.png)
+
+## Group level and global variables
+
+Did you know that you can set CI variables at [the group level](https://docs.gitlab.com/ee/ci/variables/) and [the instance level](https://docs.gitlab.com/ee/ci/variables/#instance-level-cicd-environment-variables) (new in Gitlab 13) ? This will help you speed up setup for projects by providing globally things like trusted CA and, for example, global CLI options. 
