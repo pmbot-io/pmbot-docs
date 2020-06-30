@@ -32,6 +32,8 @@ defaultBumpRule: minor # major | minor | patch
 
 </div>
 
+Defaults to `minor`.
+
 ## bumpRules
 
 A list of bump rules against which Pmbot should match dependency names. We apply the **first matching rule**, and this rule overrides the [`defaultBumpRule`](#defaultbumprule).
