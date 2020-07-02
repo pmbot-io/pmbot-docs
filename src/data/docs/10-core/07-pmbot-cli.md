@@ -94,7 +94,22 @@ Environment variable: `PMBOT_TRUSTED_CA`
 Default: none
 
 If you are using self-signed certificates to secure your servers (i.e. Pmbot, package repositories...),
-this options allows you to specify a trusted Certification Authority certificate to validate those certificates. 
+this options allows you to specify the **path** to a trusted Certification Authority certificate to validate those certificates.
+
+Example trusted CA file:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```shell script
+-----BEGIN CERTIFICATE-----
+MIIFtDCCA5ygAwIBAgIJAKh8+CrWL5MeMA0GCSqGSIb3DQEBCwUAMGcxCzAJBgNV
+...
+nDFc85qf23ctw8OnZULq6H9VT/m02vgIqCD21hrCt8krY5n8JgOoRWsn9PVIsIVu
+fQ+WljzA1PldDsGyspFWPpwqw3qSo9Uj
+-----END CERTIFICATE-----
+```
+
+</div> 
 
 #### plugins
 
