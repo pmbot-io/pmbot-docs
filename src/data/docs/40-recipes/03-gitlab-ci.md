@@ -19,3 +19,5 @@ This will ensure that the workspace is clean for each run.
 ## Group level and global variables
 
 Did you know that you can set CI variables at [the group level](https://docs.gitlab.com/ee/ci/variables/) and [the instance level](https://docs.gitlab.com/ee/ci/variables/#instance-level-cicd-environment-variables) (new in Gitlab 13) ? This will help you speed up setup for projects by providing globally things like trusted CA and, for example, global CLI options. 
+
+This is really useful as you can define globally a variable named `PMBOT_URL` and you can omit the `--url` when calling the `pmbot` CLI in your CI configuration files.
