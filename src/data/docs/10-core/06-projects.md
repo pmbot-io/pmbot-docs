@@ -44,7 +44,9 @@ Projects allow run update for a given Git repository on a specific CI platform a
     ![](../../../images/projects/add-schedule-step.png)
     
     <div class="blockquote" data-props='{ "mod": "warning" }'>
-        As a cloud user, depending on your plan, you may be limited to how many schedules you can add. In that case, the **Add branch** button will be disabled.
+    
+    As a cloud user, depending on your plan, you may be limited to how many schedules you can add. In that case, the **Add branch** button will be disabled.
+    
     </div>
         
 1. Select the Git branch you wish to update, set the **timezone**, and **period**
@@ -76,7 +78,9 @@ To open the project details page:
 ## Delete a project
 
 <div class="blockquote" data-props='{ "mod": "danger" }'>
-    This action will **delete** all project configurations, updates, schedules, etc.
+
+This action will **delete** all project configurations, updates, schedules, etc.
+
 </div> 
 
 To delete a project:
@@ -228,8 +232,10 @@ If you ever need to change the CI provider after the project is enabled, here is
 
 1. Click **Save** to save the changes.
 
-     <div class="blockquote" data-props='{ "mod": "info" }'>
-        You must save to store both the selected CI and the settings. Even if you changed the CI provider for another one with the same type and didn't change the settings, you'll have to use the **Save** button.
+    <div class="blockquote" data-props='{ "mod": "info" }'>
+    
+    You must save to store both the selected CI and the settings. Even if you changed the CI provider for another one with the same type and didn't change the settings, you'll have to use the **Save** button.
+    
     </div>
 
 ### CI provider project configuration

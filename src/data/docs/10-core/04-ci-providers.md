@@ -72,5 +72,7 @@ excerpt: ''
    Once the provider is deleted, you will be redirected to the CI provider list.
 
     <div class="blockquote" data-props='{ "mod": "info" }'>
-        When you delete a CI provider, you will have to reconfigure a CI for each project it was used in.
+    
+    When you delete a CI provider, you will have to reconfigure a CI for each project it was used in.
+    
     </div>
