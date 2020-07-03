@@ -5,6 +5,12 @@ excerpt: ''
 
 # Gitlab
 
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+If you're looking for the Gitlab **CI** provider documentation, go to [CI Providers / Gitlab CI](../ci-providers/gitlab-ci).
+
+</div>
+
 ## General settings
 
 | Field | Description |

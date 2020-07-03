@@ -5,6 +5,12 @@ excerpt: ''
 
 # Gitlab CI
 
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+If you're looking for the Gitlab **git** provider documentation, go to [Git Providers / Gitlab](../git-providers/gitlab).
+
+</div>
+
 ## Provider settings
 
 | Field | Description |
@@ -27,7 +33,7 @@ Running Pmbot on Gitlab CI is made easy thanks to Gitlab webhooks and a feature 
 
 You will need to define an `update` job in your `.gitlab-ci.yml`. Here is an example for updating Npm dependencies.
 
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [true] }'>
 
 ```yaml
 # cache things pmbot needs to access during the update

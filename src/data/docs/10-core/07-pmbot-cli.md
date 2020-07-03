@@ -63,6 +63,22 @@ Token used to authenticate with the [API](#url).
 
 Path to the SSH private key for pushing to the git current repository.
 
+You can generate a new SSH key pair with the following command:
+
+<div class="code-group" data-props='{ "lineNumbers": [true] }'>
+
+```shell script
+ssh-keygen
+```
+
+</div>
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+Make sure you add the corresponding public key to your git project.
+
+</div>
+
 #### url
 
 **CLI Option:** `--url <url>`, `-u <url>`
@@ -94,11 +110,13 @@ Disable host key verification when using git over SSH.
 If you are using self-signed certificates to secure your servers (i.e. Pmbot, package repositories...),
 this options allows you to specify the **path** to a trusted Certification Authority certificate to validate those certificates.
 
+This CA should have the `pem` format.
+
 Example trusted CA file:
 
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [true] }'>
 
-```shell script
+```
 -----BEGIN CERTIFICATE-----
 MIIFtDCCA5ygAwIBAgIJAKh8+CrWL5MeMA0GCSqGSIb3DQEBCwUAMGcxCzAJBgNV
 ...
@@ -143,13 +161,3 @@ Path to the Pmbot config file.
 **Default:** `.`
 
 The directory where Pmbot will find the cloned repository of the project to update.
-
-#### update-id
-
-**CLI Option:** `--update-id <id>`, `-i <id>`
-
-**Environment variable:** `PMBOT_UPDATE_ID`
-
-**Default:** *(passed by Pmbot when triggering the ci)*
-
-The ID of the project update being ran.

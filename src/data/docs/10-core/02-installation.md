@@ -21,7 +21,7 @@ If you think the installation workflow can be simplified or improved in any way,
 
 If you wish to try out Pmbot, you can use the `pmbot/demo` image, which regroup all services used by pmbot. 
 
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
 docker run --detach --publish 80:80 pmbot/demo
@@ -35,15 +35,15 @@ docker run --detach --publish 80:80 pmbot/demo
 The following basic `docker-compose.yml` file can be launched with this command
 (where `PMBOT_HOST` is the IP address or hostname you're going to use to access Pmbot):
 
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
-```dotenv
+```shell script
 docker-compose --env PMBOT_HOST=localhost up --detach
 ```
 
 </div>
 
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```yaml
 # docker-compose.yml
@@ -102,7 +102,7 @@ volumes:
 
 Pmbot encrypts sensitive information. It uses environment variable `SECURITY_ENCRYPTION_KEY` as the encryption key. This key must be 32 bytes long. You can generate one using the following command:
 
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
 openssl rand -hex 32
@@ -122,7 +122,7 @@ Path to the private key used by Pmbot to sign JWT tokens.
 If this file does not exist, Pmbot will generate a new key pair.
 
 It can be generated using the following command:
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
 ssh-keygen -t rsa -b 4096 -m PEM -f private-key.pem -q -N "" 
@@ -138,7 +138,7 @@ Path to the public key matching the [private key](#auth_key_path_private).
 If this file does not exist, Pmbot will generate a new key pair.
 
 It can be generated from the private key using the following command:
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
 openssl rsa -in private-key.pem -pubout -outform PEM -out public-key.pem 
@@ -160,6 +160,19 @@ After that period, the CI will not be able to change the status of an update any
 MongoDB connection string.
 
 See [MongoDB documentation](https://docs.mongodb.com/manual/reference/connection-string/) for more information.
+
+### HTTP\_COOKIE\_DOMAINS
+
+**Default:** hostname of the request
+
+Comma separated list of domains on which the cookies use by Pmbot should be set.
+
+### HTTP\_CORS\_ORIGIN
+
+**Default:** hostname of the request (insecure)
+
+[Origin](https://developer.mozilla.org/en-US/docs/Glossary/origin) from which CORS requests are allowed.
+ `*` will not work.
 
 ### LOG_LEVEL
 
@@ -229,7 +242,7 @@ Password for the SMTP server.
 This encryption key is used by Pmbot to protect sensitive information. It must be a 32 byte key encoded in the `hex` format.
 
 It can be generated using the following command:
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
 openssl rand -hex 32
@@ -244,8 +257,8 @@ openssl rand -hex 32
 If [SECURITY\_ENCRYPTION\_KEY](#security_encryption_key) is not specified, Pmbot will attempt to read the key from this file.
 If this file does not exist, Pmbot will generate a key and store it into this file.
 
-If a [SECURITY\_ENCRYPTION\_KEY](#security_encryption_key) is given after a key file has been generated,
-the key file will be ignored and the value given in the environment variable will be used.
+If [SECURITY\_ENCRYPTION\_KEY](#security_encryption_key) is given after a key file has been generated,
+the key file will be ignored and the value given in the environment variable will be used instead.
 
 ## Frontend environment variables
 
