@@ -23,7 +23,7 @@ The Npm package manager does not have additional configuration.
 
 Since this plugin uses the native `npm` CLI, make sure to add a `.npmrc` with the proper authentication tokens so that the plugin can work properly. More details [here](/recipes/private-npm-registry).
 
-If your private registry uses a self signed certificate, make sure to pass [`--trusted-ca`](/core/pmbot-cli#trusted-ca) with a string containing your private certificate authority. For example:
+If your private registry uses a self signed certificate, make sure to pass [`--trusted-ca`](/core/cli#trusted-ca) with a string containing your private certificate authority. For example:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 

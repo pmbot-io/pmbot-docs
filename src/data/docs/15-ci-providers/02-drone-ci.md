@@ -109,7 +109,7 @@ steps:
 
 ## Self signed certificates
 
-See [`--trustedCa`](/core/pmbot-cli#trusted-ca).
+See [`--trustedCa`](/core/cli#trusted-ca).
 
 Define a secret named `PMBOT_TRUSTED_CA_CONTENT` which contains the content of your certificate file. Then, update your `.drone.yml` as follows:
 

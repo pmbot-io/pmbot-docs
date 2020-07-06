@@ -7,7 +7,7 @@ excerpt: ''
 
 Our [npm](/plugins/npm) plugin uses the native Npm CLI, make sure to set a `.npmrc` so that it can access your private registry.
 
-If your private registry uses a self signed certificate, make sure to pass [`--trusted-ca`](/core/pmbot-cli#trusted-ca) with a string containing your private certificate authority. For example:
+If your private registry uses a self signed certificate, make sure to pass [`--trusted-ca`](/core/cli#trusted-ca) with a string containing your private certificate authority. For example:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 

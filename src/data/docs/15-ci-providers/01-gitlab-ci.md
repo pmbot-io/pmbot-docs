@@ -81,7 +81,7 @@ test:
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 
-If you are using a self signed certificate on your private Npm registry, make sure to pass [`--trusted-ca`](/core/pmbot-cli#trusted-ca) to the `pmbot` CLI or define an environment variable named `PMBOT_TRUSTED_CA`.
+If you are using a self signed certificate on your private Npm registry, make sure to pass [`--trusted-ca`](/core/cli#trusted-ca) to the `pmbot` CLI or define an environment variable named `PMBOT_TRUSTED_CA`.
 
 </div>
 
@@ -101,6 +101,6 @@ In the Pmbot UI, `<pmbot-backend-url>` should already be replaced with the prope
 
 ## Self signed certificates
 
-See [`--trustedCa`](/core/pmbot-cli#trusted-ca).
+See [`--trustedCa`](/core/cli#trusted-ca).
 
 We recommend setting a [CI/CD variable](https://docs.gitlab.com/ee/ci/variables/) of type [**file**](https://docs.gitlab.com/ee/ci/variables/#custom-environment-variables-of-type-file) at [the group level](https://docs.gitlab.com/ee/ci/variables/#group-level-environment-variables) or the [instance level]() with your certificate authority. Our CLI will pick the variable up automatically. More info about on this topic [in our recipes](/recipes/gitlab-ci).
