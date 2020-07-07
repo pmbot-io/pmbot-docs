@@ -69,7 +69,6 @@ services:
     restart: unless-stopped
     environment:
       APP_UI_URL: https://${PMBOT_HOST?PMBOT_HOST}
-      HTTP_COOKIE_DOMAINS: ${PMBOT_HOST}
       HTTP_CORS_ORIGIN: https://${PMBOT_HOST}
       SENTRY_ENABLED: "true"
     volumes:
