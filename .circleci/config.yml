@@ -35,3 +35,7 @@ workflows:
     unless: << pipeline.parameters.PMBOT >>
     jobs:
       - build
+
+notify:
+  webhooks:
+    - url: http://localhost:3001/v1/ci/5f05e5891c0f29452c9d4bd8/circle?token=$PMBOT_TOKEN
