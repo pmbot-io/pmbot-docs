@@ -1,0 +1,36 @@
+version: 2.1
+
+# parameters sent when we trigger an update
+parameters:
+  PMBOT:
+    type: boolean
+    default: false
+  PMBOT_UPDATE_ID:
+    type: string
+
+jobs:
+  update:
+    docker:
+      - image: pmbot/bot:latest
+    steps:
+      - checkout
+      - run: pmbot update --url $PMBOT_URL --token $PMBOT_TOKEN
+
+  build:
+    docker:
+      - image: node:12-alpine
+    steps:
+      - checkout
+      - run: npm run build
+
+workflows:
+
+  update:
+    when: << pipeline.parameters.PMBOT >>
+    jobs:
+      - update
+
+  main:
+    unless: << pipeline.parameters.PMBOT >>
+    jobs:
+      - build
