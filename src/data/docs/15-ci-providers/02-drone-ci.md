@@ -69,7 +69,7 @@ steps:
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 
-We're always trying to make your life much easier, and we know that the `if [ ! -z $PMBOT ]; then exit 0; fi` trick isn't really pretty, but Drone unfortunately does not support [job conditions](https://docs.drone.io/pipeline/docker/syntax/conditions/) using environment variables. 
+We know that the `if [ ! -z $PMBOT ]; then exit 0; fi` trick isn't really pretty. Drone currently does not support [job conditions](https://docs.drone.io/pipeline/docker/syntax/conditions/) using environment variables, but as soon as it does, we'll update our docs. 
 
 </div>
 
@@ -107,6 +107,12 @@ steps:
 
 </div>
 
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+[We would love](https://discourse.drone.io/t/using-environment-variables-in-plugin-settings/7598) to reuse the existing project secret `PMBOT_TOKEN` you defined to provide the `pmbot` CLI with the `--token` option. When Drone supports this feature, we'll update our docs. 
+
+</div>
+
 ## Self signed certificates
 
 See [`--trustedCa`](/core/cli#trusted-ca).
@@ -129,12 +135,5 @@ steps:
       - echo $PMBOT_TRUSTED_CA_CONTENT > .ca-cert.pem
       - pmbot update --trustedCa=".ca-cert.pem" # ... other options 
 ```
-
-</div>
-
-
-<div class="blockquote" data-props='{ "mod": "info" }'>
-
-We're always trying to make setup more simple, and as much as [we would love](https://discourse.drone.io/t/using-environment-variables-in-plugin-settings/7598) to reuse the existing project secret `PMBOT_TOKEN` you defined to provide the `pmbot` CLI with the `--token` option, Drone does not support this for the moment. 
 
 </div>
