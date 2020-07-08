@@ -85,7 +85,7 @@ This [handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) template i
 
 ## ignore
 
-List of dependencies to ignore. Each item is a [minimatch](https://github.com/isaacs/minimatch) pattern.
+A list dependencies to ignore. Each item should be Javascript regular expression.
 
 ## actions
 

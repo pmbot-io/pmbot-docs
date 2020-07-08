@@ -51,7 +51,7 @@ bumpRules:
 
 ### pattern
 
-A [minimatch](https://www.npmjs.com/package/minimatch) pattern to use for matching against dependency names.
+A Javascript regular expression to use for matching against dependency names.
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
