@@ -21,6 +21,7 @@ jobs:
       - image: node:12-alpine
     steps:
       - checkout
+      - run: npm install
       - run: npm run build
 
 workflows:
