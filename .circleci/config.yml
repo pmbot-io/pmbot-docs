@@ -1,12 +1,12 @@
 version: 2.1
 
-# parameters sent when we trigger an update
 parameters:
   PMBOT:
     type: boolean
     default: false
   PMBOT_UPDATE_ID:
     type: string
+    default: ''
 
 jobs:
   update:
