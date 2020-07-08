@@ -6,7 +6,7 @@ excerpt: ''
 
 # Maven
 
-To use this plugin, you will have to make sure that the `mvn` CLI is available in the environment. Our default docker image embeds Maven 3.6 and the Open JDK 11.
+To use this plugin, you will have to make sure the `mvn` CLI is available in the environment. Our `pmbot/bot:maven` docker image embeds Maven 3.6 and the Open JDK 11.
 
 Also, you will have to install your maven dependencies manually before running the `pmbot` CLI.
 
@@ -23,7 +23,52 @@ updates:
 
 </div>
 
-## `bumpConfig`
+## Limitations of the current plugin
+
+The current Maven plugin is only able to update dependencies for which the version is specified directly in the `<version></version>` tag of the dependency inside your `pom.xml`:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```xml
+<dependency>
+  <groupId>commons-io</groupId>
+  <artifactId>commons-io</artifactId>
+  <version>2.6</version>
+</dependency>
+```
+
+</div>
+
+If you do not specifiy a version:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```xml
+<dependency>
+  <groupId>commons-io</groupId>
+  <artifactId>commons-io</artifactId>
+</dependency>
+```
+
+</div>
+
+or use **properties**
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```xml
+<dependency>
+  <groupId>commons-io</groupId>
+  <artifactId>commons-io</artifactId>
+  <version>${commonsio.version}</version>
+</dependency>
+```
+
+</div>
+
+the plugin will not be able to update the dependency.
+
+## bumpConfig
 
 Configures how dependencies should be bumped. This is available because Go does not offer native support for semantic versioning. See the [generic bump configuration](#generic-bump-configuration) which re-use for all package managers that don't natively offer this funtionality.
 
@@ -40,6 +85,12 @@ updates:
 ````
 
 </div>
+
+## settingsPath
+
+Path to a maven `settings.xml` file which contains credentials for private repositories. By default, we check the following locations:
+- `~/.m2/settings.xml`
+- `.m2/settings.xml`
 
 ## Environment variables
 
