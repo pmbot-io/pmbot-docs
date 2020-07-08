@@ -81,6 +81,7 @@ parameters:
     default: false
   PMBOT_UPDATE_ID:
     type: string
+    default: ''
 
 jobs:
   # update job
@@ -99,7 +100,6 @@ jobs:
       - run: node --version
 
 workflows:
-  version: 2
 
   update:
     # this is the update workflow
