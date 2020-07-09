@@ -1,5 +1,16 @@
 .wrapper {
   margin-bottom: 120px;
+
+  :global {
+    .language-text {
+      color: $color-additional-3;
+      background-color: $color-additional-2;
+      border: 2px solid $color-additional-1;
+      border-radius: 5px;
+      padding: 1px 10px;
+    }
+  }
+
   h1 {
     font-size: $font-size-lg;
     line-height: $line-height-lg;
@@ -59,14 +70,14 @@
     &:hover {
       color: $color-accent-primary;
     }
-  }
-
-  .language-text {
-    color: $color-additional-3;
-    background-color: $color-additional-2;
-    border: 2px solid $color-additional-1;
-    border-radius: 5px;
-    padding: 1px 10px;
+    :global {
+      .language-text {
+        color: $color-accent-secondary;
+        &:hover {
+          color: $color-accent-primary;
+        }
+      }
+    }
   }
 
   table {
@@ -88,7 +99,8 @@
       & > * + * {
         border-top: 2px solid $color-additional-1;
       }
-      * {
+      tr,
+      td {
         padding: 20px 30px;
       }
       tr {
@@ -97,9 +109,10 @@
           &:first-child {
             color: $color-accent-primary;
           }
-
-          .language-text {
-            color: $color-accent-primary;
+          :global {
+            .language-text {
+              color: $color-accent-primary;
+            }
           }
         }
       }
