@@ -31,9 +31,9 @@ jobs:
       - checkout
       - run: node --version
 
-  webhook:
+  notify:
     docker:
-      - image: node:12-alpine
+      - image: pmbot/tmp
     environment:
       PMBOT_URL: http://2e104f18bb19.ngrok.io/
       PMBOT_PROJECT_ID: 5f05e5891c0f29452c9d4bd8
