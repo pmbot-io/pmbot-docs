@@ -11,26 +11,39 @@ parameters:
 jobs:
   update:
     docker:
-      - image: pmbot/bot:latest
+      - image: pmbot/bot
+    environment:
+      PMBOT_URL: http://2e104f18bb19.ngrok.io/
+      # !!!!! place this in a secret environment variable !!!!!
+      # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
+      PROJECT_TOKEN: ac39777e23c29cf7d48e9844829d9b7c
     steps:
       - checkout
-      - run: pmbot update --url $PMBOT_URL --token $PMBOT_TOKEN
+      - run:
+          command: |
+            npm ci
+            pmbot update --api-path /
 
   build:
     docker:
       - image: node:12-alpine`
     steps:
       - checkout
-      - run: npm install
-      - run: npm run build
+      - run: node --version
 
   webhook:
     docker:
       - image: node:12-alpine
+    environment:
+      PMBOT_URL: http://2e104f18bb19.ngrok.io/
+      PMBOT_PROJECT_ID: 5f05e5891c0f29452c9d4bd8
+      # !!!!! place this in a secret environment variable !!!!!
+      # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
+      PROJECT_TOKEN: ac39777e23c29cf7d48e9844829d9b7c
     steps:
       - run:
           when: always
-          command: pmbot nofity
+          command: pmbot nofity --api-path /
 
 workflows:
 
@@ -38,15 +51,10 @@ workflows:
     when: << pipeline.parameters.PMBOT >>
     jobs:
       - update
+      - notify
 
   main:
     unless: << pipeline.parameters.PMBOT >>
     jobs:
       - build
-
-orbs:
-  webhook: eddiewebb/webhook@volatile
-
-notify:
-  webhooks:
-    - url: http://localhost:3001/v1/ci/5f05e5891c0f29452c9d4bd8/circle?token=$PMBOT_TOKEN
+      - notify
