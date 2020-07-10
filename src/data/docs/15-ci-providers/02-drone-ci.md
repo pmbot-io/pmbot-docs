@@ -32,7 +32,15 @@ Done CI does not support projects with names containing more than one `/`. Githu
 
 ### CI config file
 
-You'll need to update your `.drone.yml`:
+You'll need to update your `.drone.yml`.
+
+The variables marked with `{{...}}` are prefilled in the code snippets provided in your [project setup](/core/projects#setup).
+
+| Variable | Description |
+| --- | --- |
+| `{{PMBOT_URL}}` | The URL of the Pmbot backend. |
+| `{{PMBOT_PROJECT_ID}}` | The ID of your Pmbot project. You can find this ID in the URL of your UI when you are on the project details page. |
+| `{{PMBOT_TOKEN}}` | Your [`PMBOT_TOKEN`](#pmbot_token) |
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"], "labels": [".drone.yml"] }'>
 
@@ -41,81 +49,60 @@ kind: pipeline
 type: docker
 name: default
 
+environment:
+  PMBOT_URL: {{PMBOT_URL}}
+  PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
+  # !!!!! place this in a project secret variable !!!!!
+  # https://docs.drone.io/secret/repository/
+  PROJECT_TOKEN: {{PROJECT_TOKEN}}
+
 steps:
   - name: update
-    image: pmbot-io/bot
+    image: pmbot/bot
     environment:
-      PMBOT_URL: https://pmbot.company.com
       PMBOT_TOKEN:
         from_secret: PMBOT_TOKEN
     commands:
-      # don't execute this job for standard builds triggered by a commit
+      # skip this job for standard pipelines
       - if [ -z $PMBOT ]; then exit 0; fi
-      # provider the pmbot CLI with your node_modules
+      # make node_modules available to pmbot CLI
       - npm ci
-      - pmbot update --token "$PMBOT_TOKEN" --url "$PMBOT_URL" --debug --disable-host-key-verification
+      # run the pmbot CLI
+      - pmbot update
 
-  - name: build
+  # your existing build/test jobs
+  - name: test
     image: node:12
     commands:
-      # don't execute this job for builds created by Pmbot
+      # skip this job when an update is triggered
       - if [ ! -z $PMBOT ]; then exit 0; fi
-      - node --version
+      - npm ci
+      - npm test
 
-  # webhook config (see below)
+  # notify pmbot of build status (must be the last step)
+  - name: notify
+    image: registry.dev.pmbot/bot:npm-geoffroy
+    pull: always
+    environment:
+      PMBOT_TOKEN:
+        from_secret: PMBOT_TOKEN
+    commands:
+      - pmbot notify --debug
 ```
 
 </div>
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 
-We know that the `if [ ! -z $PMBOT ]; then exit 0; fi` trick isn't really pretty. Drone currently does not support [job conditions](https://docs.drone.io/pipeline/docker/syntax/conditions/) using environment variables, but as soon as it does, we'll update our docs. 
+We know that the `if [ ! -z $PMBOT ]; then exit 0; fi` trick isn't really pretty. Drone currently does not support [job conditions](https://docs.drone.io/pipeline/docker/syntax/conditions/) using environment variables, but as soon as it does, we'll update our docs.
 
-</div>
-
-### Webhook
-
-First, you'll have to add a project secret named `PMBOT_WEBHOOK_TOKEN_HEADER` with your project token as follows:
-
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
-
-```shell script
-Authorization=<your-project-token>
-```
-
-</div>
-
-Then, in your `.drone.yml`, define a [webhook](http://plugins.drone.io/drone-plugins/drone-webhook/) as **the last step**:
-
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
-
-```yaml
-steps:
-  # ...
-
-  - name: webhook
-    image: plugins/webhook
-    when:
-      status:
-        - success
-        - failure
-    settings:
-      urls: https://pmbot.company.com
-      headers:
-        from_secret: PMBOT_WEBHOOK_TOKEN_HEADER
-```
-
-</div>
-
-<div class="blockquote" data-props='{ "mod": "info" }'>
-
-[We would love](https://discourse.drone.io/t/using-environment-variables-in-plugin-settings/7598) to reuse the existing project secret `PMBOT_TOKEN` you defined to provide the `pmbot` CLI with the `--token` option. When Drone supports this feature, we'll update our docs. 
+For now, you'll also have to repeat the environment definition in the `update` and `notify` steps as it is [currently not possible](https://discourse.drone.io/t/using-from-secrets-in-pipeline-environment-definition/7676/3) to use `from_secret` in the pipeline level environment definition.
 
 </div>
 
 ## Self signed certificates
 
-See [`--trustedCa`](/core/cli#trusted-ca).
+See [`--trusted-ca`](/core/cli#trusted-ca).
 
 Define a secret named `PMBOT_TRUSTED_CA_CONTENT` which contains the content of your certificate file. Then, update your `.drone.yml` as follows:
 
@@ -131,9 +118,9 @@ steps:
         from_secret: PMBOT_TRUSTED_CA
     commands:
       - if [ -z $PMBOT ]; then exit 0; fi
-      - # ... install node_modules
       - echo $PMBOT_TRUSTED_CA_CONTENT > .ca-cert.pem
-      - pmbot update --trustedCa=".ca-cert.pem" # ... other options 
+      - # ... install node_modules
+      - pmbot update --trusted-ca .ca-cert.pem # ... other options 
 ```
 
 </div>

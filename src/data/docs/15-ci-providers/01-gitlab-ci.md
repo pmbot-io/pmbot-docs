@@ -31,41 +31,48 @@ Running Pmbot on Gitlab CI is made easy thanks to Gitlab webhooks and a feature 
 
 ### CI config file
 
-You will need to define an `update` job in your `.gitlab-ci.yml`. Here is an example for updating Npm dependencies.
+You'll need to update in your `.gitlab-ci.yml`. 
 
-<div class="code-group" data-props='{ "lineNumbers": [true] }'>
+The variables marked with `{{...}}` are prefilled in the code snippets provided in your [project setup](/core/projects#setup).
+
+| Variable | Description |
+| --- | --- |
+| `{{PMBOT_URL}}` | The URL of the Pmbot backend. |
+| `{{PMBOT_PROJECT_ID}}` | The ID of your Pmbot project. You can find this ID in the URL of your UI when you are on the project details page. |
+| `{{PMBOT_TOKEN}}` | Your [`PMBOT_TOKEN`](#pmbot_token) |
+
+Here is an example for updating Npm dependencies:
+
+<div class="code-group" data-props='{ "lineNumbers": [true], "labels": [".gitlab-ci.yml"] }'>
 
 ```yaml
-# cache things pmbot needs to access during the update
-cache:
-  untracked: true
-  key: "$CI_PROJECT_ID-$CI_COMMIT_REF_NAME"
-  paths:
-    - node_modules/
-
 stages:
-  - install
   - update
   - test
+  # must be the last stage !
+  - notify
 
-# pmbot will need these dependencies
-install:
-  stage: install
-  image: node:12-alpine
-  script:
-    - npm ci
+variables:
+  PMBOT_URL: {{PMBOT_URL}}
+  PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
+  # !!!!! place this in a secret CI/CD variable !!!!!
+  # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
+  PROJECT_TOKEN: {{PROJECT_TOKEN}}
 
 update:
   stage: update
-  image: pmbot/bot:1
+  image: pmbot/bot
   # run the update job only when variable environment $PMBOT is "true"
   only:
     variables:
       - $PMBOT == "true"
   script:
+    # install your dependencies
+    - npm ci
     # run the update
-    - pmbot update --url "$PMBOT_URL" --token "$PMBOT_TOKEN"
+    - pmbot update --url https://pmbot.company.com
 
+# your existing build/test jobs
 test:
   stage: test
   image: node:12-alpine
@@ -74,33 +81,37 @@ test:
     variables:
       - $PMBOT == "true"
   script:
+    - npm ci
     - npm test
+
+# notify pmbot of pipeline success
+on-success:
+  stage: notify
+  image: pmbot/bot
+  when: on_success
+  script:
+    - pmbot notify --success
+
+# notify pmbot of pipeline success
+on-failure:
+  stage: notify
+  image: pmbot/bot
+  when: on_failure
+  script:
+    - pmbot notify
+
 ```
 
 </div>
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 
-If you are using a self signed certificate on your private Npm registry, make sure to pass [`--trusted-ca`](/core/cli#trusted-ca) to the `pmbot` CLI or define an environment variable named `PMBOT_TRUSTED_CA`.
+`on-success` and `on-failure` are separate jobs because Gitlab CI does not provide a pipeline status variable in the [predefined environment variables](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html). 
 
 </div>
 
-### Webhook
-
-In Gitlab CI, you'll have to create a [webhook](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html).
-
-Go to your Gitlab project, then in **Settings / Webhooks**, add a webhook with the following parameters:
-
-| Field | Value |
-| --- | --- |
-| URL | `<pmbot-backend-url>/v1/ci/<pmbot-project-id>/gitlab`. Your Pmbot project ID can be found in the URL of your project details page. |
-| Token | Your [`PMBOT_TOKEN`](#pmbot_token) |
-| Trigger | Pipeline events |
-
-In the Pmbot UI, `<pmbot-backend-url>` should already be replaced with the proper URL. 
-
 ## Self signed certificates
 
-See [`--trustedCa`](/core/cli#trusted-ca).
+See [`--trusted-ca`](/core/cli#trusted-ca).
 
 We recommend setting a [CI/CD variable](https://docs.gitlab.com/ee/ci/variables/) of type [**file**](https://docs.gitlab.com/ee/ci/variables/#custom-environment-variables-of-type-file) at [the group level](https://docs.gitlab.com/ee/ci/variables/#group-level-environment-variables) or the [instance level]() with your certificate authority. Our CLI will pick the variable up automatically. More info about on this topic [in our recipes](/recipes/gitlab-ci).

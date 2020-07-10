@@ -18,11 +18,19 @@ jobs:
 
   build:
     docker:
-      - image: node:12-alpine
+      - image: node:12-alpine`
     steps:
       - checkout
       - run: npm install
       - run: npm run build
+
+  webhook:
+    docker:
+      - image: node:12-alpine
+    steps:
+      - run:
+          when: always
+          command: pmbot nofity
 
 workflows:
 
@@ -36,7 +44,9 @@ workflows:
     jobs:
       - build
 
+orbs:
+  webhook: eddiewebb/webhook@volatile
+
 notify:
   webhooks:
-    - >
-      url: http://localhost:3001/v1/ci/5f05e5891c0f29452c9d4bd8/circle?token=${PMBOT_TOKEN}
+    - url: http://localhost:3001/v1/ci/5f05e5891c0f29452c9d4bd8/circle?token=$PMBOT_TOKEN

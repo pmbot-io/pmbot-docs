@@ -33,28 +33,62 @@ Support for `2.0` configuration should end some time in 2020 as Circle CI will d
 
 You'll need to update your `.circle/config.yml`.
 
-If you are using version `2`, you need to add an `update` job as shown in the example file below.
+The variables marked with `{{...}}` are prefilled in the code snippets provided in your [project setup](/core/projects#setup).
 
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+| Variable | Description |
+| --- | --- |
+| `{{PMBOT_URL}}` | The URL of the Pmbot backend. |
+| `{{PMBOT_PROJECT_ID}}` | The ID of your Pmbot project. You can find this ID in the URL of your UI when you are on the project details page. |
+| `{{PMBOT_TOKEN}}` | Your [`PMBOT_TOKEN`](#pmbot_token) |
+
+If you are using version `2`, you'll want to use the following config, and in the [project CI settings](#ci-provider-project-configuration), make sure you have selected **Config Version** **2.0** and that you have set the **job name** to `update`.
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"], "labels": [".circleci/config.yml"] }'>
 
 ```yaml
 version: 2 # or 2.0
 
 jobs:
-  # this is the important part
+  #
   update:
     docker:
-      - image: pmbot/bot:latest
+      - image: pmbot/bot
+    environment:
+      PMBOT_URL: {{PMBOT_URL}}
+      # !!!!! place this in a secret environment variable !!!!!
+      # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
+      PROJECT_TOKEN: {{PROJECT_TOKEN}}
     steps:
       - checkout
-      - run: pmbot update --url $PMBOT_URL --token $PMBOT_TOKEN
+      - run:
+          command: |
+            npm ci
+            pmbot update
 
-  build:
+  test:
     docker:
       - image: node:12-alpine
     steps:
       - checkout
-      - run: node --version
+      - run:
+          command: |
+            npm ci
+            npm test
+
+  # notify pmbot of workflow status (must be last job of workflow)
+  notify:
+    docker:
+      - image: pmbot/bot
+    environment:
+      PMBOT_URL: {{PMBOT_URL}}
+      PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
+      # !!!!! place this in a secret environment variable !!!!!
+      # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
+      PROJECT_TOKEN: {{PROJECT_TOKEN}}
+    steps:
+      - run:
+          when: always
+          command: pmbot notify
 
 workflows:
   version: 2
@@ -65,11 +99,9 @@ workflows:
 
 </div>
 
-Now, in the [project CI settings](#ci-provider-project-configuration), make sure you have selected **Config Version** **2.0** and that you have set the **job name** to `update`.
+If you are using config version `2.1`, you will need to [enable pipelines](https://circleci.com/docs/2.0/build-processing/) in your Circle CI account, which allows you to use conditional workflows. Also, make sure you have selected **Config Version** **2.1** in your [project CI settings](#ci-provider-project-configuration).
 
-If you are using config version `2.1`, you will need to [enable pipelines](https://circleci.com/docs/2.0/build-processing/) in your Circle CI account, which allows you to use conditional workflows. You can then define an `update` workflow as shown below:
-
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+<div class="code-group" data-props='{ "lineNumbers": ["true"], "labels": [".circleci/config.yml"] }'>
 
 ```yaml
 version: 2.1
@@ -87,55 +119,61 @@ jobs:
   # update job
   update:
     docker:
-      - image: pmbot/bot:latest
+      - image: pmbot/bot
+    environment:
+      PMBOT_URL: {{PMBOT_URL}}
+      # !!!!! place this in a secret environment variable !!!!!
+      # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
+      PROJECT_TOKEN: {{PROJECT_TOKEN}}
     steps:
-      - checkout
-      - run: pmbot update --url $PMBOT_URL --token $PMBOT_TOKEN
+      - run:
+          command: |
+            npm ci
+            pmbot update
 
-  build:
+  # your existing job(s)
+  test:
     docker:
       - image: node:12-alpine
     steps:
       - checkout
-      - run: node --version
+      - run:
+          command: |
+            npm ci
+            npm test
+
+  # notify pmbot of workflow status
+  notify:
+    docker:
+      - image: pmbot/bot
+    environment:
+      PMBOT_URL: {{PMBOT_URL}}
+      PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
+      # !!!!! place this in a secret environment variable !!!!!
+      # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
+      PROJECT_TOKEN: {{PROJECT_TOKEN}}
+    steps:
+      - run:
+          when: always
+          command: pmbot notify
 
 workflows:
+  version: 2
 
   update:
     # this is the update workflow
     when: << pipeline.parameters.PMBOT >>
     jobs:
       - update
+      - notify # must be last job of workflow
 
+  # your existing workflow
   main:
     # skip this workflow during an update
     unless: << pipeline.parameters.PMBOT >>
     jobs:
       - build
+      - notify # must be last job of workflow
 ```
 
 </div>
-
-Now, in the [project CI settings](#ci-provider-project-configuration), make sure you have selected **Config Version** **2.1**.
-
-### Webhook
-
-In your `.circle/config.yml`, add a webhook as follows:
-
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
-
-```yaml
-notify:
-  webhooks:
-    - url: $PMBOT_URL/v1/ci/<pmbot-project-id>/circle?token=$PMBOT_TOKEN
-```
-
-</div>
-
-The above code sample is given to you in the `PMBOT_TOKEN` section of the project **Setup** with preformatted URLs containing proper values for all variables mentioned above. However, here is a description of each of those variables in case it is needed: 
-
-| Variable | Description |
-| --- | --- |
-| `PMBOT_URL` | The URL of the Pmbot backend. |
-| `<pmbot-project-id>` | The ID of your Pmbot project. You can find this ID in the URL of your UI when you are on the project details page. In the [setup](/core/projects#setup) section of your project, this value will be filled in for you in the code snippet displayed. |
-| `PMBOT_TOKEN` | Your [`PMBOT_TOKEN`](#pmbot_token) |
