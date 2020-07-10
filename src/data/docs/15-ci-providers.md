@@ -11,6 +11,5 @@ CI Providers are used by Pmbot to run project updates via the `pmbot` CLI. Pmbot
 
 [Gitlab CI](/ci-providers/gitlab-ci)
 [Drone CI](/ci-providers/drone-ci)
-[Circle CI](/ci-providers/circle-ci)
 
 </div>

@@ -228,7 +228,6 @@ If you ever need to change the CI provider after the project is enabled, here is
 
     - [Gitlab CI](/ci-providers/gitlab-ci#project-settings)    
     - [Drone CI](/ci-providers/drone-ci#project-settings)
-    - [Circle CI](/ci-providers/circle-ci#project-settings)    
 
 1. Click **Save** to save the changes.
 
@@ -319,13 +318,11 @@ To run updates, we leverage conditional CI jobs. You'll need to setup an update 
 
 - [Gitlab CI](/ci-providers/gitlab-ci#ci-config-file)    
 - [Drone CI](/ci-providers/drone-ci#ci-config-file)
-- [Circle CI](/ci-providers/circle-ci#ci-config-file)    
 
 ### Webhook
 
 - [Gitlab CI](/ci-providers/gitlab-ci#webhook)    
 - [Drone CI](/ci-providers/drone-ci#webhook)
-- [Circle CI](/ci-providers/circle-ci#webhook)    
 
 ### Git credentials
 

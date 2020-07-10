@@ -25,7 +25,6 @@ excerpt: ''
 
     - [Gitlab CI](/ci-providers/gitlab-ci#provider-settings)    
     - [Drone CI](/ci-providers/drone-ci#provider-settings)
-    - [Circle CI](/ci-providers/circle-ci#provider-settings)
 
     ![](../../../images/ci-providers/general-config.png)
     
