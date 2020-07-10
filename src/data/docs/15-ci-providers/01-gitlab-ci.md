@@ -112,6 +112,6 @@ on-failure:
 
 ## Self signed certificates
 
-See [`--trusted-ca`](/core/cli#trusted-ca).
+See [`here`](/core/cli#self-signed-certificates).
 
-We recommend setting a [CI/CD variable](https://docs.gitlab.com/ee/ci/variables/) of type [**file**](https://docs.gitlab.com/ee/ci/variables/#custom-environment-variables-of-type-file) at [the group level](https://docs.gitlab.com/ee/ci/variables/#group-level-environment-variables) or the [instance level]() with your certificate authority. Our CLI will pick the variable up automatically. More info about on this topic [in our recipes](/recipes/gitlab-ci).
+We recommend setting a [CI/CD variable](https://docs.gitlab.com/ee/ci/variables/) of type [**file**](https://docs.gitlab.com/ee/ci/variables/#custom-environment-variables-of-type-file) at [the group level](https://docs.gitlab.com/ee/ci/variables/#group-level-environment-variables) or the [instance level]() with the path to your CA certificate.

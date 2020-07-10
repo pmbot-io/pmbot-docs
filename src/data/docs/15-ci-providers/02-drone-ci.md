@@ -102,25 +102,6 @@ For now, you'll also have to repeat the environment definition in the `update` a
 
 ## Self signed certificates
 
-See [`--trusted-ca`](/core/cli#trusted-ca).
+See [`here`](/core/cli#self-signed-certificates).
 
-Define a secret named `PMBOT_TRUSTED_CA_CONTENT` which contains the content of your certificate file. Then, update your `.drone.yml` as follows:
-
-<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
-
-```yaml
-steps:
-  - name: update
-    # ...
-    environment:
-      # ...
-      PMBOT_TRUSTED_CA_CONTENT:
-        from_secret: PMBOT_TRUSTED_CA
-    commands:
-      - if [ -z $PMBOT ]; then exit 0; fi
-      - echo $PMBOT_TRUSTED_CA_CONTENT > .ca-cert.pem
-      - # ... install node_modules
-      - pmbot update --trusted-ca .ca-cert.pem # ... other options 
-```
-
-</div>
+Define a secret named `NODE_EXTRA_CA_CERTS` which contains the path to your CA certificate file.

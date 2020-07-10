@@ -7,7 +7,7 @@ excerpt: ''
 
 Our [npm](/plugins/npm) plugin uses the native Npm CLI, make sure to set a `.npmrc` so that it can access your private registry.
 
-If your private registry uses a self signed certificate, make sure to pass [`--trusted-ca`](/core/cli#trusted-ca) with a string containing your private certificate authority. For example:
+If your private registry uses a self signed certificate, make sure to set the `NODE_EXTRA_CA_CERTS` environment variable with a path to your certificate in the **PEM** format:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
