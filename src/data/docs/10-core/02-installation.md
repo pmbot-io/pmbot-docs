@@ -54,22 +54,14 @@ services:
   entrypoint:
     image: pmbot/reverse-proxy
     restart: unless-stopped
-    depends_on:
-      - backend
-      - frontend
-    volumes:
-#      - certs:/certs
-      - cache:/cache
     ports:
       - 80:80
-#      - 443:443
 
   backend:
     image: pmbot/backend
     restart: unless-stopped
     environment:
       APP_UI_URL: https://${PMBOT_HOST?PMBOT_HOST}
-      HTTP_CORS_ORIGIN: https://${PMBOT_HOST}
       SENTRY_ENABLED: "true"
     volumes:
       - secrets:/secrets
