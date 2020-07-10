@@ -103,6 +103,44 @@ openssl rand -hex 32
 
 ### How to generate private/public keys for JWT tokens
 
+## Reverse proxy environment variables
+
+### TRAEFIK\_DYNAMIC\_CONFIG
+
+**Default:** none
+
+May contain additional [dynamic configuration](https://docs.traefik.io/reference/dynamic-configuration/file/) to inject
+in Traefik.
+The content of this variable will be written into a temporary file and will be loaded
+by Traefik [file provider](https://docs.traefik.io/providers/file/).
+
+You may use yaml multiline syntax for this variable:
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```yaml@
+services:
+  reverse-proxy:
+    image: pmbot/reverse-proxy
+    restart: unless-stopped
+    environment:
+      TRAEFIK_DYNAMIC_CONFIG: >
+        [tls.stores]
+          [tls.stores.default]
+            [tls.stores.default.defaultCertificate]
+              certFile = "/certs/fullchain.pem"
+              keyFile = "/certs/privkey.pem"
+...
+```
+
+</div>
+
+### TRAEFIK\_DYNAMIC\_CONFIG\_FORMAT
+
+**Default:** `toml`
+
+File format of the content given in [TRAEFIK\_DYNAMIC\_CONFIG](#traefik_dynamic_config).
+Can be `toml` or `yaml`.
+
 ## Backend environment variables
 
 ### AUTH\_KEY\_PATH\_PRIVATE
