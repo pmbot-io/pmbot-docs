@@ -7,6 +7,8 @@ excerpt: ''
 
 A package manager config allows you to configure how updates are made for a single package manager (e.g Npm, Go, ...).
 
+<div class="table-of-content"></div>
+
 ## packageManager
 
 Configure which package manager to use and fine tune the settings. This is an object representing a standard Pmbot plugin declaration:
