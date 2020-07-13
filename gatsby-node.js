@@ -6,25 +6,11 @@ const {
   unorderify,
   compose,
   buildBreadcrumbs,
+  stripDocRoot,
 } = require('./src/utils/utils');
-
-/* aux local helpers */
-
-// creating-docs-pages-specific function; extracts the category after
-// 'docs'; e.g. /whatever/some-more -> whatever
-// getDocSection(str: String) -> String
-const getDocTopLevelSection = str => str.replace(/^\/(.*?)\/.*$/, '$1');
-
-const stripDocRoot = str => str.replace(/^\/docs/, '');
-
-const isSectionPage = path => {
-  return path === getDocTopLevelSection(path);
-};
 
 // main doc page template
 const docPageTemplate = path.resolve(`src/templates/doc-page.js`);
-// aux doc page template
-const sectionPageTemplate = path.resolve(`src/templates/doc-section-page.js`);
 
 async function createDocPages({ actions: { createPage }, graphql, reporter }) {
   // doc pages query
@@ -98,7 +84,6 @@ async function createDocPages({ actions: { createPage }, graphql, reporter }) {
             unorderify,
             stripDocRoot
           )(`/${relativeDirectory}/${title || name}`);
-
       const extendedRemarkNode = {
         ...remarkNode,
         frontmatter: {

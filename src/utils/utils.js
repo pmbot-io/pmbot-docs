@@ -21,13 +21,14 @@ const slugify = string => {
   return string
     .toString()
     .toLowerCase()
-    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/\s+|\.+/g, '-') // Replace spaces and dots with -
     .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
     .replace(/&/g, '-and-') // Replace & with 'and'
     .replace(/[^\w/-]+/g, '') // Remove all non-word characters
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
     .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, ''); // Trim - from end of text
+    .replace(/-+$/, '') // Trim - from end of text
+    .replace(/\/-/g, '/'); // Trim - from every part of the path
 };
 
 // creates a file tree structure
@@ -107,6 +108,9 @@ const getRandomKey = () =>
     .toString()
     .replace('.', '')}`;
 
+// strips the 'docs' parth from the file path
+const stripDocRoot = str => str.replace(/^\/docs/, '');
+
 module.exports = {
   createMetaImagePath,
   slugify,
@@ -116,4 +120,5 @@ module.exports = {
   compose,
   buildBreadcrumbs,
   getRandomKey,
+  stripDocRoot,
 };

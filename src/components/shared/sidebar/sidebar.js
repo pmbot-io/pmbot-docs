@@ -6,6 +6,16 @@ import Search from 'components/shared/search';
 import { Link, withPrefix } from 'gatsby';
 import ArrowSvg from 'images/arrow.inline.svg';
 import { navigate } from 'gatsby';
+import AlgoliaQueries from 'utils/algolia';
+
+const indexName = AlgoliaQueries[0].indexName;
+
+// local helper data
+//
+// algolia indices
+const searchIndices = [
+  { name: indexName, title: 'Doc Pages', hitComp: 'docPageHit' },
+];
 
 const cx = classNames.bind(styles);
 
@@ -76,7 +86,7 @@ const Sidebar = ({ sidebar, slug }) => {
 
   return (
     <div className={styles.wrapper}>
-      {/* <Search /> */}
+      <Search collapse indices={searchIndices} />
       <Media
         query="(min-width: 768px)"
         render={() => (
