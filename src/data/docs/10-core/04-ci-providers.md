@@ -21,10 +21,13 @@ excerpt: ''
 
     ![](../../../images/ci-providers/select-type.png)
     
-1. Configure **General Configuration**. These fields may vary based on the type of CI provider selected.
+1. Configure **General Configuration**. These fields may vary based on the type of CI provider selected. See the specific configuration for your provider:
+
+    - [Gitlab CI](/ci-providers/gitlab-ci#provider-settings)    
+    - [Drone CI](/ci-providers/drone-ci#provider-settings)
 
     ![](../../../images/ci-providers/general-config.png)
-
+    
 1. Click **Add CI provider**
 
     ![](../../../images/ci-providers/add-ci-provider-button.png)
@@ -39,7 +42,7 @@ excerpt: ''
 
     ![](../../../images/ci-providers/select-in-list.png)
     
-1. Edit the form
+1. Edit the settings
 
     ![](../../../images/ci-providers/form.png)
     
@@ -66,3 +69,9 @@ excerpt: ''
    ![](../../../images/ci-providers/confirm-delete.png)
    
    Once the provider is deleted, you will be redirected to the CI provider list.
+
+    <div class="blockquote" data-props='{ "mod": "info" }'>
+    
+    When you delete a CI provider, you will have to reconfigure a CI for each project it was used in.
+    
+    </div>

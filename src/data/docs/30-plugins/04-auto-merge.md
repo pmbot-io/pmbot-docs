@@ -16,7 +16,6 @@ updates:
 - packageManager:
     name: auto-merge
     config:
-      rebase: true
       squash: true
       commitMessage: 'chore: update {{slug}} dependencies'
       removeUpdateBranch: true
@@ -24,9 +23,11 @@ updates:
 
 </div>
 
-## rebase
+<div class="blockquote" data-props='{ "mod": "warning" }'>
 
-Tells pmbot to rebase the update branch onto the source branch instead of merging. This allows a cleaner Git history.
+When a dependency update fails, Pmbot reverts it. For this reason, this plugin will **not** work when `failure` is used in the [`on`](https://docs.pmbot.io/pmbot-yml/package-manager-update-config#on) property.  
+
+</div>
 
 ## squash
 

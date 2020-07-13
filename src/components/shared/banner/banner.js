@@ -35,7 +35,7 @@ const Banner = ({ title, buttonText, articleSrc }) => {
 };
 
 Banner.defaultProps = {
-  title: 'Help us to improve documentation',
+  title: 'Help us to improve this documentation',
   buttonText: 'Suggest edits',
 };
 

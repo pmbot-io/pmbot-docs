@@ -1,0 +1,9 @@
+version: "1"
+packageManagers:
+  - packageManager:
+      name: npm
+    actions:
+      - name: auto-merge
+        on:
+          - success
+          - partial

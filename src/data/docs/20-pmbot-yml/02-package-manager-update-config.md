@@ -7,6 +7,8 @@ excerpt: ''
 
 A package manager config allows you to configure how updates are made for a single package manager (e.g Npm, Go, ...).
 
+<div class="table-of-content"></div>
+
 ## packageManager
 
 Configure which package manager to use and fine tune the settings. This is an object representing a standard Pmbot plugin declaration:
@@ -85,7 +87,7 @@ This [handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) template i
 
 ## ignore
 
-List of dependencies to ignore. Each item is a [minimatch](https://github.com/isaacs/minimatch) pattern.
+A list dependencies to ignore. Each item should be Javascript regular expression.
 
 ## actions
 
@@ -135,3 +137,13 @@ When to trigger this action:
 | `success` | When all dependencies have been updated successfully |
 | `partial` | When some dependencies succeeded and some failed     |
 | `failure` | When all dependencies failed to update               |
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+No actions are executed when all dependency updates have status `skipped`.
+
+</div>
+
+## keepUpdateBranchOnFailure
+
+By default, after all actions have been executed, Pmbot deletes the update branch when the status of the package manager update is `failure`. To disable this behavior and keep the update branch, set this to `true`.
