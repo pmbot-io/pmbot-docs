@@ -17,15 +17,9 @@ If you think the installation workflow can be simplified or improved in any way,
 
 ## Docker compose
 
-If you are a premium user, you will need to replace `pmbot/backend` and `pmbot/backend` with the corresponding images for your edition. Those Docker images are available on our private Docker registry for which you can find your credentials in your dashboard.
-
-**developer**:
-- `docker.pmbot.io/backend-developer`
-- `docker.pmbot.io/ui-developer`
-
-**enterprise**:
-- `docker.pmbot.io/backend-enterprise`
-- `docker.pmbot.io/ui-enterprise`
+If you are a premium user, you will need to:
+- replace `pmbot/backend` and `pmbot/backend` with the [corresponding images](#premium-registry) for your edition
+- provide the backend Docker container with your [license file](#license)
 
 The following basic `docker-compose.yml` file can be launched with this command (where `PMBOT_HOST` is the IP address or hostname you're going to use to access Pmbot):
 
@@ -84,6 +78,41 @@ volumes:
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
 We use [Sentry](https://sentry.io/welcome/) for catching unhandled errors. If you do not want this service enabled, set `SENTRY_ENABLED` to `false` in both the UI and backend.
+
+</div>
+
+## Premium
+
+### Premium registry
+
+Premium editions are available on our private Docker registry. You can get your credentials in your dashboard under the **Install** section.
+
+**developer**:
+- `docker.pmbot.io/backend-developer`
+- `docker.pmbot.io/ui-developer`
+
+**enterprise**:
+- `docker.pmbot.io/backend-enterprise`
+- `docker.pmbot.io/ui-enterprise`
+
+### License
+
+Premium users will need provide their license file (downloaded from their dashboard) to the backend Docker container via a volume:
+
+1. Place your license file somewhere on your host
+1. Define a `LICENSE` environment variable in your `docker-compose.yml`:
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```shell script
+services:
+  backend:
+    # ...
+    environment:
+      LICENSE: /path/to/license.txt
+    volumes:
+      - /data/PMBOT_LICENSE.txt:/path/to/license.txt
+```
 
 </div>
 
