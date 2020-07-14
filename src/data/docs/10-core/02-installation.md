@@ -15,25 +15,19 @@ If you think the installation workflow can be simplified or improved in any way,
 
 <div class="table-of-content"></div>
 
-## Docker image (incoming)
-
-### Basic launch to try Pmbot
-
-If you wish to try out Pmbot, you can use the `pmbot/demo` image, which regroup all services used by pmbot. 
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```shell script
-docker run --detach --publish 80:80 pmbot/demo
-```
-
-</div>
-
-
 ## Docker compose
 
-The following basic `docker-compose.yml` file can be launched with this command
-(where `PMBOT_HOST` is the IP address or hostname you're going to use to access Pmbot):
+If you are a premium user, you will need to replace `pmbot/backend` and `pmbot/backend` with the corresponding images for your edition. Those Docker images are available on our private Docker registry for which you can find your credentials in your dashboard.
+
+**developer**:
+- `docker.pmbot.io/backend-developer`
+- `docker.pmbot.io/ui-developer`
+
+**enterprise**:
+- `docker.pmbot.io/backend-enterprise`
+- `docker.pmbot.io/ui-enterprise`
+
+The following basic `docker-compose.yml` file can be launched with this command (where `PMBOT_HOST` is the IP address or hostname you're going to use to access Pmbot):
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
@@ -87,6 +81,12 @@ volumes:
 
 </div>
 
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+We use [Sentry](https://sentry.io/welcome/) for catching unhandled errors. If you do not want this service enabled, set `SENTRY_ENABLED` to `false` in both the UI and backend.
+
+</div>
+
 ## General
 
 ### How to generate an encryption key
@@ -102,6 +102,16 @@ openssl rand -hex 32
 </div>
 
 ### How to generate private/public keys for JWT tokens
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```shell script
+ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N ""
+```
+
+</div>
+
+This will create a **private** key in `/tmp/sshkey` and a **public** key in `/tmp/sshkey.pub`.
 
 ## Reverse proxy environment variables
 
