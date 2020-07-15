@@ -97,10 +97,11 @@ Premium editions are available on our private Docker registry. You can get your 
 
 ### License
 
-Premium users will need provide their license file (downloaded from their dashboard) to the backend Docker container via a volume:
+Premium users will need provide their license file (downloaded from their dashboard) to the backend Docker container in **one of** the following ways:
 
-1. Place your license file somewhere on your host
-1. Define a `LICENSE` environment variable in your `docker-compose.yml`:
+**environment variable**
+
+Define a `LICENSE` environment variable with the content of your license file:
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
@@ -109,9 +110,23 @@ services:
   backend:
     # ...
     environment:
-      LICENSE: /path/to/license.txt
+      LICENSE: "<license-content-goes-here>"
+```
+
+</div>
+
+**file**
+
+Our backend looks for a file named `/license.txt`, so you'll need to provide it via a Docker volume:
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```shell script
+services:
+  backend:
+    # ...
     volumes:
-      - /data/PMBOT_LICENSE.txt:/path/to/license.txt
+      - /data/PMBOT_LICENSE.txt:/license.txt
 ```
 
 </div>
