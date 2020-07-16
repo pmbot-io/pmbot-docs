@@ -105,7 +105,7 @@ Define a `LICENSE` environment variable with the content of your license file:
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
-```shell script
+```yaml
 services:
   backend:
     # ...
@@ -121,7 +121,7 @@ Our backend looks for a file named `/license.txt`, so you'll need to provide it 
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
-```shell script
+```yaml
 services:
   backend:
     # ...
@@ -171,7 +171,7 @@ by Traefik [file provider](https://docs.traefik.io/providers/file/).
 You may use yaml multiline syntax for this variable:
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
-```yaml@
+```yaml
 services:
   reverse-proxy:
     image: pmbot/reverse-proxy
