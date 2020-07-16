@@ -81,7 +81,7 @@ Since Bull operates in a distributed (multi-node) environment, it defines the co
 
 ```yaml
 version: '1'
-updates:
+packageManagers:
   - pm:
       name: 'npm'
     actions:

@@ -12,24 +12,24 @@ This plugin allows you to open an issue.
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: create-issue
-    config:
-      title: 'Automated update of {{slug}} {{statusEmoji}}'
-      additionalText: ''
-      assignees:
-        - ...
-      closeOpen: true
+packageManagers:
+  - packageManager:
+      name: create-issue
+      config:
+        token: "${env.MY_TOKEN}"
 ````
 
 </div>
 
-To be able to authenticate with your Git provider, this plugin needs to have a token:
-- with **Gitlab**, set an environment variable named `GITLAB_TOKEN` which should contain a [Gitlab personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
-- with **Github**, set an environment variable named `GITHUB_TOKEN` which should contain a [Github personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+## token
+
+Allows the plugin to authenticate with your Git provider API:
+- with **Gitlab**, it should be a [Gitlab personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+- with **Github**, it should be a [Github personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
 
 ## title
+
+**Default:** `Automated update of {{slug}} {{statusEmoji}}`
 
 Allows you to customize issue title.
 
@@ -86,5 +86,7 @@ Additional text to embed in the issue description.
 Usernames to assign to the issue created. Note that Gitlab CE only allows one assignee.
 
 ## closeOpen
+
+**Default:** `true`
 
 Close open issues that were created by Pmbot. This option prevents multiple issues open simultaneously when you don't have the time to look at them.

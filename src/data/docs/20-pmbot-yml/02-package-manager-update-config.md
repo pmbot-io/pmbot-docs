@@ -17,7 +17,7 @@ Configure which package manager to use and fine tune the settings. This is an ob
 
 ```yaml
 version: '1'
-updates:
+packageManagers:
   - packageManager:
       name: ... # npm | go
       config: ... # config of your package manager
@@ -40,7 +40,7 @@ Allows you to configure CI behavior
 
 ```yaml
 version: '1'
-updates:
+packageManagers:
   - ci:
       enabled: true # defaults to true
 ```
@@ -99,7 +99,7 @@ Configure which package manager to use and fine tune the settings. This is an ob
 
 ```yaml
 version: '1'
-updates:
+packageManagers:
   - ...
     actions:
       name: ...

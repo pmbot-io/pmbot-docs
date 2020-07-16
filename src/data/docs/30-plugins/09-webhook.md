@@ -12,15 +12,15 @@ This plugin allows you to `POST` the update result to a specific URL.
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: webhook
-    config:
-      url: ''
-      extraData:
-        ...
-      headers:
-        ...
+packageManagers:
+  - packageManager:
+      name: webhook
+      config:
+        url: ''
+        extraData:
+          # ...
+        headers:
+          # ...
 ````
 
 </div>
@@ -31,24 +31,61 @@ The webhook URL to which data will be sent.
 
 ## extraData
 
-Data that will be appended to the webhook payload in property `extraData`.
+Data that will be appended to the webhook payload in property `extraData`. Can be of any shape. The YAML will be converted to a JSON object.
 
-## headers
-
-And **array** of additional headers to append to the HTTP request.
+For example, with the following configuration:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: webhook
-    config:
-      ...
-      headers:
-        - name: 'Authorization'
-          value: 'my-token'
+packageManagers:
+  - packageManager:
+      name: webhook
+      config:
+        extraData:
+          prop: 'val'
+          arr:
+            - val1
+            - val2
+````
+
+</div>
+
+the webhook payload will include:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+````json
+{
+  "extraData": {
+    "prop": "val",
+    "arr": [
+      "val1",
+      "val2"
+    ]
+  }
+}
+````
+
+</div>
+
+## headers
+
+An **array** of additional headers to append to the HTTP request.
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+````yaml
+version: '1'
+packageManagers:
+  - packageManager:
+      name: webhook
+      config:
+        ...
+        headers:
+          - name: 'Authorization'
+            value: 'my-token'
 ````
 
 </div>

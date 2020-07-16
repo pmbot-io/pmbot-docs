@@ -12,18 +12,18 @@ This plugin allows you to send an email using [Nodemailer](https://nodemailer.co
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: email
-    config:
-      transportOptions:
-        ...
-      messageConfig:
-        from: ''
-        to: ''
-        subject: 'Automated update of {{slug}} {{statusEmoji}}'
-        ...
-      additionalText: ''
+packageManagers:
+  - packageManager:
+      name: email
+      config:
+        transportOptions:
+          ...
+        messageConfig:
+          from: ''
+          to: ''
+          subject: 'Automated update of {{slug}} {{statusEmoji}}'
+          ...
+        additionalText: ''
 ````
 
 </div>
@@ -36,13 +36,13 @@ A YAML object with Nodemailer [transport options](https://nodemailer.com/smtp/#g
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: email
-    config:
-      transportOptions:
-        port: 1025
-        host: mailhog # inside a Docker network
+packageManagers:
+  - packageManager:
+      name: email
+      config:
+        transportOptions:
+          port: 1025
+          host: mailhog # inside a Docker network
 ````
 
 </div>
@@ -91,13 +91,13 @@ For example, if you want to add `cc`, you can do:
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: email
-    config:
-      ...
-      messageConfig:
-        cc: 'test@test.com'
+packageManagers:
+  - packageManager:
+      name: email
+      config:
+        ...
+        messageConfig:
+          cc: 'test@test.com'
 
 ````
 

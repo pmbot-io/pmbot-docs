@@ -12,13 +12,9 @@ This plugin allows you to automatically merge the update branch into the source 
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: auto-merge
-    config:
-      squash: true
-      commitMessage: 'chore: update {{slug}} dependencies'
-      removeUpdateBranch: true
+packageManagers:
+  - packageManager:
+      name: auto-merge
 ````
 
 </div>
@@ -29,11 +25,30 @@ When a dependency update fails, Pmbot reverts it. For this reason, this plugin w
 
 </div>
 
+You can customize this plugin by providing a custom configuration:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+````yaml
+version: '1'
+packageManagers:
+  - packageManager:
+      name: auto-merge
+      config:
+        commitMessage: 'chore: update {{slug}} dependencies'
+````
+
+</div>
+
 ## squash
+
+**Default:** `true`
 
 Whether to squash commits into a single one. This ensures a clean Git history.
 
 ## commitMessage
+
+**Default:** `chore: update {{slug}} dependencies`
 
 The commit message used for the merge/squash commit.
 
@@ -52,3 +67,9 @@ This [handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) template i
 | Property | Description |
 | --- | --- |
 | `slug` | Key that identifies the update in your configuration. For example, "npm", or, "npm-0" when there are multiple `packageManagerUpdates` configured with `npm` as the `packageManager.name`. |
+
+## removeUpdateBranch
+
+**Default:** `true`
+
+Whether the update branch should be removed.

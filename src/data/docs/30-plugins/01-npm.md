@@ -10,7 +10,7 @@ excerpt: ''
 
 ````yaml
 version: '1'
-updates:
+packageManagers:
   - packageManager:
       name: npm
 ````

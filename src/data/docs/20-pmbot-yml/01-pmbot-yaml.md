@@ -48,7 +48,7 @@ A list of [package manager update configs](/package-manager-update-config). In a
 
 ````yaml
 version: '1'
-updates:
+packageManagers:
   - ...
 ````
 

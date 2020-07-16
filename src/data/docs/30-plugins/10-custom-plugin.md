@@ -348,7 +348,7 @@ If you defined your plugin as a **package manager adapter**, you can use it in t
 
 ````yaml
 version: '1'
-updates:
+packageManagers:
   - packageManager:
       name: my-plugin
       config: ... # config of your package manager
@@ -364,7 +364,7 @@ If you defined your plugin as an **action**, you can use it in the [`actions`](#
 
 ````yaml
 version: '1'
-updates:
+packageManagers:
   - ...
     actions:
       name: my-action 
