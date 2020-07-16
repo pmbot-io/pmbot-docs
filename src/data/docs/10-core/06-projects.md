@@ -61,7 +61,7 @@ Projects allow run update for a given Git repository on a specific CI platform a
 
     ![](../../../images/projects/add-project-step.png)
     
-    You will be redirected to your project's page where you can then setup Git credentials and prepare your [`.pmbot.yml`](/pmbot-yml/pmbotyml) file.
+    You will be redirected to your project's page where you can then setup Git credentials and prepare your [`.pmbot.yml`](/pmbot-yml/pmbot-yml) file.
 
 ## Project details page
 
@@ -149,7 +149,7 @@ Pmbot uses your CI to **execute updates**. We leverage conditional pipelines to 
 
 Pmbot updates each dependency one at a time and listens to CI pipelines statuses to know whether the update of a given dependency succeeded or failed. Based on that result, it may rollback the previous dependency update. Then, it moves on to the next dependency that needs to be updated.
 
-Once it has finished updating all dependencies, it executes actions you have configured in your [`.pmbot.yml`](/pmbot-yml/pmbotyml).
+Once it has finished updating all dependencies, it executes actions you have configured in your [`.pmbot.yml`](/pmbot-yml/pmbot-yml).
 
 To better understand how things happens, let's take an example of a project `dummy` scheduled to be updated daily on the `dev` branch.
 1. Every day, at midnight UTC, Pmbot tells your CI to run a specific job configured in your CI config file in `dummy`.
@@ -158,7 +158,7 @@ To better understand how things happens, let's take an example of a project `dum
     1. Our CLI updates, for example, the Npm dependency `chalk` from `v1.0.0` to `v1.1.0`
     1. Our CLI commits and pushes to `dummy`. As it sees the new commit, your CI automatically starts a new pipeline and runs all jobs configured in your CI config file, such as `build`, `test`, `lint`, etc.  
 1. Our backend listens to events from your CI and once it receives whether the commit passed all checks, it triggers a new job on your CI to update the remaining dependencies.
-1. Once all dependencies have been updated, our CLI executes all actions configured in your [`.pmbot.yml`](/pmbot-yml/pmbotyml). For example, you can send Slack messages, emails, open a pull request, or even automatically merge. See the [plugins](/plugins) section for a full list of available plugins and how to write custom plugins. 
+1. Once all dependencies have been updated, our CLI executes all actions configured in your [`.pmbot.yml`](/pmbot-yml/pmbot-yml). For example, you can send Slack messages, emails, open a pull request, or even automatically merge. See the [plugins](/plugins) section for a full list of available plugins and how to write custom plugins. 
 
 ### Update list
 
@@ -295,7 +295,7 @@ When you renew the `PMBOT_TOKEN`, you need to reconfigure the webhook in your CI
 
 ### .pmbot.yaml
 
-First, you'll have to place at your project root a `.pmbot.yml` file. Here is a basic example for updating Npm dependencies and automatically merging when an update succeeds (checkout the [.pmbot.yml reference](/pmbot-yml/pmbotyml) for more details):
+First, you'll have to place at your project root a `.pmbot.yml` file. Here is a basic example for updating Npm dependencies and automatically merging when an update succeeds (checkout the [.pmbot.yml reference](/pmbot-yml/pmbot-yml) for more details):
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
