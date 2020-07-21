@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Link} from 'gatsby';
 import Media from 'react-media';
 import HeaderMobile from 'components/shared/header-mobile';
 import LogoInlineSvg from 'images/logo.inline.svg';
@@ -14,9 +13,9 @@ const Header = props => {
       <div className="container">
         <div className={styles.inner}>
           <div className="header-logo">
-            <Link className={styles.headerLogoLink} to="/">
+            <a className={styles.headerLogoLink} href="https://pmbot.io">
               <LogoInlineSvg/>{' '}
-            </Link>
+            </a>
           </div>
           <Media
             query="(max-width: 991.98px)"
