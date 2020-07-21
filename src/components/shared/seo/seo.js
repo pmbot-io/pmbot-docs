@@ -3,15 +3,6 @@ import {Helmet} from 'react-helmet';
 import {graphql, useStaticQuery} from 'gatsby';
 import {createMetaImagePath} from 'utils';
 
-function ga() {
-  return `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${process.env.GATSBY_GA_TRACKING_ID}');
-  `
-}
-
 const Seo = ({
                data: {title, description, image, slug} = {},
                facebook,
@@ -72,7 +63,12 @@ const Seo = ({
       )}
       {process.env.GATSBY_GA_TRACKING_ID && (
         <script>
-          {ga()}
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${process.env.GATSBY_GA_TRACKING_ID}');
+        `}
         </script>
       )}
     </Helmet>
