@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import {Link} from 'gatsby';
 import LogoInlineSvg from 'images/logo.inline.svg';
 import styles from './footer.module.scss';
 
@@ -8,14 +8,14 @@ import WavesSvgUrl from './waves.svg';
 const Footer = props => (
   <footer className={styles.wrapper}>
     <div className={styles.wrapperIllustration}>
-      <img src={WavesSvgUrl} className={styles.illustration} />
+      <img src={WavesSvgUrl} className={styles.illustration}/>
     </div>
     <div className="container">
       <div className="columns is-multiline">
         <div className="column is-12-mobile is-2-tablet is-5-desktop">
           <div className={styles.logo}>
             <Link to="/">
-              <LogoInlineSvg />
+              <LogoInlineSvg/>
             </Link>
           </div>
         </div>
@@ -25,32 +25,37 @@ const Footer = props => (
           <div className={styles.section}>
             <div className={styles.sectionName}>Pages</div>
             <div>
-              <Link to="/" className={`link ${styles.link}`}>
-                Plugins
-              </Link>
-            </div>
-            <div>
-              <Link to="/" className={`link ${styles.link}`}>
+              <a href="https://docs.pmbot.io" className={`link ${styles.link}`}>
                 Documetation
-              </Link>
+              </a>
             </div>
             <div>
-              <Link to="/" className={`link ${styles.link}`}>
+              <a href="https://github.com/pmbot-io/issues" className={`link ${styles.link}`}>
+                Issues
+              </a>
+            </div>
+            <div>
+              <a href="https://blog.pmbot.io" className={`link ${styles.link}`}>
                 Blog
-              </Link>
+              </a>
             </div>
           </div>
           <div className={styles.section}>
             <div className={styles.sectionName}>Legal</div>
             <div>
-              <Link to="/" className={`link ${styles.link}`}>
-                Privacy policy
-              </Link>
+              <a href="/legals/cookie-policy" className={`link ${styles.link}`}>
+                Cookie policy
+              </a>
             </div>
             <div>
-              <Link to="/" className={`link ${styles.link}`}>
+              <a href="/legals/privacy-policy" className={`link ${styles.link}`}>
+                Privacy policy
+              </a>
+            </div>
+            <div>
+              <a href="/legals/terms-of-service" className={`link ${styles.link}`}>
                 Term of service
-              </Link>
+              </a>
             </div>
           </div>
           <div className={styles.section}>
@@ -59,27 +64,32 @@ const Footer = props => (
               href="mailto:support@pmbot.com"
               className={`link ${styles.link}`}
             >
-              support@pmbot.com
+              info@pmbot.com
             </a>
           </div>
         </div>
       </div>
       <div className={styles.copyright}>
         <div className={styles.company}>
-          Created by{' '}
+          Crafted by{' '}
           <a
-            href="https://charlie-bravo.be/"
+            href="https://charlie-bravo.be"
             className={`link ${styles.companyLink}`}
             target="_blank"
           >
             Charlie Bravo
+          </a>,
+          graphics design by{' '}
+          <a
+            href="https://pixelpoint.io/"
+            className={`link ${styles.companyLink}`}
+            target="_blank"
+          >
+            Pixel Point
           </a>
         </div>
         <div className={styles.footerCopyrightText}>
-          <a href="https://pmbot.io" className={`link ${styles.companyLink}`}>
-            Pmbot
-          </a>{' '}
-          &copy; {new Date().getFullYear()} - All rights reserved
+          Pmbot &copy; {new Date().getFullYear()} - All rights reserved
         </div>
       </div>
     </div>
