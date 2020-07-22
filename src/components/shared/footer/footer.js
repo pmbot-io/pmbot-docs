@@ -64,7 +64,7 @@ const Footer = props => (
               href="mailto:support@pmbot.com"
               className={`link ${styles.link}`}
             >
-              info@pmbot.com
+              {atob('aW5mb0BwbWJvdC5jb20=')}
             </a>
           </div>
         </div>
