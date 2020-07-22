@@ -60,11 +60,20 @@ const Footer = props => (
           </div>
           <div className={styles.section}>
             <div className={styles.sectionName}>Contact us</div>
+            <a href="https://docs.pmbot.io/faq/faq#how-to-get-support" className={`link ${styles.link}`}>
+              Support
+            </a>
             <a
-              href="mailto:support@pmbot.com"
+              href={atob('bWFpbHRvOmluZm9AcG1ib3QuY29t')}
               className={`link ${styles.link}`}
             >
-              {atob('aW5mb0BwbWJvdC5jb20=')}
+              General inquiries
+            </a>
+            <a
+              href={atob('bWFpbHRvOnNhbGVzQHBtYm90LmNvbQ')}
+              className={`link ${styles.link}`}
+            >
+              Sales
             </a>
           </div>
         </div>
