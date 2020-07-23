@@ -25,18 +25,6 @@ Enable the debug mode. This will print more information in the logs.
 
 This is useful when things go wrong but can unnecessarily bloat your logs otherwise.
 
-#### sentry
-
-**CLI Option:** `--sentry [true|false]`, `-s [true|false]`
-
-**Environment variable:** `PMBOT_SENTRY`
-
-**Default:** `true`
-
-Enable [Sentry](https://sentry.io/) error reporting.
-
-This allows us to detect and fix errors easier and sooner in order to improve the quality of Pmbot.
-
 ## Update
 
 The update command is the default command. It is used inside your CI jobs in order to execute the updates triggered by Pmbot. 

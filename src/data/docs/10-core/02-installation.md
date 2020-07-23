@@ -50,15 +50,12 @@ services:
     restart: unless-stopped
     environment:
       APP_UI_URL: https://${PMBOT_HOST?PMBOT_HOST}
-      SENTRY_ENABLED: "true"
     volumes:
       - secrets:/secrets
 
   frontend:
     image: pmbot/ui
     restart: unless-stopped
-    environment:
-      SENTRY_ENABLED: "true"
 
   mongo:
     image: mongo:4.2-bionic
@@ -72,12 +69,6 @@ volumes:
   mongo:
   secrets:
 ```
-
-</div>
-
-<div class="blockquote" data-props='{ "mod": "warning" }'>
-
-We use [Sentry](https://sentry.io/welcome/) for catching unhandled errors. If you do not want this service enabled, set `SENTRY_ENABLED` to `false` in both the UI and backend.
 
 </div>
 
