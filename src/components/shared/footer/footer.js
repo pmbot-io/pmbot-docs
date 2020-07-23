@@ -64,13 +64,13 @@ const Footer = props => (
               Support
             </a>
             <a
-              href={atob('bWFpbHRvOmluZm9AcG1ib3QuY29t')}
+              href={typeof atob !== 'undefined' ? atob('bWFpbHRvOmluZm9AcG1ib3QuY29t') : ''}
               className={`link ${styles.link}`}
             >
               General inquiries
             </a>
             <a
-              href={atob('bWFpbHRvOnNhbGVzQHBtYm90LmNvbQ')}
+              href={typeof atob !== 'undefined' ? atob('bWFpbHRvOnNhbGVzQHBtYm90LmNvbQ') : undefined}
               className={`link ${styles.link}`}
             >
               Sales
