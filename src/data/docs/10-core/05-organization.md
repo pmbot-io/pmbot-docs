@@ -30,6 +30,12 @@ Here you can change your organization name and configure [email domains](#limit-
 1. Click **Save**
 
     ![](../../../images/organization-settings/save-button.png)
+
+### Workspace
+
+To onboard new users into your organization, they will need to sign up to your Pmbot organization's workspace. You can find your workspace URL in your organization settings:
+
+![](../../../images/organization-settings/workspace.png)
     
 ### Limit who can sign up into your workspace
 
@@ -37,11 +43,13 @@ When you want to limit who can sign up to your workspace, you can define a list 
 
 ![](../../../images/organization-settings/email-domains.png)
 
-### Workspace
+<div class="blockquote" data-props='{ "mod": "warning" }'>
 
-To onboard new users into your organization, they will need to sign up to your Pmbot organization's workspace. You can find your workspace URL in your organization settings:
+When no email domains are defined:
+- **cloud**: no one can register to your workspace
+- **self hosted**: anyone can register to your workspace
 
-![](../../../images/organization-settings/workspace.png)
+</div>
 
 ### Delete an organization
 
