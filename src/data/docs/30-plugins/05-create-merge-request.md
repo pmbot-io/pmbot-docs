@@ -14,9 +14,13 @@ This plugin allows you to open a merge request.
 version: '1'
 packageManagers:
   - packageManager:
-      name: create-merge-request
-      config:
-        token: "${env.MY_TOKEN}"
+      name: npm
+    actions:
+      - name: create-merge-request
+        on:
+          - success
+        config:
+          token: '${env.MY_TOKEN}'
 ````
 
 </div>

@@ -14,11 +14,13 @@ This plugin allows you to send a Slack message.
 version: '1'
 packageManagers:
   - packageManager:
-      name: slack
-      config:
-        url: ''
-        title: 'Automated update of {{slug}} {{statusEmoji}}'
-        additionalText: ''
+      name: npm
+    actions:
+      - name: slack
+        config:
+          url: 'https://hooks.slack.com/services/8WEU64JD6/X3ULZ40VVE2/qt6teFGj1g95g8z6HwdvRk9z'
+          title: 'Automated update of {{slug}} {{statusEmoji}}'
+          additionalText: '@john'
 ````
 
 </div>

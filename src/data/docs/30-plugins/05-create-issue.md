@@ -14,9 +14,13 @@ This plugin allows you to open an issue.
 version: '1'
 packageManagers:
   - packageManager:
-      name: create-issue
-      config:
-        token: "${env.MY_TOKEN}"
+      name: npm
+    actions:
+      - name: create-issue
+        on:
+          - failure
+        config:
+          token: '${env.MY_TOKEN}'
 ````
 
 </div>

@@ -11,10 +11,14 @@ This plugin allows you to automatically merge the update branch into the source 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ````yaml
-version: '1'
+version: "1"
 packageManagers:
   - packageManager:
-      name: auto-merge
+      name: npm
+    actions:
+      - name: auto-merge
+        on:
+          - success
 ````
 
 </div>
@@ -33,9 +37,13 @@ You can customize this plugin by providing a custom configuration:
 version: '1'
 packageManagers:
   - packageManager:
-      name: auto-merge
-      config:
-        commitMessage: 'chore: update {{slug}} dependencies'
+      name: npm
+    actions:
+      - name: auto-merge
+        on:
+          - success
+        config:
+          commitMessage: 'chore: update {{slug}} dependencies'
 ````
 
 </div>

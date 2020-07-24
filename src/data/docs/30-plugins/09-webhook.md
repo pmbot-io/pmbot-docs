@@ -11,16 +11,18 @@ This plugin allows you to `POST` the update result to a specific URL.
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ````yaml
-version: '1'
+version: "1"
 packageManagers:
   - packageManager:
-      name: webhook
-      config:
-        url: ''
-        extraData:
-          # ...
-        headers:
-          # ...
+      name: npm
+    actions:
+      - name: webhook
+        config:
+          url: "https://automation.company.com/webhooks/pmbot"
+          extraData:
+            # ...
+          headers:
+            # ...
 ````
 
 </div>
@@ -31,7 +33,7 @@ The webhook URL to which data will be sent.
 
 ## extraData
 
-Data that will be appended to the webhook payload in property `extraData`. Can be of any shape. The YAML will be converted to a JSON object.
+Data that will be appended to the webhook payload (body) in property `extraData`. Can be of any shape. The YAML will be converted to a JSON object.
 
 For example, with the following configuration:
 
@@ -84,8 +86,8 @@ packageManagers:
       config:
         ...
         headers:
-          - name: 'Authorization'
-            value: 'my-token'
+          - name: "Authorization"
+            value: "my-token"
 ````
 
 </div>
@@ -153,6 +155,9 @@ The **JSON** body contains information about the update.
     "actions": [],
     "updateBranch": "update/npm/master/1234",
     "slug": "npm-0"
+  },
+  "extraData": {
+    ...
   }
 }
 ````

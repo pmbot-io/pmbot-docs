@@ -14,14 +14,15 @@ This plugin allows you to send a Mattermost message.
 version: '1'
 packageManagers:
   - packageManager:
-      name: mattermost
-      config:
-        url: ''
-        channels:
-          - team1
-          - awesomeness
-        title: 'Automated update of {{slug}} {{statusEmoji}}'
-        additionalText: ''
+      name: npm
+    actions:
+      - name: mattermost
+        config:
+          url: 'https://mattermost.company.com/hooks/dog8nditdpdw5yaai8mty37jte'
+          channels:
+            - team1
+            - awesomeness
+          title: 'Automated update of {{slug}} {{statusEmoji}}'
 ````
 
 </div>

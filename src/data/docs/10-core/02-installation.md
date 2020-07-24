@@ -17,19 +17,7 @@ If you think the installation workflow can be simplified or improved in any way,
 
 ## Docker compose
 
-If you are a premium user, you will need to:
-- replace `pmbot/backend` and `pmbot/backend` with the [corresponding images](#premium-registry) for your edition
-- provide the backend Docker container with your [license file](#license)
-
-The following basic `docker-compose.yml` file can be launched with this command (where `PMBOT_HOST` is the IP address or hostname you're going to use to access Pmbot):
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```shell script
-docker-compose --env PMBOT_HOST=localhost up --detach
-```
-
-</div>
+Here is a basic `docker-compose.yml` that can be used to test pmbot locally:
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
@@ -38,18 +26,15 @@ docker-compose --env PMBOT_HOST=localhost up --detach
 version: "3.6"
 
 services:
-
-  entrypoint:
+  reverse-proxy:
     image: pmbot/reverse-proxy
-    restart: unless-stopped
     ports:
-      - 80:80
+      - 127.0.0.1:80:80
+    restart: unless-stopped
 
   backend:
     image: pmbot/backend
     restart: unless-stopped
-    environment:
-      APP_UI_URL: https://${PMBOT_HOST?PMBOT_HOST}
     volumes:
       - secrets:/secrets
 
@@ -64,91 +49,31 @@ services:
       - mongo:/data/db
 
 volumes:
-#  certs:
-  cache:
   mongo:
   secrets:
+#
 ```
 
 </div>
 
-## Premium
-
-### Premium registry
-
-Premium editions are available on our private Docker registry. You can get your credentials in your dashboard under the **Install** section.
-
-**developer**:
-- `docker.pmbot.io/backend-developer`
-- `docker.pmbot.io/ui-developer`
-
-**enterprise**:
-- `docker.pmbot.io/backend-enterprise`
-- `docker.pmbot.io/ui-enterprise`
-
-### License
-
-Premium users will need provide their license file (downloaded from their dashboard) to the backend Docker container in **one of** the following ways:
-
-**environment variable**
-
-Define a `LICENSE` environment variable with the content of your license file:
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```yaml
-services:
-  backend:
-    # ...
-    environment:
-      LICENSE: "<license-content-goes-here>"
-```
-
-</div>
-
-**file**
-
-Our backend looks for a file named `/license.txt`, so you'll need to provide it via a Docker volume:
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```yaml
-services:
-  backend:
-    # ...
-    volumes:
-      - /data/PMBOT_LICENSE.txt:/license.txt
-```
-
-</div>
-
-## General
-
-### How to generate an encryption key
-
-Pmbot encrypts sensitive information. It uses environment variable `SECURITY_ENCRYPTION_KEY` as the encryption key. This key must be 32 bytes long. You can generate one using the following command:
+It can be launched with the following command:
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
-openssl rand -hex 32
+docker-compose up --detach
 ```
 
 </div>
 
-### How to generate private/public keys for JWT tokens
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```shell script
-ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N ""
-```
-
-</div>
-
-This will create a **private** key in `/tmp/sshkey` and a **public** key in `/tmp/sshkey.pub`.
+You can then open [http://localhost](http://localhost) in your browser.
 
 ## Reverse proxy environment variables
+
+The reverse proxy is a [traefik](https://hub.docker.com/_/traefik) image preconfigured
+to serve the frontend (`/`) and backend (`/api`).
+
+It can also be configured with commands like a regular traefik container.
 
 ### TRAEFIK\_DYNAMIC\_CONFIG
 
@@ -163,6 +88,7 @@ You may use yaml multiline syntax for this variable:
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```yaml
+...
 services:
   reverse-proxy:
     image: pmbot/reverse-proxy
@@ -344,3 +270,57 @@ URL of Pmbot API (backend).
 This URL needs to be accessible by the users (not by the frontend container/server).
 
 With the default deployment, it should point towards Pmbot reverse proxy with the `/api` path.
+
+## Premium
+
+If you are a premium user, you will need to:
+- replace `pmbot/backend` and `pmbot/backend` with the [corresponding images](#premium-registry) for your edition
+- provide the backend Docker container with your [license file](#license)
+
+### Premium registry
+
+Premium editions are available on our private Docker registry. You can get your credentials in your dashboard under the **Install** section.
+
+The following images are available for customer using the **developer edition**:
+- `docker.pmbot.io/backend-developer` (replaces `pmbot/backend`)
+- `docker.pmbot.io/ui-developer` (replaces `pmbot/ui`)
+
+The following images are available for customer using the **enterprise edition**:
+- `docker.pmbot.io/backend-enterprise` (replaces `pmbot/backend`)
+- `docker.pmbot.io/ui-enterprise` (replaces `pmbot/ui`)
+
+### License
+
+Premium users will need to provide their license file (downloaded from their dashboard) to the backend Docker container in **one of** the following ways:
+
+### Environment variable
+
+Define a `LICENSE` environment variable with the content of your license file:
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```yaml
+services:
+  backend:
+    # ...
+    environment:
+      LICENSE: "<license-content-goes-here>"
+```
+
+</div>
+
+### File
+
+Our backend looks for a file named `/license.txt`, so you'll need to provide it via a Docker volume:
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```yaml
+services:
+  backend:
+    # ...
+    volumes:
+      - /data/PMBOT_LICENSE.txt:/license.txt
+```
+
+</div>

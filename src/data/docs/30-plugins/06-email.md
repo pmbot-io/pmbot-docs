@@ -11,19 +11,20 @@ This plugin allows you to send an email using [Nodemailer](https://nodemailer.co
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ````yaml
-version: '1'
+version: "1"
 packageManagers:
   - packageManager:
-      name: email
-      config:
-        transportOptions:
-          ...
-        messageConfig:
-          from: ''
-          to: ''
-          subject: 'Automated update of {{slug}} {{statusEmoji}}'
-          ...
-        additionalText: ''
+      name: npm
+    actions:
+      - name: email
+        config:
+          transportOptions:
+            host: smtp.company.com
+          messageConfig:
+            from: "pmbot@company.com"
+            to: "admin@company.com"
+            subject: "Automated update of {{slug}} {{statusEmoji}}"
+          additionalText: "Please contact John if there is any issue."
 ````
 
 </div>
@@ -93,11 +94,13 @@ For example, if you want to add `cc`, you can do:
 version: '1'
 packageManagers:
   - packageManager:
-      name: email
-      config:
-        ...
-        messageConfig:
-          cc: 'test@test.com'
+      name: npm
+    actions:
+      - name: email
+        config:
+          ...
+          messageConfig:
+            cc: 'test@test.com'
 
 ````
 
