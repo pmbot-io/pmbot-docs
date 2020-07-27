@@ -17,6 +17,8 @@ If you think the installation workflow can be simplified or improved in any way,
 
 ## Docker compose
 
+### Basic
+
 Here is a basic `docker-compose.yml` that can be used to test pmbot locally:
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
@@ -28,9 +30,9 @@ version: "3.6"
 services:
   reverse-proxy:
     image: pmbot/reverse-proxy
-    ports:
-      - 127.0.0.1:80:80
     restart: unless-stopped
+    ports:
+      - 127.0.0.1:9118:80
 
   backend:
     image: pmbot/backend
@@ -65,8 +67,6 @@ docker-compose up --detach
 ```
 
 </div>
-
-You can then open [http://localhost](http://localhost) in your browser.
 
 ## Reverse proxy environment variables
 
