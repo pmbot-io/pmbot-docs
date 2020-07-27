@@ -68,6 +68,76 @@ docker-compose up --detach
 
 </div>
 
+### HTTPS with Let's Encrypt
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```yaml
+# docker-compose.yml
+version: "3.6"
+
+services:
+  reverse-proxy:
+    image: pmbot/reverse-proxy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - letsencrypt:/letsencrypt
+    command:
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL?LETSENCRYPT_EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+
+  backend:
+    image: pmbot/backend
+    restart: unless-stopped
+    volumes:
+      - secrets:/secrets
+    environment:
+      APP_UI_URL: https://${PMBOT_DOMAIN}
+    labels:
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.rule=Host(`${PMBOT_DOMAIN?PMBOT_DOMAIN}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.tls=true"
+
+  frontend:
+    image: pmbot/ui
+    restart: unless-stopped
+    environment:
+      PMBOT_API_URL: https://${PMBOT_DOMAIN}
+    labels:
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.rule=Host(`${PMBOT_DOMAIN?PMBOT_DOMAIN}`) && PathPrefix(`/`)"
+      - "traefik.http.routers.frontend.tls=true"
+
+  mongo:
+    image: mongo:4.2-bionic
+    restart: unless-stopped
+    volumes:
+      - mongo:/data/db
+
+volumes:
+  mongo:
+  secrets:
+#
+```
+
+</div>
+
+It can be launched with the following command:
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```shell script
+docker-compose --env PMBOT_DOMAIN=pmbot.company.com LETSENCRYPT_EMAIL=infra@company.com up --detach
+```
+
+</div>
+
+
 ## Reverse proxy environment variables
 
 The reverse proxy is a [traefik](https://hub.docker.com/_/traefik) image preconfigured
