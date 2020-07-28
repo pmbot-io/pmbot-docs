@@ -1,10 +1,10 @@
 ---
 slug: '/plugins/email'
-title: 'Send an email'
+title: 'Email'
 excerpt: ''
 ---
 
-# Create issue
+# Email
 
 This plugin allows you to send an email using [Nodemailer](https://nodemailer.com/message/).
 
