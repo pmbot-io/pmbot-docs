@@ -249,7 +249,7 @@ the key file will be ignored and the value given in the environment variable wil
 
 ## Frontend environment variables
 
-### API_URL
+### PMBOT\_API\_URL
 
 **Default:** `http://localhost:9118`
 
@@ -258,11 +258,11 @@ This URL needs to be accessible by the users (not by the frontend container/serv
 
 With the default deployment, it should point towards Pmbot reverse proxy.
 
-### API_PATH
+### PMBOT\_API\_PATH
 
 **Default:** `/api`
 
-Path that will be appended to the [API\_URL](#api_url).
+Path that will be appended to the [PMBOT\_API\_URL](#api\_url).
 
 ## Recipes
 
