@@ -39,7 +39,7 @@ The variables marked with `{{...}}` are prefilled in the code snippets provided 
 | --- | --- |
 | `{{PMBOT_URL}}` | The URL of the Pmbot backend. |
 | `{{PMBOT_PROJECT_ID}}` | The ID of your Pmbot project. You can find this ID in the URL of your UI when you are on the project details page. |
-| `{{PMBOT_TOKEN}}` | Your [`PMBOT_TOKEN`](#pmbot_token) |
+| `{{PROJECT_TOKEN}}` | Your [`PMBOT_TOKEN`](#pmbot_token) |
 
 Here is an example for updating Npm dependencies:
 

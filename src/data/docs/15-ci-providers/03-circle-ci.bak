@@ -24,8 +24,8 @@ excerpt: ''
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
 Support for `2.0` configuration should end some time in 2020 as Circle CI will drop some API endpoints that we use for v2 configurations. More info [here](https://discuss.circleci.com/t/feedback-wanted-moving-from-v1-1-job-triggering-to-v2-pipeline-triggering/33494).
- 
-</div> 
+
+</div>
 
 ## Project Setup
 
@@ -57,7 +57,7 @@ jobs:
       PMBOT_URL: {{PMBOT_URL}}
       # !!!!! place this in a secret environment variable !!!!!
       # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
-      PROJECT_TOKEN: {{PROJECT_TOKEN}}
+      PMBOT_TOKEN {{PROJECT_TOKEN}}
     steps:
       - checkout
       - run:
@@ -84,7 +84,7 @@ jobs:
       PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
       # !!!!! place this in a secret environment variable !!!!!
       # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
-      PROJECT_TOKEN: {{PROJECT_TOKEN}}
+      PMBOT_TOKEN {{PROJECT_TOKEN}}
     steps:
       - run:
           when: always
@@ -124,7 +124,7 @@ jobs:
       PMBOT_URL: {{PMBOT_URL}}
       # !!!!! place this in a secret environment variable !!!!!
       # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
-      PROJECT_TOKEN: {{PROJECT_TOKEN}}
+      PMBOT_TOKEN {{PROJECT_TOKEN}}
     steps:
       - run:
           command: |
@@ -151,7 +151,7 @@ jobs:
       PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
       # !!!!! place this in a secret environment variable !!!!!
       # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
-      PROJECT_TOKEN: {{PROJECT_TOKEN}}
+      PMBOT_TOKEN {{PROJECT_TOKEN}}
     steps:
       - run:
           when: always
