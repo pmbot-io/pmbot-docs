@@ -20,6 +20,10 @@ packageManagers:
         config:
           transportOptions:
             host: smtp.company.com
+            port: 1025
+            auth:
+              user: "user"
+              pass: "pass"
           messageConfig:
             from: "pmbot@company.com"
             to: "admin@company.com"
