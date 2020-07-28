@@ -15,6 +15,7 @@
     pre {
       margin: 0;
     }
+
     code {
       flex-grow: 1;
       display: block;
@@ -32,22 +33,41 @@
       &.string {
         color: $color-accent-secondary;
       }
-      &.comment {
+      &.builtin {
+        color: $color-accent-secondary;
+      }
+      &.punctuation {
+        color: $color-tertiary;
+      }
+      &.keyword {
+        color: #f5a087;
+      }
+      &.class-name,
+      &.function {
+        color: #ff65b3;
+      }
+      &.comment,
+      &.prolog,
+      &.doctype,
+      &.cdata {
         color: rgba($color-tertiary, 0.5);
       }
     }
+
     .line-numbers-rows {
       font-family: $font-family-secondary;
       padding: 20px 8px 14px 20px;
       border-right: none !important;
       background-color: rgba($color-tertiary, 0.05);
       border-radius: 5px 0 0 5px;
+
       span {
         &::before {
           color: rgba($color-tertiary, 0.25);
         }
       }
     }
+
     .language-yaml {
       color: $color-accent-secondary;
       .token {
