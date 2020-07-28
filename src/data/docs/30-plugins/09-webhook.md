@@ -87,7 +87,7 @@ packageManagers:
         ...
         headers:
           - name: "Authorization"
-            value: "my-token"
+            value: "${env.MY_TOKEN}"
 ````
 
 </div>

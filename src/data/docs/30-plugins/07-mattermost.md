@@ -18,7 +18,7 @@ packageManagers:
     actions:
       - name: mattermost
         config:
-          url: 'https://mattermost.company.com/hooks/dog8nditdpdw5yaai8mty37jte'
+          url: "${env.MY_MATTERMOST_WEBHOOK_URL}"
           channels:
             - team1
             - awesomeness

@@ -18,7 +18,7 @@ packageManagers:
     actions:
       - name: slack
         config:
-          url: 'https://hooks.slack.com/services/8WEU64JD6/X3ULZ40VVE2/qt6teFGj1g95g8z6HwdvRk9z'
+          url: "${env.MY_SLACK_WEBHOOK_URL}"
           title: 'Automated update of {{slug}} {{statusEmoji}}'
           additionalText: '@john'
 ````

@@ -22,8 +22,8 @@ packageManagers:
             host: smtp.company.com
             port: 1025
             auth:
-              user: "user"
-              pass: "pass"
+              user: "${env.EMAIL_USERNAME}"
+              pass: "${env.EMAIL_PASSWORD}"
           messageConfig:
             from: "pmbot@company.com"
             to: "admin@company.com"
