@@ -70,7 +70,7 @@ update:
     # install your dependencies
     - npm ci
     # run the update
-    - pmbot update --url https://pmbot.company.com
+    - pmbot update --disable-host-key-verification
 
 # your existing build/test jobs
 test:

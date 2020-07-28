@@ -102,6 +102,46 @@ For now, you'll also have to repeat the environment definition in the `update` a
 
 ## Self signed certificates
 
-See [`here`](/core/cli#self-signed-certificates).
+Background information on this topic can be found [`here`](/core/cli#self-signed-certificates).
 
-Define a secret named `NODE_EXTRA_CA_CERTS` which contains the path to your CA certificate file.
+Define a secret named `PMBOT_TRUSTED_CA` which contains **the content** of your CA certificate file. Then, update your `.drone.yml` as follows:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+...
+
+steps:
+  - name: update
+    ...
+    environment:
+      PMBOT_TRUSTED_CA:
+        from_secret: PMBOT_TRUSTED_CA
+    commands:
+      ...
+      # output your trusted CA content to a file
+      - echo $PMBOT_TRUSTED_CA > .ca-cert.pem
+      # pass the trusted CA path via the --trusted-ca option
+      - pmbot update --trusted-ca .ca-cert.pem --disable-host-key-verification
+
+  ...
+
+  - name: notify
+    ...
+    environment:
+      PMBOT_TRUSTED_CA:
+        from_secret: PMBOT_TRUSTED_CA
+    commands:
+      # output your trusted CA content to a file
+      - echo $PMBOT_TRUSTED_CA > .ca-cert.pem
+      # pass the trusted CA path via the --trusted-ca option
+      - pmbot notify --trusted-ca .ca-cert.pem
+```
+
+</div>
+
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+If any of you out there would like to suggest a shorter or more simple way to do the above, [let us know](https://github.com/pmbot-io/issues/issues) !
+
+</div>
