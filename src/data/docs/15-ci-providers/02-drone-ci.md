@@ -40,7 +40,7 @@ The variables marked with `{{...}}` are prefilled in the code snippets provided 
 | --- | --- |
 | `{{PMBOT_URL}}` | The URL of the Pmbot backend. |
 | `{{PMBOT_PROJECT_ID}}` | The ID of your Pmbot project. You can find this ID in the URL of your UI when you are on the project details page. |
-| `{{PMBOT_TOKEN}}` | Your [`PMBOT_TOKEN`](#pmbot_token) |
+| `{{PROJECT_TOKEN}}` | Your [`PMBOT_TOKEN`](#pmbot_token) |
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"], "labels": [".drone.yml"] }'>
 
@@ -54,7 +54,7 @@ environment:
   PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
   # !!!!! place this in a project secret variable !!!!!
   # https://docs.drone.io/secret/repository/
-  PROJECT_TOKEN: {{PROJECT_TOKEN}}
+  PMBOT_TOKEN: {{PROJECT_TOKEN}}
 
 steps:
   - name: update
