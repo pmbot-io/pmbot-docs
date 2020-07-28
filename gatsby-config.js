@@ -88,7 +88,6 @@ const plugins = [
       ],
     },
   },
-
   'gatsby-alias-imports',
   {
     resolve: 'gatsby-plugin-sass',
@@ -117,18 +116,18 @@ if (
 }
 
 module.exports = {
-  pathPrefix: '/docs',
+  pathPrefix: '/',
   siteMetadata: {
     siteTitle: 'Pmbot Docs', // <title>
     siteDescription:
-      'The Pmbot documentation helps you to learn how to automate dependency updates with our solution.',
+      'The Pmbot documentation helps you learn how to automate dependency updates with our solution.',
     // pathPrefix: "",
     siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
     siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
     /* author */
-    authorName: 'pixel point',
-    authorTwitterAccount: '@',
+    authorName: 'Pmbot',
+    authorTwitterAccount: '@pmbot_io',
   },
   plugins,
 };

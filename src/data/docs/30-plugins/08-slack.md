@@ -12,13 +12,15 @@ This plugin allows you to send a Slack message.
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: slack
-    config:
-      url: ''
-      title: 'Automated update of {{slug}} {{statusEmoji}}'
-      additionalText: ''
+packageManagers:
+  - packageManager:
+      name: npm
+    actions:
+      - name: slack
+        config:
+          url: "${env.MY_SLACK_WEBHOOK_URL}"
+          title: 'Automated update of {{slug}} {{statusEmoji}}'
+          additionalText: '@john'
 ````
 
 </div>

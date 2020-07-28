@@ -11,7 +11,7 @@ The `.pmbot.yml` file allows you to configure how the `pmbot` CLI performs updat
 
 ## Environment variable injection
 
-You can use environment variables anywhere in your `.pmbot.yml` by placing `${env.MY_VAR}` where `MY_VAR` is an environment variable.
+You can use environment variables anywhere in your `.pmbot.yml` by placing `${env.MY_VAR}` where `MY_VAR` is an environment variable:
 
 For example, you could place a webhook secret in a `WEBHOOK_SECRET` environment variable, and use it as follows:
 
@@ -48,7 +48,7 @@ A list of [package manager update configs](/package-manager-update-config). In a
 
 ````yaml
 version: '1'
-updates:
+packageManagers:
   - ...
 ````
 

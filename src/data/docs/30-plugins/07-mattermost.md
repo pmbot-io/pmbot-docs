@@ -12,16 +12,17 @@ This plugin allows you to send a Mattermost message.
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: mattermost
-    config:
-      url: ''
-      channels:
-        - team1
-        - awesomeness
-      title: 'Automated update of {{slug}} {{statusEmoji}}'
-      additionalText: ''
+packageManagers:
+  - packageManager:
+      name: npm
+    actions:
+      - name: mattermost
+        config:
+          url: "${env.MY_MATTERMOST_WEBHOOK_URL}"
+          channels:
+            - team1
+            - awesomeness
+          title: 'Automated update of {{slug}} {{statusEmoji}}'
 ````
 
 </div>

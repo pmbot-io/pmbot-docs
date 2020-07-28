@@ -14,11 +14,11 @@ Also, you will have to install your maven dependencies manually before running t
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: maven
-    config:
-    ...
+packageManagers:
+  - packageManager:
+      name: maven
+      config:
+        # ...
 ````
 
 </div>
@@ -76,12 +76,12 @@ Configures how dependencies should be bumped. This is available because Go does 
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: maven
-    config:
-      bumpConfig:
-        ...        
+packageManagers:
+  - packageManager:
+      name: maven
+      config:
+        bumpConfig:
+          # ...        
 ````
 
 </div>

@@ -4,12 +4,12 @@
   @include default-section-padding;
   will-change: transform;
   background: radial-gradient(
-    420.86% 2785.64% at 100% 0%,
-    #210a51 0%,
-    #29115b 29.69%,
-    #250f56 67.47%,
-    #3a1968 77.6%,
-    #613d7a 100%
+                  420.86% 2785.64% at 100% 0%,
+                  #210a51 0%,
+                  #29115b 29.69%,
+                  #250f56 67.47%,
+                  #3a1968 77.6%,
+                  #613d7a 100%
   );
 }
 
@@ -27,7 +27,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  justify-content: center;
+  justify-content: flex-end;
   will-change: transform;
   @include md-down {
     display: none;
@@ -42,33 +42,32 @@
   z-index: 1;
 }
 
-.header-logo-subtitle {
-  position: relative;
-  bottom: -3px;
-  color: $color-tertiary;
-  margin-left: 10px;
-}
-
 .link {
   position: relative;
   padding: 20px 0;
   color: $color-tertiary;
   margin-right: 30px;
   transition: color $transition-base;
+
   &-active {
     color: $color-accent-secondary;
   }
+
   &:after {
     bottom: 22px;
   }
+
   &:nth-child(4) {
     margin-right: 0;
   }
+
   &:last-child {
     margin-right: 0;
   }
+
   &:hover {
     color: $color-accent-secondary;
+
     &:hover {
       &:before {
         width: 100%;

@@ -5,7 +5,8 @@ excerpt: ''
 
 # Installation
 
-We try to make the installation of Pmbot as clean as possible. We currently have the UI and backend as separate Docker images so that you can fine tune how you want them deployed with `docker-compose`.
+We try to make the installation of Pmbot as clean as possible.
+We currently have the UI and backend as separate [Docker](https://docs.docker.com/) images so that you can fine tune how you want them deployed with [Docker Compose](https://docs.docker.com/compose/).
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 
@@ -15,33 +16,30 @@ If you think the installation workflow can be simplified or improved in any way,
 
 <div class="table-of-content"></div>
 
-## Docker image (incoming)
-
-### Basic launch to try Pmbot
-
-If you wish to try out Pmbot, you can use the `pmbot/demo` image, which regroup all services used by pmbot. 
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```shell script
-docker run --detach --publish 80:80 pmbot/demo
-```
-
-</div>
-
-
 ## Docker compose
 
-The following basic `docker-compose.yml` file can be launched with this command
-(where `PMBOT_HOST` is the IP address or hostname you're going to use to access Pmbot):
+### One-liner
+
+The following command will launch an instance of Pmbot for local testing:
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
-docker-compose --env PMBOT_HOST=localhost up --detach
+curl https://raw.githubusercontent.com/pmbot-io/install/master/basic/docker-compose.yml > docker-compose.yml | docker-compose up --detach
 ```
 
 </div>
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+When testing Pmbot on your local machine with remote git providers, keep in mind that you need to adapt the Pmbot URL you give them.
+Use an IP address that they can use to reach your local machine.
+
+</div> 
+
+### Basic
+
+Here is a basic `docker-compose.yml` that can be used to test pmbot locally:
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
@@ -50,27 +48,21 @@ docker-compose --env PMBOT_HOST=localhost up --detach
 version: "3.6"
 
 services:
-
-  entrypoint:
+  reverse-proxy:
     image: pmbot/reverse-proxy
     restart: unless-stopped
     ports:
-      - 80:80
+      - 9118:80
 
   backend:
-    image: pmbot/backend
+    image: pmbot/backend-community
     restart: unless-stopped
-    environment:
-      APP_UI_URL: https://${PMBOT_HOST?PMBOT_HOST}
-      SENTRY_ENABLED: "true"
     volumes:
       - secrets:/secrets
 
   frontend:
     image: pmbot/ui
     restart: unless-stopped
-    environment:
-      SENTRY_ENABLED: "true"
 
   mongo:
     image: mongo:4.2-bionic
@@ -79,69 +71,42 @@ services:
       - mongo:/data/db
 
 volumes:
-#  certs:
-  cache:
   mongo:
   secrets:
+#
 ```
 
 </div>
 
-## General
-
-### How to generate an encryption key
-
-Pmbot encrypts sensitive information. It uses environment variable `SECURITY_ENCRYPTION_KEY` as the encryption key. This key must be 32 bytes long. You can generate one using the following command:
+It can be launched with the following command:
 
 <div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
-openssl rand -hex 32
+docker-compose up --detach
 ```
 
 </div>
 
-### How to generate private/public keys for JWT tokens
+### Advanced
 
-## Reverse proxy environment variables
-
-### TRAEFIK\_DYNAMIC\_CONFIG
-
-**Default:** none
-
-May contain additional [dynamic configuration](https://docs.traefik.io/reference/dynamic-configuration/file/) to inject
-in Traefik.
-The content of this variable will be written into a temporary file and will be loaded
-by Traefik [file provider](https://docs.traefik.io/providers/file/).
-
-You may use yaml multiline syntax for this variable:
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```yaml@
-services:
-  reverse-proxy:
-    image: pmbot/reverse-proxy
-    restart: unless-stopped
-    environment:
-      TRAEFIK_DYNAMIC_CONFIG: >
-        [tls.stores]
-          [tls.stores.default]
-            [tls.stores.default.defaultCertificate]
-              certFile = "/certs/fullchain.pem"
-              keyFile = "/certs/privkey.pem"
-...
-```
-
-</div>
-
-### TRAEFIK\_DYNAMIC\_CONFIG\_FORMAT
-
-**Default:** `toml`
-
-File format of the content given in [TRAEFIK\_DYNAMIC\_CONFIG](#traefik_dynamic_config).
-Can be `toml` or `yaml`.
+For more advanced and configurable deployments, we provide a [repository](https://github.com/pmbot-io/install)
+with a more configurable `docker-compose.yaml`.
 
 ## Backend environment variables
+
+### APP\_UI\_URL
+
+**Default:** `http://localhost:9118`
+
+URL that users can use to reach the frontend. It will be used in emails, notifications, etc.
+
+### APP\_PROJECTUPDATES\_MAX\_TIMETOWRITE
+
+**Default:** `86400000` (1 day)
+
+Maximum duration of an update, in milliseconds from the start of the update.
+After that period, the CI will not be able to change the status of an update anymore.
 
 ### AUTH\_KEY\_PATH\_PRIVATE
 
@@ -174,13 +139,6 @@ openssl rsa -in private-key.pem -pubout -outform PEM -out public-key.pem
 ```
 
 </div>
-
-### APP\_PROJECTUPDATES\_MAX\_TIMETOWRITE
-
-**Default:** `86400000` (1 day)
-
-Maximum duration of an update, in milliseconds from the start of the update.
-After that period, the CI will not be able to change the status of an update anymore.
 
 ### DB_URI
 
@@ -247,7 +205,7 @@ See [Nodemailer transport](https://nodemailer.com/smtp/) `secure`.
 
 ### MAIL\_SUBJECT\_PREFIX
 
-**Default:** `Pmbot | `
+**Default:** `[Pmbot] `
 
 Prefix to be added in front of the subject in mails sent by Pmbot.
 This can be used for filtering and rules in your mail client.
@@ -293,9 +251,96 @@ the key file will be ignored and the value given in the environment variable wil
 
 ### API_URL
 
-**Default:** `/api` (from the frontend)
+**Default:** `http://localhost:9118`
 
 URL of Pmbot API (backend).
 This URL needs to be accessible by the users (not by the frontend container/server).
 
-With the default deployment, it should point towards Pmbot reverse proxy with the `/api` path.
+With the default deployment, it should point towards Pmbot reverse proxy.
+
+### API_PATH
+
+**Default:** `/api`
+
+Path that will be appended to the [API\_URL](#api_url).
+
+## Recipes
+
+### How to set a trusted CA certificate
+
+If you are using other self-hosted services with Pmbot, you might have secured them with a self-signed certificate.
+In order for Pmbot to recognize that certificate, you must provide it with the corresponding trusted CA certificate.
+
+You can do so by modifying the backend service in the `docker-compose.yml` file:
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```yaml
+# docker-compose.yml
+services:
+    ...
+    backend:
+      ...
+      volumes:
+        - ./trusted-ca.pem:/trusted-ca.pem:ro
+      environment:
+        NODE_EXTRA_CA_CERTS: /trusted-ca.pem
+    ...
+```
+
+</div>
+
+This adds a read-only volume pointing to `./trusted-ca.pem` (the trusted CA certificate)
+and tells Nodejs (used by Pmbot) to trust it.
+
+## Premium
+
+If you are a premium user, you will need to:
+- replace `pmbot/backend-community` with the [corresponding images](#premium-registry) for your edition
+- provide the backend Docker container with your [license file](#license)
+
+### Premium registry
+
+Premium editions are available on our private Docker registry. You can get your credentials in your dashboard under the **Install** section.
+
+The following image is available for customers using the **developer edition**:
+- `docker.pmbot.io/backend-developer` (replaces `pmbot/backend-community`)
+
+The following image is available for customers using the **enterprise edition**:
+- `docker.pmbot.io/backend-enterprise` (replaces `pmbot/backend-community`)
+
+### License
+
+Premium users will need to provide their license file (downloaded from their dashboard) to the backend Docker container in **one of** the following ways:
+
+### Environment variable
+
+Define a `LICENSE` environment variable with the content of your license file:
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```yaml
+services:
+  backend:
+    # ...
+    environment:
+      LICENSE: "<license-content-goes-here>"
+```
+
+</div>
+
+### File
+
+Our backend looks for a file named `/license.txt`, so you'll need to provide it via a Docker volume:
+
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+
+```yaml
+services:
+  backend:
+    # ...
+    volumes:
+      - /data/LICENSE.txt:/license.txt:ro
+```
+
+</div>

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Link } from 'gatsby';
+import React, {useState} from 'react';
 import Media from 'react-media';
 import HeaderMobile from 'components/shared/header-mobile';
 import LogoInlineSvg from 'images/logo.inline.svg';
@@ -14,10 +13,9 @@ const Header = props => {
       <div className="container">
         <div className={styles.inner}>
           <div className="header-logo">
-            <Link className={styles.headerLogoLink} to="/">
-              <LogoInlineSvg />{' '}
-              <span className={styles.headerLogoSubtitle}>Docs</span>
-            </Link>
+            <a className={styles.headerLogoLink} href="https://pmbot.io">
+              <LogoInlineSvg/>{' '}
+            </a>
           </div>
           <Media
             query="(max-width: 991.98px)"
@@ -26,16 +24,10 @@ const Header = props => {
             }
           />
           {isMobileOrTablet ? (
-            <HeaderMobile />
+            <HeaderMobile/>
           ) : (
             <>
               <div className={styles.headerMenu}>
-                <a
-                  href="https://docs.pmbot.io"
-                  className={`link ${styles.link} ${styles.linkActive}`}
-                >
-                  Documentation
-                </a>
                 <a
                   href="https://blog.pmbot.io"
                   className={`link ${styles.link}`}
@@ -43,15 +35,21 @@ const Header = props => {
                   Blog
                 </a>
                 <a
+                  href="https://docs.pmbot.io"
+                  className={`link ${styles.link} ${styles.linkActive}`}
+                >
+                  Documentation
+                </a>
+                <a
                   href="https://github.com/pmbot-io/issues/issues"
                   className={`link ${styles.link}`}
                 >
                   Issues
                 </a>
+                <a className={`button ${styles.button}`} href="https://app.pmbot.io/auth/login">
+                  Sign in
+                </a>
               </div>
-              <a className={`button ${styles.button}`} href="https://pmbot.io">
-                Preorder
-              </a>
             </>
           )}
         </div>

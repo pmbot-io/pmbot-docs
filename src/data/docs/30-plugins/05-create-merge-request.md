@@ -12,27 +12,28 @@ This plugin allows you to open a merge request.
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: create-merge-request
-    config:
-      title: 'Automated update of {{slug}} {{statusEmoji}}'
-      additionalText: ''
-      assignees:
-        - ...
-      closeOpen: true
-      squash: true
-      deleteSourceBranch: true
-      maintainerCanModify: true
+packageManagers:
+  - packageManager:
+      name: npm
+    actions:
+      - name: create-merge-request
+        on:
+          - success
+        config:
+          token: '${env.MY_TOKEN}'
 ````
 
 </div>
 
-To be able to authenticate with your Git provider, this plugin needs to have a token:
-- with **Gitlab**, set an environment variable named `GITLAB_TOKEN` which should contain a [Gitlab personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
-- with **Github**, set an environment variable named `GITHUB_TOKEN` which should contain a [Github personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+## token
+
+Allows the plugin to authenticate with your Git provider API:
+- with **Gitlab**, it should be a [Gitlab personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+- with **Github**, it should be a [Github personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
 
 ## title
+
+**Default:** `Automated update of {{slug}} {{statusEmoji}}`
 
 Allows you to customize issue title.
 
@@ -66,9 +67,13 @@ Usernames to assign to the issue created. Note that Gitlab CE only allows one as
 
 ## closeOpen
 
+**Default:** `true`
+
 Close open issues that were created by Pmbot. This option prevents multiple issues open simultaneously when you don't have the time to look at them.
 
 ## squash
+
+**Default:** `true`
 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
@@ -80,6 +85,8 @@ Whether commits of the merge request source branch should be squashed.
 
 ## deleteSourceBranch
 
+**Default:** `true`
+
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
 Only applies to **Gitlab**
@@ -89,6 +96,8 @@ Only applies to **Gitlab**
 Whether the merge request source branch should be deleted.
 
 ## maintainerCanModify
+
+**Default:** `true`
 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 

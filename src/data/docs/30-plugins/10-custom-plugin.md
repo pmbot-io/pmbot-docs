@@ -147,7 +147,7 @@ An example `ProjectUpdateState`:
 
 ### `parser`
 
-This is a **synchronous** function that we call with the configuration loaded as a plain Javascript object from the [`.pmbot.yml`](/pmbot-yml/pmbotyml).
+This is a **synchronous** function that we call with the configuration loaded as a plain Javascript object from the [`.pmbot.yml`](/pmbot-yml/pmbot-yml).
 
 You are free to do whatever you like in this function. We generally use it to convert plain objects into classes that we can later validate using `class-validator`.
 
@@ -274,7 +274,7 @@ interface Dependency<Meta = any> {
 
 ## Actions
 
-Actions are executed when all the dependencies of a package manager are updated. This means that if you configured an Npm and Go package manager in your project using the [`.pmbot.yml`](/pmbot-yml/pmbotyml), actions will be executed twice.
+Actions are executed when all the dependencies of a package manager are updated. This means that if you configured an Npm and Go package manager in your project using the [`.pmbot.yml`](/pmbot-yml/pmbot-yml), actions will be executed twice.
 
 Actions should comply with the following interface:
 
@@ -354,7 +354,7 @@ If you defined your plugin as a **package manager adapter**, you can use it in t
 
 ```yaml
 version: '1'
-updates:
+packageManagers:
   - packageManager:
       name: my-plugin
       config: ... # config of your package manager
@@ -370,7 +370,7 @@ If you defined your plugin as an **action**, you can use it in the [`actions`](#
 
 ```yaml
 version: '1'
-updates:
+packageManagers:
   - ...
     actions:
       name: my-action

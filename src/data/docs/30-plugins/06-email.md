@@ -1,29 +1,34 @@
 ---
 slug: '/plugins/email'
-title: 'Send an email'
+title: 'Email'
 excerpt: ''
 ---
 
-# Create issue
+# Email
 
 This plugin allows you to send an email using [Nodemailer](https://nodemailer.com/message/).
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ````yaml
-version: '1'
-updates:
-- packageManager:
-    name: email
-    config:
-      transportOptions:
-        ...
-      messageConfig:
-        from: ''
-        to: ''
-        subject: 'Automated update of {{slug}} {{statusEmoji}}'
-        ...
-      additionalText: ''
+version: "1"
+packageManagers:
+  - packageManager:
+      name: npm
+    actions:
+      - name: email
+        config:
+          transportOptions:
+            host: smtp.company.com
+            port: 1025
+            auth:
+              user: "${env.EMAIL_USERNAME}"
+              pass: "${env.EMAIL_PASSWORD}"
+          messageConfig:
+            from: "pmbot@company.com"
+            to: "admin@company.com"
+            subject: "Automated update of {{slug}} {{statusEmoji}}"
+          additionalText: "Please contact John if there is any issue."
 ````
 
 </div>
@@ -36,13 +41,13 @@ A YAML object with Nodemailer [transport options](https://nodemailer.com/smtp/#g
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: email
-    config:
-      transportOptions:
-        port: 1025
-        host: mailhog # inside a Docker network
+packageManagers:
+  - packageManager:
+      name: email
+      config:
+        transportOptions:
+          port: 1025
+          host: mailhog # inside a Docker network
 ````
 
 </div>
@@ -91,13 +96,15 @@ For example, if you want to add `cc`, you can do:
 
 ````yaml
 version: '1'
-updates:
-- packageManager:
-    name: email
-    config:
-      ...
-      messageConfig:
-        cc: 'test@test.com'
+packageManagers:
+  - packageManager:
+      name: npm
+    actions:
+      - name: email
+        config:
+          ...
+          messageConfig:
+            cc: 'test@test.com'
 
 ````
 

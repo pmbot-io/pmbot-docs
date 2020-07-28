@@ -11,6 +11,10 @@
 }
 
 .code-container {
+  .code-toolbar {
+    width: 100%;
+  }
+
   :global {
     pre {
       margin: 0;
