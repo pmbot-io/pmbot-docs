@@ -308,6 +308,7 @@ packageManagers:
       - name: auto-merge
         on:
           - success
+          - partial
 ```
 
 </div>
