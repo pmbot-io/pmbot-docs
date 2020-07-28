@@ -57,7 +57,7 @@ variables:
   PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
   # !!!!! place this in a secret CI/CD variable !!!!!
   # https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
-  PROJECT_TOKEN: {{PROJECT_TOKEN}}
+  PMBOT_TOKEN: {{PROJECT_TOKEN}}
 
 update:
   stage: update
