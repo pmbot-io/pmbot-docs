@@ -102,6 +102,7 @@ services:
       - "traefik.http.routers.backend.entrypoints=websecure"
       - "traefik.http.routers.backend.rule=Host(`${PMBOT_DOMAIN?PMBOT_DOMAIN}`) && PathPrefix(`/api`)"
       - "traefik.http.routers.backend.tls=true"
+      - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
 
   frontend:
     image: pmbot/ui
@@ -112,6 +113,7 @@ services:
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.rule=Host(`${PMBOT_DOMAIN?PMBOT_DOMAIN}`) && PathPrefix(`/`)"
       - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
 
   mongo:
     image: mongo:4.2-bionic
@@ -120,6 +122,7 @@ services:
       - mongo:/data/db
 
 volumes:
+  letsencrypt:
   mongo:
   secrets:
 #
@@ -184,7 +187,7 @@ Can be `toml` or `yaml`.
 
 ## Backend environment variables
 
-### AUTH\_KEY\_PATH\_PRIVATE
+### AUTH\_PRIVATE\_KEY\_PATH
 
 **Default:** `/secrets/private-key.pem`
 
@@ -200,11 +203,11 @@ ssh-keygen -t rsa -b 4096 -m PEM -f private-key.pem -q -N ""
 
 </div>
 
-### AUTH\_KEY\_PATH\_PUBLIC
+### AUTH\_PUBLIC\_KEY\_PATH
 
 **Default:** `/secrets/public-key.pem`
 
-Path to the public key matching the [private key](#auth_key_path_private).
+Path to the public key matching the [private key](#auth_private_key_path).
 If this file does not exist, Pmbot will generate a new key pair.
 
 It can be generated from the private key using the following command:
