@@ -340,7 +340,7 @@ services:
   backend:
     # ...
     volumes:
-      - /data/PMBOT_LICENSE.txt:/license.txt
+      - /data/LICENSE.txt:/license.txt:ro
 ```
 
 </div>
