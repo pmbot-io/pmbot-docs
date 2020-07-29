@@ -17,6 +17,8 @@ Community plugins are welcome ! If you open source your plugin, we will referenc
 
 </div>
 
+<div class="table-of-content"></div>
+
 ## Creating a custom plugin
 
 Pmbot currently has two types of plugins: [**package managers**](#package-managers) and [**actions**](#actions). Package manager plugins allow Pmbot to interact with specific package managers. Action plugins allow you to execute specific tasks after the dependencies of a package manager have been updated.
@@ -29,7 +31,7 @@ We will release a plugin toolkit with Typescript typings and helper functions in
 
 </div>
 
-A plugin basically consists of a Node module which contains a single Javascript file that exports the following properties:
+A plugin consists in a Javascript file that exports the following properties:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
@@ -340,14 +342,72 @@ The `PackageManagerUpdateState` contains information of the current package mana
 
 ## Using a custom plugin
 
-Plugins are required by the `pmbot` CLI as standard Npm modules.
+Plugins are loaded by the `pmbot` CLI as standard Npm modules using Node's `require` function. Hence, they can be simple Javascript files placed at your project root, or Npm packages with an `index.js`.
 
-You can make them available to the CLI by pass them as arguments :
-```
-pmbot update --plugins ./my-plugin.js
+First, you'll have to install the plugin in your CI so that our CLI can `require` it. There are several ways to do this:
+- install the plugin using `npm install`
+- place it at the root of your project or anywhere on the file system
+- use `curl` to download the plugin
+- ...
+
+Once your plugin is made available to our CLI, you'll want to register it when running the `update` command:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+pmbot update --plugins ./plugin.js
+# OR with an absolute path
+pmbot update --plugins /plugin.js
+# OR with a plugin distributed as an Npm package
+pmbot update --plugins my-plugin
 ```
 
-Once your plugin is made available to our CLI, all you need is to reference it in your [`.pmbot.yml`](#pmbotyml) using its `name`.
+</div>
+
+Finally, you'll need to reference it in your [`.pmbot.yml`](#pmbotyml) using its `name`. For example, if we have the following plugin:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+module.exports = {
+  name: 'my-plugin',
+  ...
+};
+
+```
+
+</div>
+
+we'll use it as follows:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+version: "1"
+packageManagers:
+  - packageManager:
+      name: npm
+    actions:
+      - name: my-plugin # reference the name of your plugin
+        on:
+          - success
+          - partial
+          - failure
+```
+
+</div>
+
+If you want to register more than one plugin, you can do the following:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+pmbot update \
+  --plugins ./plugin.js \
+  --plugins ./my-other-plugin.js
+```
+
+</div>
 
 ### Package manager adapters
 
