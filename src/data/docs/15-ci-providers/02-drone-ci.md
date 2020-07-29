@@ -59,9 +59,11 @@ environment:
 steps:
   - name: update
     image: pmbot/bot
-    #environment:
-    #  PMBOT_TOKEN:
-    #    from_secret: PMBOT_TOKEN
+    environment:
+      PMBOT_SSH_PRIVATE_KEY:
+        from_secret: PMBOT_SSH_PRIVATE_KEY
+      #PMBOT_TOKEN:
+      #  from_secret: PMBOT_TOKEN
     commands:
       # skip this job for standard pipelines
       - if [ -z $PMBOT ]; then exit 0; fi
@@ -83,9 +85,11 @@ steps:
   - name: notify
     image: registry.dev.pmbot/bot:npm-geoffroy
     pull: always
-    #environment:
-    #  PMBOT_TOKEN:
-    #    from_secret: PMBOT_TOKEN
+    environment:
+      PMBOT_SSH_PRIVATE_KEY:
+        from_secret: PMBOT_SSH_PRIVATE_KEY
+      #PMBOT_TOKEN:
+      #  from_secret: PMBOT_TOKEN
     commands:
       - pmbot notify --debug
 ```
