@@ -5,7 +5,7 @@ excerpt: ''
 
 # Plugin list
 
-**Actions**
+## Actions
 - [auto-merge](/plugins/auto-merge)
 - [create-issue](/plugins/create-issue)
 - [create-merge-request](/plugins/create-merge-request)
@@ -14,7 +14,7 @@ excerpt: ''
 - [slack](/plugins/slack)
 - [webhook](/plugins/webhook)
 
-**Package managers**
+## Package managers
 - [Npm](/plugins/npm)
 - [Go](/plugins/go)
 - [Go](/plugins/maven)
