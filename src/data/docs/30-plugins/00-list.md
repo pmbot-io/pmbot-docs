@@ -17,4 +17,4 @@ excerpt: ''
 ## Package managers
 - [Npm](/plugins/npm)
 - [Go](/plugins/go)
-- [Go](/plugins/maven)
+- [Maven](/plugins/maven)

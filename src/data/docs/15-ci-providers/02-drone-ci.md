@@ -83,7 +83,7 @@ steps:
 
   # notify pmbot of build status (must be the last step)
   - name: notify
-    image: registry.dev.pmbot/bot:npm-geoffroy
+    image: pmbot/bot
     pull: always
     environment:
       PMBOT_SSH_PRIVATE_KEY:

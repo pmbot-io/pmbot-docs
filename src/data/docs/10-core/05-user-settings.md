@@ -5,7 +5,7 @@ excerpt: ''
 
 # User settings
 
-User settings allow you to manager settings for your Pmbot account, such as changing your password or disconnecting from all devices.
+User settings allow you to manage settings for your Pmbot account, such as changing your password or disconnecting from all devices.
 
 <div class="table-of-content"></div>
 
@@ -39,6 +39,3 @@ If you want to disconnect all devices that have signed in your Pmbot account, yo
     
 ![](../../../images/user-settings/disconnect-all-devices.png)
 
-## Refresh token
-
-Use this to refresh your authentication token. This is deprecated as of **v1.0.0**.

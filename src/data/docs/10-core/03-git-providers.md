@@ -135,7 +135,7 @@ You can sign in a Git provider in the following ways:
 
     ![](../../../images/git-providers/sign-in-button-git-provider-page.png)
 
-Once you are signe-in, we display your username. This is useful when you are signed in multiple Git providers:
+Once you are signed-in, we display your username. This is useful when you are signed in multiple Git providers:
 
 ![](../../../images/git-providers/sign-out-button-in-list.png)
 

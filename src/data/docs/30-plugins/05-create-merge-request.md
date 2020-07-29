@@ -27,13 +27,15 @@ packageManagers:
 
 ## token
 
+**Required**
+
 Allows the plugin to authenticate with your Git provider API:
 - with **Gitlab**, it should be a [Gitlab personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
 - with **Github**, it should be a [Github personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
 
 ## title
 
-**Default:** `Automated update of {{slug}} {{statusEmoji}}`
+**Default:** `Automated update of {{slug}} dependencies {{statusEmoji}}`
 
 Allows you to customize issue title.
 
@@ -59,9 +61,13 @@ This [handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) template i
 
 ## additionalText
 
+**Default:** none
+
 Additional text to embed in the issue description.
 
 ## assignees
+
+**Default:** none
 
 Usernames to assign to the issue created. Note that Gitlab CE only allows one assignee.
 

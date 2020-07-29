@@ -38,8 +38,13 @@ module.exports = {
   version: '1.0.0',
   type: 'ACTION', // ACTION | PACKAGE_MANAGER_ADAPTER
   name: 'my-plugin', // plugin name
-  core: async () => {
-    // plugin logic
+  core: class {
+    constructor(context) {
+      // ...
+    }
+    execute(actionConfig, actionContext) {
+      // plugin logic
+    } 
   },
   parser: config => config,
   validator: config => Promise.resolve([]),
@@ -58,16 +63,16 @@ The type of plugin. Can be `ACTION` or `PACKAGE_MANAGER_ADAPTER`.
 
 ### `name`
 
-Plugin name.
+The name of your plugin. This is what will be used to reference your plugin in `.pmbot.yml`.
 
 ### `core`
 
-The plugin core logic. This should be a `class` or `object` (at your discretion) which implements an interface specific to the defined plugin type:
+The plugin core logic. This should implement an interface specific to the defined plugin type:
 
 - [Package manager](#package-managers)
 - [Actions](#actions)
 
-Independently from the plugin type, the `core` can either be a plain Javascript object, or you may create an ES6 class. In that case, the constructor will be passed a context which contains information about the environment, update configuration, etc.
+Independently from the plugin type, the `core` should be an **ES6 class**. The constructor will be passed a context which contains information about the environment, update configuration, etc.
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
@@ -149,9 +154,9 @@ An example `ProjectUpdateState`:
 
 This is a **synchronous** function that we call with the configuration loaded as a plain Javascript object from the [`.pmbot.yml`](/pmbot-yml/pmbot-yml).
 
-You are free to do whatever you like in this function. We generally use it to convert plain objects into classes that we can later validate using `class-validator`.
+You are free to do whatever you like in this function. We generally use it to convert plain objects into classes that we can later validate using [`class-validator`](https://www.npmjs.com/package/class-validator).
 
-The minimum code required is the identify function:
+The minimum code required is the identity function:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
@@ -335,14 +340,12 @@ The `PackageManagerUpdateState` contains information of the current package mana
 
 ## Using a custom plugin
 
-Plugins are loaded by the `pmbot` CLI as standard Npm modules.
+Plugins are required by the `pmbot` CLI as standard Npm modules.
 
-We recommend publishing plugins as Npm packages, whether it be on the public Npm registry or on a private one.
-
-First, you'll have to install the plugin in your CI so that our CLI can `require` it. There are several ways to do this:
-
-- install the plugin using `npm install` before running the `pmbot` CLI
-- create a custom Docker image for the update job and embed your plugin as global Npm module
+You can make them available to the CLI by pass them as arguments :
+```
+pmbot update --plugins ./my-plugin.js
+```
 
 Once your plugin is made available to our CLI, all you need is to reference it in your [`.pmbot.yml`](#pmbotyml) using its `name`.
 

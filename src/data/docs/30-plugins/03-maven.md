@@ -88,9 +88,11 @@ packageManagers:
 
 ## settingsPath
 
-Path to a maven `settings.xml` file which contains credentials for private repositories. By default, we check the following locations:
+**Default:**
 - `~/.m2/settings.xml`
 - `.m2/settings.xml`
+
+Path to a maven `settings.xml` file which contains credentials for private repositories.
 
 ## Environment variables
 
@@ -106,6 +108,6 @@ export MAVEN_OPTS=$MAVEN_OPTS; mvn ...
 
 </div>
 
-### MAVEN_CLI_OPTS
+### MAVEN\_CLI\_OPTS
 
 This variable is passed to the `mvn` CLI as follows: `mvn $MAVEN_CLI_OPTS`

@@ -30,6 +30,8 @@ at runtime, `${env.WEBHOOK_SECRET}` will be replaced with the value set in the e
 
 ## version
 
+**Required**
+
 Tells version of your `.pmbot.yml` file. The only value at this time is `1`
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
@@ -40,7 +42,9 @@ version: '1'
 
 </div>
 
-## updates
+## packageManagers
+
+**Required**
 
 A list of [package manager update configs](/package-manager-update-config). In a single project, you may update your Npm dependencies, Go dependencies etc.
 

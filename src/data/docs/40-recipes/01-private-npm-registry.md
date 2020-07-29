@@ -43,7 +43,7 @@ setup:
 update:
   extends: .npmrc # creates an .npmrc
   stage: update
-  image: registry.dev.pmbot/bot:geoffroy
+  image: pmbot/bot
   dependencies:
     - setup
   only:
@@ -58,7 +58,7 @@ update:
 
 </div>
 
-Here is another example `.gitlab-ci.yml` configuration file that leverages the global `before_script`:
+Here is another example of `.gitlab-ci.yml` configuration file that leverages the global `before_script`:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
@@ -74,7 +74,7 @@ setup:
 
 update:
   stage: update
-  image: registry.dev.pmbot/bot:geoffroy
+  image: pmbot/bot
   dependencies:
     - setup
   only:

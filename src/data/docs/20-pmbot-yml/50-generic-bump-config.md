@@ -22,6 +22,8 @@ bumpRules:
 
 ## defaultBumpRule
 
+**Default:** `minor`
+
 Defines the default bump rules applied to a dependency when no other rule applies.
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
@@ -32,9 +34,9 @@ defaultBumpRule: minor # major | minor | patch
 
 </div>
 
-Defaults to `minor`.
-
 ## bumpRules
+
+**Default:** none
 
 A list of bump rules against which Pmbot should match dependency names. We apply the **first matching rule**, and this rule overrides the [`defaultBumpRule`](#defaultbumprule).
 
@@ -51,6 +53,8 @@ bumpRules:
 
 ### pattern
 
+**Required**
+
 A Javascript regular expression to use for matching against dependency names.
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
@@ -63,6 +67,8 @@ bumpRules:
 </div>
 
 ### bump
+
+**Required**
 
 The type of bump to use for dependencies matching the pattern associated with this bump.
 

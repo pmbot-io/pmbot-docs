@@ -39,7 +39,7 @@ To onboard new users into your organization, they will need to sign up to your P
     
 ### Limit who can sign up into your workspace
 
-When you want to limit who can sign up to your workspace, you can define a list of comma-separated domains. When a user tries to sign up in your workspace, we match their email against the list of domains you defined. If the email doesn't match, we deny the registration.
+When you want to limit who can sign up to your workspace, you can define a list of comma-separated domains. When a user tries to sign up in your workspace, we match their email address against the list of domains you defined. If the email address doesn't match, we deny the registration.
 
 ![](../../../images/organization-settings/email-domains.png)
 

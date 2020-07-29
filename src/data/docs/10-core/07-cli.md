@@ -53,7 +53,7 @@ Path to the SSH private key for pushing to the git current repository.
 
 You can generate a new SSH key pair with the following command:
 
-<div class="code-group" data-props='{ "lineNumbers": [true] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
 ```shell script
 ssh-keygen
@@ -128,9 +128,9 @@ If you are using self-signed certificates to secure your servers (i.e. Pmbot, pa
 
 This CA should have the **`pem`** format:
 
-<div class="code-group" data-props='{ "lineNumbers": [true] }'>
+<div class="code-group" data-props='{ "lineNumbers": [false] }'>
 
-```
+```pem
 -----BEGIN CERTIFICATE-----
 MIIFtDCCA5ygAwIBAgIJAKh8+CrWL5MeMA0GCSqGSIb3DQEBCwUAMGcxCzAJBgNV
 ...
@@ -139,4 +139,5 @@ fQ+WljzA1PldDsGyspFWPpwqw3qSo9Uj
 -----END CERTIFICATE-----
 ```
 
-</div> 
+</div>
+
