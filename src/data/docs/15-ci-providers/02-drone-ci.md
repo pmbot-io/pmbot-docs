@@ -70,7 +70,7 @@ steps:
       # make node_modules available to pmbot CLI
       - npm ci
       # run the pmbot CLI
-      - pmbot update
+      - pmbot update --disable-host-key-verification
 
   # your existing build/test jobs
   - name: test

@@ -63,7 +63,7 @@ jobs:
       - run:
           command: |
             npm ci
-            pmbot update
+            pmbot update --disable-host-key-verification
 
   test:
     docker:
@@ -129,7 +129,7 @@ jobs:
       - run:
           command: |
             npm ci
-            pmbot update
+            pmbot update --disable-host-key-verification
 
   # your existing job(s)
   test:
