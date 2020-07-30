@@ -334,7 +334,7 @@ To be able to push to your Git repository, Pmbot needs to be provided with crede
     <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
     
     ```shell
-ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N ""
+    ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N ""
     ```
     
     </div>
