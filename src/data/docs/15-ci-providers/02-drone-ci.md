@@ -86,8 +86,6 @@ steps:
     image: pmbot/bot
     pull: always
     environment:
-      PMBOT_SSH_PRIVATE_KEY:
-        from_secret: PMBOT_SSH_PRIVATE_KEY
       #PMBOT_TOKEN:
       #  from_secret: PMBOT_TOKEN
     commands:
