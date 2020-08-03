@@ -5,6 +5,11 @@ excerpt: ''
 
 # Gitea
 
+Gitea support requires:
+- pmbot/ui v1.18.0+
+- pmbot/backend-community (or any premium edition) v1.9.0+
+- pmbot/bot (@pmbot/bot) v1.8.0
+
 ## General settings
 
 | Field | Description |
