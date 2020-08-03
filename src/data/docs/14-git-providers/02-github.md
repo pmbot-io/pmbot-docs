@@ -42,6 +42,7 @@ If you want to revoke access from the Pmbot app to a Github organization:
 #### Enable organization lock
 
 1. Go to your project page
+1. Select an organization
 1. To save the changes, click **Update** at the bottom of the page
 1. Use the **Cleanup Projects** button to cleanup projects that were configured in Pmbot and do not belong to the new group you have selected.
 
