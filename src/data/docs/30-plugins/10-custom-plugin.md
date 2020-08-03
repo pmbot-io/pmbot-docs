@@ -150,8 +150,6 @@ The `projectUpdateState` contains information about the current update, such as 
 
 </div>
 
-An example `ProjectUpdateState`:
-
 ### `parser`
 
 This is a **synchronous** function that we call with the configuration loaded as a plain Javascript object from the [`.pmbot.yml`](/pmbot-yml/pmbot-yml).
