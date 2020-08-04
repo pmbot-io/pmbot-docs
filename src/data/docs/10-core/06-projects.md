@@ -289,7 +289,7 @@ At any time, you can renew your `PMBOT_TOKEN` by clicking the **Renew** button.
     
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
-When you renew the `PMBOT_TOKEN`, you need to reconfigure the webhook in your CI and update the `--token` provided to the `pmbot` CLI in the update job of your [CI config file](#ci-config-file).
+When you renew the `PMBOT_TOKEN`, you need to update it in your CI so our `pmbot` CLI has the right crddentials. See [CI config file](#ci-config-file).
 
 </div>
 
@@ -320,12 +320,13 @@ To run updates, we leverage conditional CI jobs. You'll need to setup an update 
 - [Gitlab CI](/ci-providers/gitlab-ci#ci-config-file)    
 - [Drone CI](/ci-providers/drone-ci#ci-config-file)
 
-### Webhook
-
-- [Gitlab CI](/ci-providers/gitlab-ci#webhook)    
-- [Drone CI](/ci-providers/drone-ci#webhook)
-
 ### Git credentials
+
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+This step is optional if you're not using the [auto-merge](plugin).
+
+</div>
 
 To be able to push to your Git repository, Pmbot needs to be provided with credentials.
 
@@ -344,5 +345,7 @@ To be able to push to your Git repository, Pmbot needs to be provided with crede
    For Gitlab, you'll need to add the public key as a [project deploy key](https://docs.gitlab.com/ee/ssh/#per-repository-deploy-keys).
    
    For Github, you'll need to add the public key as a [deploy key](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys).
+   
+   For Gitea, you'll need to add the public key as a [project deploy key](/git-providers/gitea#adding-a-project-deploy-key).
    
 1. Configure the **private key** in a CI environment variable named `PMBOT_SSH_PRIVATE_KEY`.

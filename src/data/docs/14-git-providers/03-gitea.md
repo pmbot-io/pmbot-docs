@@ -10,6 +10,14 @@ Gitea support requires:
 - pmbot/backend-community (or any premium edition) v1.9.0+
 - pmbot/bot (@pmbot/bot) v1.8.0
 
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+Blog post on how to use Gitea with Pmbot and Drone CI [here](https://blog.pmbot.io/announcing-support-for-gitea/).
+
+</div>
+
+<div class="table-of-content"></div>
+
 ## General settings
 
 | Field | Description |
@@ -69,3 +77,13 @@ This setting allows you to limit projects to a given Gitea organization. Pmbot w
     ![](../../../images/git-providers/clear-gitlab-group-lock.png)
 
 1. Click **update**
+
+## Adding a project deploy key
+
+In your project **settings**, go to **deploy keys**, add the **public** key and name the key, then click **Add deploy key**.
+
+![](../../../images/git-providers/gitea/add-deploy-key.png)
+
+The deploy key is now added:
+
+![](../../../images/git-providers/gitea/deploy-key-added.png)

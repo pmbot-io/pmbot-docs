@@ -8,6 +8,8 @@ excerpt: ''
 
 This plugin allows you to automatically merge the update branch into the source branch.
 
+For our bot to commit and push to your repository, you will have to setup and SSH keypair as explained [here](https://docs.pmbot.io/core/projects#git-credentials).
+
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ````yaml
