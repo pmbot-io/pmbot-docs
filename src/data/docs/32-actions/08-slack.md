@@ -1,5 +1,4 @@
 ---
-slug: '/plugins/slack'
 title: 'Slack'
 excerpt: ''
 ---

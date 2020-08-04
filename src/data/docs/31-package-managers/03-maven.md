@@ -1,5 +1,4 @@
 ---
-slug: '/plugins/maven'
 title: 'Maven'
 excerpt: ''
 ---

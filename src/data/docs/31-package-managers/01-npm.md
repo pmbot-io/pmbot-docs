@@ -1,5 +1,4 @@
 ---
-slug: '/plugins/npm'
 title: 'Npm'
 excerpt: ''
 ---

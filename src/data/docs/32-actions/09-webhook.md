@@ -1,5 +1,4 @@
 ---
-slug: '/plugins/webhook'
 title: 'Webhook'
 excerpt: ''
 ---

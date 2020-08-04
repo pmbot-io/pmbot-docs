@@ -1,5 +1,4 @@
 ---
-slug: '/plugins/mattermost'
 title: 'Mattermost'
 excerpt: ''
 ---

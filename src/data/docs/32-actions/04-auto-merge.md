@@ -1,5 +1,4 @@
 ---
-slug: '/plugins/auto-merge'
 title: 'Auto merge'
 excerpt: ''
 ---

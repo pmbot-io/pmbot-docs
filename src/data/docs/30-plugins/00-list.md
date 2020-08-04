@@ -5,16 +5,17 @@ excerpt: ''
 
 # Plugin list
 
-## Actions
-- [auto-merge](/plugins/auto-merge)
-- [create-issue](/plugins/create-issue)
-- [create-merge-request](/plugins/create-merge-request)
-- [email](/plugins/email)
-- [mattermost](/plugins/mattermost)
-- [slack](/plugins/slack)
-- [webhook](/plugins/webhook)
-
 ## Package managers
-- [Npm](/plugins/npm)
-- [Go](/plugins/go)
-- [Maven](/plugins/maven)
+- [Npm](/package-managers/npm)
+- [Go](/package-managers/go)
+- [Maven](/package-managers/maven)
+- [Composer](/package-managers/composer)
+
+## Actions
+- [auto-merge](/actions/auto-merge)
+- [create-issue](/actions/create-issue)
+- [create-merge-request](/actions/create-merge-request)
+- [email](/actions/email)
+- [mattermost](/actions/mattermost)
+- [slack](/actions/slack)
+- [webhook](/actions/webhook)

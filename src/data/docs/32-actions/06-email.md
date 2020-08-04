@@ -1,5 +1,4 @@
 ---
-slug: '/plugins/email'
 title: 'Email'
 excerpt: ''
 ---

@@ -1,12 +1,11 @@
 ---
-slug: '/plugins/create-merge-request'
-title: 'Create merge request'
+title: 'Create issue'
 excerpt: ''
 ---
 
 # Create issue
 
-This plugin allows you to open a merge request.
+This plugin allows you to open an issue.
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
@@ -16,9 +15,9 @@ packageManagers:
   - packageManager:
       name: npm
     actions:
-      - name: create-merge-request
+      - name: create-issue
         on:
-          - success
+          - failure
         config:
           token: '${env.MY_TOKEN}'
 ````
@@ -76,39 +75,3 @@ Usernames to assign to the issue created. Note that Gitlab CE only allows one as
 **Default:** `true`
 
 Close open issues that were created by Pmbot. This option prevents multiple issues open simultaneously when you don't have the time to look at them.
-
-## squash
-
-**Default:** `true`
-
-<div class="blockquote" data-props='{ "mod": "warning" }'>
-
-Only applies to **Gitlab**
-
-</div>
-
-Whether commits of the merge request source branch should be squashed.
-
-## deleteSourceBranch
-
-**Default:** `true`
-
-<div class="blockquote" data-props='{ "mod": "warning" }'>
-
-Only applies to **Gitlab**
-
-</div>
-
-Whether the merge request source branch should be deleted.
-
-## maintainerCanModify
-
-**Default:** `true`
-
-<div class="blockquote" data-props='{ "mod": "warning" }'>
-
-Only applies to **Gitlab**
-
-</div>
-
-Whether maintainers can modify the created pull request.

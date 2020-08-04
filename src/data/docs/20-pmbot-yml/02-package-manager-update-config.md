@@ -29,10 +29,10 @@ packageManagers:
 
 Available package managers:
 
-- [Npm](/plugins/npm)
-- [Go](/plugins/go)
-- [Maven](/plugins/maven)
-- ... can't find your favorite package manager here ? You can [create your own package manager plugin](#plugins/custom) or open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request !
+- [Npm](/package-managers/npm)
+- [Go](/package-managers/go)
+- [Maven](/package-managers/maven)
+- ... can't find your favorite package manager here ? You can [create your own package manager plugin](#plugins/custom-plugin) or open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request !
 
 ## ci
 
@@ -123,13 +123,13 @@ packageManagers:
 
 Available actions are:
 
-- [auto-merge](/plugins/auto-merge)
-- [create-issue](/plugins/create-issue)
-- [create-merge-request](/plugins/create-merge-request)
-- [email](/plugins/email)
-- [mattermost](/plugins/mattermost)
-- [slack](/plugins/slack)
-- [webhook](/plugins/webhook)
+- [auto-merge](/actions/auto-merge)
+- [create-issue](/actions/create-issue)
+- [create-merge-request](/actions/create-merge-request)
+- [email](/actions/email)
+- [mattermost](/actions/mattermost)
+- [slack](/actions/slack)
+- [webhook](/actions/webhook)
 - ... can't find what you need ? You can [write your own actions](#plugins/custom) as a Pmbot plugin. Otherwise, you can open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request !
 
 ### name
