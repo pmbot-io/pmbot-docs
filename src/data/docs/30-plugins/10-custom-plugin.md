@@ -41,7 +41,7 @@ module.exports = {
   type: 'ACTION', // ACTION | PACKAGE_MANAGER_ADAPTER
   name: 'my-plugin', // plugin name
   core: class {
-    constructor(context) {
+    constructor(context, logger) {
       // ...
     }
     execute(actionConfig, actionContext) {
@@ -74,7 +74,13 @@ The plugin core logic. This should implement an interface specific to the define
 - [Package manager](#package-managers)
 - [Actions](#actions)
 
-Independently from the plugin type, the `core` should be an **ES6 class**. The constructor will be passed a context which contains information about the environment, update configuration, etc.
+### Plugin constructor
+
+Independently from the plugin type, the `core` should be an **ES6 class**. The constructor will be passed two arguments in the following order:
+
+#### context
+
+Contains information about the environment, update configuration, etc. 
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
@@ -147,6 +153,42 @@ The `projectUpdateState` contains information about the current update, such as 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
 `projectUpdateState` is always `undefined` for package manager plugins.
+
+</div>
+
+#### logger
+
+Gives you access to the logger used by the `pmbot` CLI, which implements the following interface:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```ts
+interface Logger {
+  info(message: string, meta?: LoggerMeta): void;
+
+  debug(message: string, meta?: LoggerMeta): void;
+
+  warn(message: string, meta?: LoggerMeta): void;
+
+  error(message: string, meta?: LoggerMeta): void;
+}
+
+export interface LoggerMeta {
+  /**
+   * An error object that should be printed by the logger by calling the `toString` 
+   * method on the error.
+   */
+  error?: any;
+  /**
+   * The logger passed to your plugin has a context named after the type and name 
+   * of your plugin. By default, `logger.info('hello')` will produce a log which 
+   * contains `... [<plugin-type>-<plugin-name>] ... hello`. If you provide a context
+   * via `logger.info('hello', {context: 'some-function'})`,
+   * you will see something like `... [<plugin-type>-<plugin-name>/some-function] ... hello`.
+   */
+  context?: string;
+}
+```
 
 </div>
 

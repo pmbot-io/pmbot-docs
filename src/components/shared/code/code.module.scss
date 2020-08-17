@@ -3,6 +3,7 @@
   height: 100%;
   overflow-y: auto;
   @include no-scrollbars;
+
   * {
     &::selection {
       background-color: $color-accent-primary;
@@ -18,6 +19,9 @@
   :global {
     pre {
       margin: 0;
+      overflow: auto;
+      word-wrap: normal;
+      white-space: pre;
     }
 
     code {
@@ -37,19 +41,24 @@
       &.string {
         color: $color-accent-secondary;
       }
+
       &.builtin {
         color: $color-accent-secondary;
       }
+
       &.punctuation {
         color: $color-tertiary;
       }
+
       &.keyword {
         color: #f5a087;
       }
+
       &.class-name,
       &.function {
         color: #ff65b3;
       }
+
       &.comment,
       &.prolog,
       &.doctype,
@@ -74,6 +83,7 @@
 
     .language-yaml {
       color: $color-accent-secondary;
+
       .token {
         &.key,
         &.punctuation {
@@ -90,6 +100,7 @@
     .line-numbers-rows {
       display: none;
     }
+
     pre {
       padding-left: 0 !important;
     }
