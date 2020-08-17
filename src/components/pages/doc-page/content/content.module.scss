@@ -7,7 +7,9 @@
       background-color: $color-additional-2;
       border: 2px solid $color-additional-1;
       border-radius: 5px;
-      padding: 1px 10px;
+      padding: 1px 5px;
+      margin-left: 3px;
+      margin-right: 3px;
     }
   }
 
@@ -43,6 +45,7 @@
 
   li {
     list-style: none;
+
     &::before {
       content: '\2022';
       color: $color-accent-primary;
@@ -56,6 +59,7 @@
   ol {
     li {
       list-style: inherit;
+
       &::before {
         display: none;
       }
@@ -67,6 +71,7 @@
     color: $color-accent-secondary;
     text-decoration: none;
     transition: color $transition-base;
+
     &:hover {
       color: $color-accent-primary;
     }
@@ -74,6 +79,7 @@
     :global {
       .language-text {
         color: $color-accent-secondary;
+
         &:hover {
           color: $color-accent-primary;
         }
@@ -112,9 +118,11 @@
       tr {
         td {
           color: $color-secondary;
+
           &:first-child {
             color: $color-accent-primary;
           }
+
           :global {
             .language-text {
               color: $color-accent-primary;
@@ -137,9 +145,11 @@
     border-radius: 5px;
     padding: 20px 20px 20px 64px;
     margin: 0;
+
     p {
       margin: 0;
     }
+
     &::before {
       content: '';
       position: absolute;

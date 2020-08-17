@@ -5,7 +5,9 @@ excerpt: ''
 
 # Ruby
 
-To use this plugin, you will have to make sure the `bundle` CLI is available in the environment. Our `pmbot/bot:ruby` Docker image embeds Composer Ruby 2.7 and Bundler 2.1.4.
+Requires `pmbot/bot` **v1.10.0+**.
+
+To use this plugin, you will have to make sure the `bundle` CLI is available in the environment. Our `pmbot/bot:ruby` Docker image embeds Ruby 2.7 and Bundler 2.1.4.
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
