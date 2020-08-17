@@ -10,6 +10,7 @@ excerpt: ''
 - [Go](/package-managers/go)
 - [Maven](/package-managers/maven)
 - [Composer](/package-managers/composer)
+- [Ruby](/package-managers/ruby)
 
 ## Actions
 - [auto-merge](/actions/auto-merge)
