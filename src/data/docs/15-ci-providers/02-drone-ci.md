@@ -84,7 +84,10 @@ steps:
   # notify pmbot of build status (must be the last step)
   - name: notify
     image: pmbot/bot
-    pull: always
+    when:
+      status:
+        - success
+        - failure
     environment:
       #PMBOT_TOKEN:
       #  from_secret: PMBOT_TOKEN
