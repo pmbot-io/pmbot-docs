@@ -87,3 +87,7 @@ In your project **settings**, go to **deploy keys**, add the **public** key and 
 The deploy key is now added:
 
 ![](../../../images/git-providers/gitea/deploy-key-added.png)
+
+## Sessions
+
+When your Gitea session times out, you won't be able to see projects or trigger updates anymore. In your Pmbot UI, sign out of your Gitea Git provider, then sign in again. Everything should be back to normal. 
