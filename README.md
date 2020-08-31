@@ -14,4 +14,5 @@ This repository contains the sources of  [https://docs.pmbot.io](https://docs.pm
 ## Get started
 
 1. Install dependencies `npm run install`
-1. Install dependencies `npm start`
+1. Run `cp .env.example .env`
+1. Start `npm start`
