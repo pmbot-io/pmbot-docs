@@ -61,12 +61,5 @@
     "start": "npm run develop",
     "serve": "gatsby serve --prefix-paths",
     "clean": "gatsby clean"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pixel-point/gatsby-starter"
-  },
-  "bugs": {
-    "url": "https://github.com/pixel-point/gatsby-starter/issues"
   }
 }

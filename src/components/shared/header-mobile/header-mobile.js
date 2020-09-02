@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { Link } from 'gatsby';
-import { motion, useCycle, AnimatePresence } from 'framer-motion';
+import React, {useEffect} from 'react';
+import {AnimatePresence, motion, useCycle} from 'framer-motion';
 import cl from 'classnames';
 import styles from './header-mobile.module.scss';
-import { MOTION_EASE } from 'constants/animation-variables';
+import {MOTION_EASE} from 'constants/animation-variables';
 
 const backgroundAnimation = {
   open: {
@@ -117,9 +116,9 @@ const HeaderMobile = props => {
                 </a>
                 <a
                   className={`button ${styles.navButton}`}
-                  href="https://pmbot.io"
+                  href="https://app.pmbot.io"
                 >
-                  Preorder
+                  Sign in
                 </a>
               </motion.div>
             </motion.nav>
