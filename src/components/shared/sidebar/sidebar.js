@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Media from 'react-media';
 import classNames from 'classnames/bind';
 import styles from './sidebar.module.scss';
 import Search from 'components/shared/search';
-import { Link, withPrefix } from 'gatsby';
+import { Link, navigate, withPrefix } from 'gatsby';
 import ArrowSvg from 'images/arrow.inline.svg';
-import { navigate } from 'gatsby';
 import AlgoliaQueries from 'utils/algolia';
+import { useAckee } from '../../../hooks/use-analytics';
 
 const indexName = AlgoliaQueries[0].indexName;
 
@@ -19,11 +19,13 @@ const searchIndices = [
 
 const cx = classNames.bind(styles);
 
+function withoutEndSlash(str) {
+  return str.replace(/\/$/, '');
+}
+
 const doesPathnameMatch = path => {
   const maybePrefixedPath = withPrefix(path);
-  const doesPathMatchLocation = maybePrefixedPath === window.location.pathname;
-
-  return doesPathMatchLocation;
+  return withoutEndSlash(maybePrefixedPath) === withoutEndSlash(window.location.pathname);
 };
 
 // renders sidebar nodes from passed children prop, recursively
@@ -35,6 +37,7 @@ const SidebarNode = ({
 }) => {
   const [isActive, setIsActive] = useState(false);
   const isLink = !!path;
+  const ackee = useAckee();
 
   useEffect(() => {
     setIsActive(doesPathnameMatch(path));
@@ -46,6 +49,7 @@ const SidebarNode = ({
         <Link
           to={path}
           className={`${styles.link} ${isActive ? styles.linkActive : ''}`}
+          onClick={() => ackee(path)}
         >
           {title || name}
         </Link>
@@ -63,14 +67,8 @@ const OptionsGroup = ({
     name,
   },
 }) => {
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    setIsActive(doesPathnameMatch(path));
-  }, []);
-
   return (
-    <option label={title || name} value={path} selected={isActive}>
+    <option label={title || name} value={path}>
       {title || name}
     </option>
   );
@@ -79,14 +77,19 @@ const OptionsGroup = ({
 const Sidebar = ({ sidebar, slug }) => {
   const isActivePath = children =>
     Object.values(children).some(({ meta: { path } }) => slug === path);
-
   const selectMenu = useRef();
+  const ackee = useAckee();
+  const [selectedPath, setSelectedPath] = useState(slug);
 
-  const navigateMobile = () => navigate(selectMenu.current.value);
+  const navigateMobile = () => {
+    setSelectedPath(selectMenu.current.value);
+    navigate(selectMenu.current.value);
+    ackee(selectMenu.current.value);
+  };
 
   return (
     <div className={styles.wrapper}>
-      <Search collapse indices={searchIndices} />
+      <Search collapse indices={searchIndices}/>
       <Media
         query="(min-width: 768px)"
         render={() => (
@@ -103,10 +106,10 @@ const Sidebar = ({ sidebar, slug }) => {
                     onClick={({ target }) => {
                       const control = target.closest('span');
                       control.nextSibling.classList.toggle(
-                        styles.dropdownActive
+                        styles.dropdownActive,
                       );
                       control.firstElementChild.classList.toggle(
-                        styles.arrowActive
+                        styles.arrowActive,
                       );
                     }}
                     className={styles.title}
@@ -124,11 +127,11 @@ const Sidebar = ({ sidebar, slug }) => {
                     })}
                   >
                     {Object.values(children).map(node => (
-                      <SidebarNode node={node} key={node.name} />
+                      <SidebarNode node={node} key={node.name}/>
                     ))}
                   </div>
                 </div>
-              )
+              ),
             )}
           </nav>
         )}
@@ -142,17 +145,18 @@ const Sidebar = ({ sidebar, slug }) => {
               ref={selectMenu}
               onChange={() => navigateMobile()}
               className={styles.select}
+              value={selectedPath}
             >
               {Object.values(sidebar).map(
                 ({ meta: { title, path }, name, children }, i) => {
                   return (
                     <optgroup label={title || name} key={name}>
                       {Object.values(children).map(node => (
-                        <OptionsGroup node={node} key={node.name} />
+                        <OptionsGroup node={node} key={node.name}/>
                       ))}
                     </optgroup>
                   );
-                }
+                },
               )}
             </select>
           </div>

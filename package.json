@@ -6,6 +6,7 @@
   "author": "Charlie Bravo <info@charlie-bravo.be>",
   "dependencies": {
     "@svgr/webpack": "^5.2.0",
+    "ackee-tracker": "^4.0.1",
     "algoliasearch": "^4.3.0",
     "bulma": "^0.8.0",
     "chunk-text": "^1.0.5",

@@ -5,3 +5,10 @@
  */
 
 require('./src/styles/app.scss');
+
+import React from "react"
+import { Ackee } from './src/hooks/use-analytics';
+
+export const wrapRootElement = ({ element }) => (
+  <Ackee>{element}</Ackee>
+)

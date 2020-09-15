@@ -5,7 +5,7 @@ import SectionContentTable from 'components/pages/doc-page/section-content-table
 import Breadcrumbs from 'components/shared/breadcrumbs';
 import contentStyles from 'components/pages/doc-page/content/content.module.scss';
 
-export default function({
+export default function ({
   pageContext: {
     title,
     excerpt,
@@ -21,9 +21,9 @@ export default function({
       seoMetadata={{ title, content: excerpt, slug }}
       sidebar={sidebarTree}
     >
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <Content content={content} className={contentStyles.wrapperSection} />
-      <SectionContentTable sectionLinks={sectionLinks} />
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
+      <Content content={content} className={contentStyles.wrapperSection}/>
+      <SectionContentTable sectionLinks={sectionLinks}/>
     </LayoutMain>
   );
 }

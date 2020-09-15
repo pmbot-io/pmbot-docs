@@ -1,12 +1,12 @@
 import React from 'react';
-import {Helmet} from 'react-helmet';
-import {graphql, useStaticQuery} from 'gatsby';
-import {createMetaImagePath} from 'utils';
+import { Helmet } from 'react-helmet';
+import { graphql, useStaticQuery } from 'gatsby';
+import { createMetaImagePath } from 'utils';
 
 const Seo = ({
-               data: {title, description, image, slug} = {},
-               facebook,
-             } = {}) => {
+  data: { title, description, image, slug } = {},
+  facebook,
+} = {}) => {
   const {
     site: {
       siteMetadata: {
@@ -58,19 +58,6 @@ const Seo = ({
       {/* Twitter Card tags */}
       <meta name="twitter:card" content="summary"/>
       <meta name="twitter:creator" content={authorTwitterAccount}/>
-      {process.env.GATSBY_GA_TRACKING_ID && (
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_TRACKING_ID}`}></script>
-      )}
-      {process.env.GATSBY_GA_TRACKING_ID && (
-        <script>
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.GATSBY_GA_TRACKING_ID}');
-        `}
-        </script>
-      )}
     </Helmet>
   );
 };
