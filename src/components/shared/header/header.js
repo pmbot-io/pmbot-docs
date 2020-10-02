@@ -46,8 +46,8 @@ const Header = props => {
                 >
                   Issues
                 </a>
-                <a className={`button ${styles.button}`} href="https://app.pmbot.io/auth/login">
-                  Sign in
+                <a className={`button ${styles.button}`} href="https://docs.pmbot.io/core/installation#installation">
+                  Install
                 </a>
               </div>
             </>
