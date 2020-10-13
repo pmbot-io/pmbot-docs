@@ -1,3 +1,6 @@
+$code-block-font-size: $font-size-base;
+$code-block-line-height: 130%;
+
 .code {
   flex-grow: 1;
   height: 100%;
@@ -29,14 +32,14 @@
       display: block;
       font-family: $font-family-secondary;
       color: $color-tertiary;
-      padding: 20px 20px 14px 30px;
-
-      @include xs-down {
-        font-size: $font-size-xs - 1;
-      }
+      padding: 20px 20px 14px 10px;
+      font-size: $code-block-font-size;
+      line-height: $code-block-line-height;
     }
 
     .token {
+      line-height: $code-block-line-height;
+
       &.boolean,
       &.string {
         color: $color-accent-secondary;
@@ -73,8 +76,12 @@
       border-right: none !important;
       background-color: rgba($color-tertiary, 0.05);
       border-radius: 5px 0 0 5px;
+      display: block;
+      font-size: $code-block-font-size;
 
       span {
+        line-height: $code-block-line-height;
+
         &::before {
           color: rgba($color-tertiary, 0.25);
         }

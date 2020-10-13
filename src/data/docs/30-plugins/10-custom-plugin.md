@@ -21,6 +21,12 @@ Community plugins are welcome ! If you open source your plugin, we will referenc
 
 ## Creating a custom plugin
 
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+If your custom plugin uses a CLI that is not available in our `pmbot/bot` Docker image, you can create a custom Docker image with the Pmbot CLI embedded (see [here](/plugins/custom-docker-image)).
+
+</div>
+
 Pmbot currently has two types of plugins: [**package managers**](#package-managers) and [**actions**](#actions). Package manager plugins allow Pmbot to interact with specific package managers. Action plugins allow you to execute specific tasks after the dependencies of a package manager have been updated.
 
 Plugins must be made with **Javascript**, but we greatly recommend you to write them with [Typescript](https://www.typescriptlang.org/) and compile them to Javascript before shipping.
@@ -36,18 +42,20 @@ A plugin consists in a Javascript file that exports the following properties:
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ```javascript
+class MyPlugin {
+  constructor(context, logger) {
+    // ...
+  }
+  execute(actionConfig, actionContext) {
+    // plugin logic
+  } 
+}
+
 module.exports = {
   version: '1.0.0',
-  type: 'ACTION', // ACTION | PACKAGE_MANAGER_ADAPTER
+  type: 'action', // action | pm
   name: 'my-plugin', // plugin name
-  core: class {
-    constructor(context, logger) {
-      // ...
-    }
-    execute(actionConfig, actionContext) {
-      // plugin logic
-    } 
-  },
+  core: MyPlugin,
   parser: config => config,
   validator: config => Promise.resolve([]),
 };
@@ -61,7 +69,7 @@ The plugin version. This property is used for logging purposes.
 
 ### `type`
 
-The type of plugin. Can be `ACTION` or `PACKAGE_MANAGER_ADAPTER`.
+The type of plugin. Can be `action` or `pm`.
 
 ### `name`
 
@@ -261,7 +269,7 @@ module.exports = {
 
 Package manager adapters are the bridge between Pmbot and package managers like Npm, Go, Maven, etc. We are constantly adding new adapters but encourage the community to come forward with new adapters. We will be happy to add your package manager adapters to our documentation.
 
-A package manager adapter is a plugin which has a type `PACKAGE_MANAGER_ADAPTER` and provides a `core` which satisfies the following interface:
+A package manager adapter is a plugin which has a type `pm` and provides a `core` which satisfies the following interface:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 

@@ -18,7 +18,7 @@ const Header = props => {
             </a>
           </div>
           <Media
-            query="(max-width: 991.98px)"
+            query="(max-width: 767.98px)"
             onChange={matches =>
               matches ? setIsMobileOrTablet(true) : setIsMobileOrTablet(false)
             }

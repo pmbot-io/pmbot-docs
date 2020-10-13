@@ -19,8 +19,6 @@ module.exports = {
   },
   plugins: [
     'react',
-    '@babel/plugin-proposal-optional-chaining',
-    '@babel/plugin-proposal-nullish-coalescing',
   ],
   rules: {
     'react/jsx-filename-extension': [

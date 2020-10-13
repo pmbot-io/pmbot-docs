@@ -1,42 +1,17 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import styles from './banner.module.scss';
 
-const Banner = ({ title, buttonText, articleSrc }) => {
-  const {
-    illustration: {
-      childImageSharp: { fluid: imageFluid },
-    },
-  } = useStaticQuery(graphql`
-    query {
-      illustration: file(relativePath: { eq: "banner/illustration.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 780, quality: 80) {
-            ...GatsbyImageSharpFluid_withWebp_noBase64
-          }
-        }
-      }
-    }
-  `);
+export default function Banner({articleSrc, buttonText = 'Edit on Github'}) {
   return (
     <div className={styles.wrapper}>
-      <Img fluid={imageFluid} className={styles.img} />
-      <p className={styles.title}>{title}</p>
       <a
-        className={`button ${styles.button}`}
+        className={`link`}
         href={articleSrc}
         target="_blank"
+        rel="noreferrer noopener"
       >
         {buttonText}
       </a>
     </div>
   );
-};
-
-Banner.defaultProps = {
-  title: 'Help us to improve this documentation',
-  buttonText: 'Suggest edits',
-};
-
-export default Banner;
+}

@@ -5,375 +5,208 @@ excerpt: ''
 
 # Installation
 
-The installation of Pmbot relies on [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
+To deploy, you'll need to:
+- Create a `docker-compose.yml` file
+- Register Pmbot as an OAuth app in your Git server and update your `docker-compose.yml`
+- Configure your CI provider in your `docker-compose.yml`
+- Run `docker-compose up -d`
+- Browse `http://localhost:3000`
 
-The backend and the UI are both available as separate images. An optional (but recommended) reverse proxy sits in front of them
-to serve them both on the same domain.
+If you are using the enterprise edition, we provided you with:
+- a license file, which you can pass to `pmbot-server` using the [`PMBOT_LICENSE`](/environment-reference/server-environment-reference#pmbot_license) environment variable, or by providing your license as a Docker volume pointing to `/license.txt`
+- credentials to pull Docker images `pmbot/server-ee` and `pmbot/ui-ee` from our premium Docker registry. You will use these images in place of `pmbot/server` and `pmbot/ui` 
 
-<div class="blockquote" data-props='{ "mod": "info" }'>
+## 1. Basic docker-compose
 
-If you think the installation workflow can be simplified or improved in any way, or if you want to showcase other ways to deploy Pmbot and/or want to share installation recipes, you are welcome to open and issue in our [Github docs repository](https://github.com/pmbot-io/docs/issues). We'll see how to integrate it in these docs.
+Create a `docker-compose.yml` (we'll complete it further below):
 
-</div>
-
-<div class="table-of-content"></div>
-
-## Docker compose
-
-### One-liner
-
-The following command will launch an instance of Pmbot for local testing:
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```shell script
-curl https://raw.githubusercontent.com/pmbot-io/install/master/basic/docker-compose.yml > docker-compose.yml | docker-compose up --detach
-```
-
-</div>
-
-<div class="blockquote" data-props='{ "mod": "warning" }'>
-
-When testing Pmbot on your local machine with remote git providers, keep in mind that you need to adapt the Pmbot URL you give them.
-Use an IP address that they can use to reach your local machine.
-
-</div> 
-
-### Basic
-
-Here is a basic `docker-compose.yml` that can be used to test pmbot locally:
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ```yaml
-# docker-compose.yml
-version: "3.6"
+version: "3"
 
 services:
-  reverse-proxy:
-    image: pmbot/reverse-proxy
+  ui:
+    image: pmbot/ui:latest
     restart: unless-stopped
     ports:
-      - 9118:80
+      - "3000:80"
+    environment:
+      PMBOT_SERVER_URL: http://10.0.1.23:3001
 
-  backend:
-    image: pmbot/backend-community
+  server:
+    image: pmbot/server:latest
     restart: unless-stopped
+    ports:
+      - "3001:80"
+    environment:
+      PMBOT_HOST: http://10.0.1.23:3001
+      PMBOT_UI_URL: http://10.0.1.23:3000
+      # Generated with "openssl rand 32 -hex"
+      PMBOT_JWT_SECRET: 896933b3545913aac9175890882c2ca3d861f6109dfe2c48f1b4c15686c59542
+      # Generated with "openssl rand 32 -hex"
+      PMBOT_RUNNER_SECRET: 1f1b3c989bd7514797f5bc8da6a6dd8ac6acd08c3719acf47aa2a7f4aa1a7e57
+      PMBOT_MONGO_URI: mongodb://mongo:27017/pmbot
+
+  runner-1:
+    image: pmbot/runner:latest
+    restart: unless-stopped
+    environment:
+      PMBOT_SERVER_ADDRESS: http://server
+      PMBOT_RUNNER_SECRET: 1f1b3c989bd7514797f5bc8da6a6dd8ac6acd08c3719acf47aa2a7f4aa1a7e57
     volumes:
-      - secrets:/secrets
-
-  frontend:
-    image: pmbot/ui
-    restart: unless-stopped
+      - /var/run/docker.sock:/var/run/docker.sock
 
   mongo:
     image: mongo:4.2-bionic
     restart: unless-stopped
     volumes:
-      - mongo:/data/db
+      - pmbot-mongo:/data/db
 
 volumes:
-  mongo:
-  secrets:
-#
+  pmbot-mongo:
 ```
 
 </div>
 
-It can be launched with the following command:
+## 2. Register Pmbot in your Git server
 
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+### Gitea
 
-```shell script
-docker-compose up --detach
-```
+In **Settings / Applications**, add an OAuth application with the following settings:
 
-</div>
+| Field | Value |
+| ---- | ---- |
+| Application name   | Pmbot | 
+| Authorization callback URL | `<pmbot-server-url>/auth/gitea/oauth/callback` |
 
-### Advanced
+Copy your **Client ID** and **Client secret**.
 
-For more advanced and configurable deployments, we provide a [repository](https://github.com/pmbot-io/install)
-with a more configurable `docker-compose.yaml`.
+<div class="blockquote" data-props='{ "mod": "info" }'>
 
-## Backend environment variables
-
-### APP\_UI\_URL
-
-**Default:** `http://localhost:9118`
-
-URL that users can type in their browser to reach the frontend. It will be used in emails, notifications, etc.
-
-### APP\_PROJECTUPDATES\_MAX\_TIMETOWRITE
-
-**Default:** `86400000` (1 day)
-
-Maximum duration of an update, in milliseconds from the start of the update.
-After that period, the CI will not be able to change the status of an update anymore.
-
-Setting it too low will cause issues with long lasting pipelines.
-
-### AUTH\_PRIVATE\_KEY\_PATH
-
-**Default:** `/secrets/private-key.pem`
-
-Path to the private key used by Pmbot to sign JWT tokens.
-If this file does not exist, Pmbot will generate a new key pair.
-
-It can be generated using the following command:
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```shell script
-ssh-keygen -t rsa -b 4096 -m PEM -f private-key.pem -q -N "" 
-```
+If you've changed [`REFRESH_TOKEN_EXPIRATION_TIME`](https://docs.gitea.io/en-us/config-cheat-sheet/#oauth2-oauth2) in your Gitea config, make sure to set `PMBOT_REFRESH_TOKEN_EXPIRATION_TIME` with that same value. We've opened [an issue](https://github.com/go-gitea/gitea/issues/12641) on their repo to improve this.
 
 </div>
 
-### AUTH\_PUBLIC\_KEY\_PATH
+Now, you can update your `docker-compose.yml`:
 
-**Default:** `/secrets/public-key.pem`
-
-Path to the public key matching the [private key](#auth_private_key_path).
-If this file does not exist, Pmbot will generate a new key pair.
-
-It can be generated from the private key using the following command:
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```shell script
-openssl rsa -in private-key.pem -pubout -outform PEM -out public-key.pem 
-```
-
-</div>
-
-### DB_URI
-
-**Default:** `mongo://mongo:27017/pmbot`
-
-MongoDB connection string.
-
-See [MongoDB documentation](https://docs.mongodb.com/manual/reference/connection-string/) for more information.
-
-### HTTP\_COOKIE\_DOMAINS
-
-**Default:** hostname of the request
-
-Comma separated list of domains on which the cookies used by Pmbot should be set.
-
-### HTTP\_CORS\_ORIGIN
-
-**Default:** hostname of the request (insecure)
-
-[Origin](https://developer.mozilla.org/en-US/docs/Glossary/origin) from which CORS requests are allowed.
- 
-<div class="blockquote" data-props='{ "mod": "warning" }'>
-
-`*` will not work.
-
-</div>
-
-### LOG_LEVEL
-
-**Default:** `info`
-
-Determine how much information should be logged.
-Possible levels, from less verbose to more verbose, are: `error`, `warning`, `info`, `debug`.
-
-### MAIL_FROM
-
-**Default:** `noreply@pmbot.io`
-
-Sets the sender email address for all emails sent by Pmbot.
-
-### MAIL_HOST
-
-**Default:** none (print emails in logs)
-
-Address of the SMTP server used to send emails.
-
-See [Nodemailer transport](https://nodemailer.com/smtp/) `host`.
-
-<div class="blockquote" data-props='{ "mod": "warning" }'>
-
-If no MAIL_HOST is specified, emails will be printed in the server logs instead of being sent.    
-
-</div> 
-
-### MAIL_PORT
-
-**Default:** `465` or `587` (automatic, see [Nodemailer transport](https://nodemailer.com/smtp/) `port`)
-
-TCP port of the SMTP server used to send emails.
-
-### MAIL_SECURE
-
-**Default:** `false`
-
-If `true`, forces the use of SSL/TLS.
-If `false`, the client and server will start without SSL/TLS and enable it if possible.
-
-See [Nodemailer transport](https://nodemailer.com/smtp/) `secure`.
-
-### MAIL\_SUBJECT\_PREFIX
-
-**Default:** `[Pmbot]`
-
-Prefix to be added in front of the subject in mails sent by Pmbot.
-This can be used for filtering and rules in your mail client.
-
-### MAIL_USERNAME
-
-**Default:** none
-
-Username for the SMTP server
-
-### MAIL_PASSWORD
-
-**Default:** none
-
-Password for the SMTP server.
-
-### SECURITY\_ENCRYPTION\_KEY
-
-**Default:** generated by Pmbot (see [SECURITY\_ENCRYPTION\_KEY\_PATH](#security_encryption_key_path))
-
-This encryption key is used by Pmbot to protect sensitive information. It must be a 32 bytes key encoded in the `hex` format.
-
-It can be generated using the following command:
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```shell script
-openssl rand -hex 32
-```
-
-</div>
-
-### SECURITY\_ENCRYPTION\_KEY\_PATH
-
-**Default:** `/secrets/encryption-key`
-
-If [SECURITY\_ENCRYPTION\_KEY](#security_encryption_key) is not specified, Pmbot will attempt to read the key from this file.
-If this file does not exist, Pmbot will generate a key and store it into this file.
-
-If [SECURITY\_ENCRYPTION\_KEY](#security_encryption_key) is given after a key file has been generated,
-the key file will be ignored and the value given in the environment variable will be used instead.
-
-## Frontend environment variables
-
-### PMBOT\_API\_URL
-
-**Default:** `http://localhost:9118`
-
-URL of Pmbot API (backend).
-This URL needs to be accessible by the users (not by the frontend container/server).
-
-With the default deployment, it should point towards Pmbot reverse proxy and be equal to [APP\_UI\_URL](#app_ui_url).
-
-### PMBOT\_API\_PATH
-
-**Default:** `/api`
-
-Path that will be appended to the [PMBOT\_API\_URL](#api\_url).
-
-## Recipes
-
-### How to set a trusted CA certificate
-
-If you are using other self-hosted services with Pmbot, you might have secured them with a self-signed certificate.
-In order for Pmbot to recognize that certificate, you must provide it with the corresponding trusted CA certificate.
-
-You can do so by modifying the backend service in the `docker-compose.yml` file:
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ```yaml
-# docker-compose.yml (partial)
+# ...
 services:
-    ...
-    backend:
-      ...
-      volumes:
-        - ./trusted-ca.pem:/trusted-ca.pem:ro
-      environment:
-        NODE_EXTRA_CA_CERTS: /trusted-ca.pem
-    ...
-```
-
-</div>
-
-This adds a read-only volume pointing to `./trusted-ca.pem` (the trusted CA certificate)
-and tells Nodejs (used by Pmbot) to trust it.
-
-### Email configuration
-
-Here is an example of configuration using TLS and authentication.
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```yaml
-# docker-compose.yml (partial)
-services:
-    ...
-    backend:
-      ...
-      environment:
-        MAIL_FROM: pmbot@company.com
-        MAIL_HOST: smtp.company.com
-        MAIL_PORT: 465 # optional in this case
-        MAIL_SECURE: true
-        MAIL_USERNAME: pmbot
-        MAIL_PASSWORD: "secretPassword"
-    ...
-```
-
-</div>
-
-## Premium
-
-If you are a premium user, you will need to:
-- replace `pmbot/backend-community` with the [corresponding images](#premium-registry) for your edition
-- provide the backend Docker container with your [license file](#license)
-
-### Premium registry
-
-Premium editions are available on our private Docker registry. You can get your credentials in your [dashboard](https://app.pmbot.io/) under the **Install** section.
-
-The following image is available for customers using the **developer edition**:
-- `docker.pmbot.io/backend-developer` (replaces `pmbot/backend-community`)
-
-The following image is available for customers using the **enterprise edition**:
-- `docker.pmbot.io/backend-enterprise` (replaces `pmbot/backend-community`)
-
-### License
-
-To use a premium edition, you will need to provide your license file (downloaded from your [dashboard](https://app.pmbot.io/)) to the backend Docker container in **one of** the following ways:
-
-### Environment variable
-
-Define a `LICENSE` environment variable with the content of your license file:
-
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
-
-```yaml
-services:
-  backend:
+  # ...
+  pmbot-server:
     # ...
     environment:
-      LICENSE: "<license-content-goes-here>"
+      # ...
+      PMBOT_GITEA_CLIENT_ID: <your-gitea-client-id>
+      PMBOT_GITEA_CLIENT_SECRET: <your-gitea-client-secret>
+      PMBOT_GITEA_URL: http://10.0.1.23:3003
 ```
 
 </div>
 
-### File
+### Gitlab
 
-Our backend looks for the file `/license.txt`, so you'll need to provide it via a Docker volume:
+From your Gitlab **admin area**, [add a new application](https://docs.gitlab.com/ee/integration/oauth_provider.html#adding-an-application-through-the-profile) with the following settings:
 
-<div class="code-group" data-props='{ "lineNumbers": [false] }'>
+| Field | Value |
+| ---- | ---- |
+| Name   | Pmbot | 
+| Redirect URL | `<pmbot-server-url>/auth/gitlab/oauth/callback` |
+| Trusted | true |
+| Scopes | api |
+
+After creating the application, Gitlab will give you both the **Client ID** and **Client Secret**, which they respectively name **Application ID** and **Application Secret**.
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+You may need to check "Allow requests to the local network from web hooks and services" in **Admin / Settings / Network / Outbound requests** for webhooks to be sent to Pmbot.
+
+</div>
+
+Now, you can update your `docker-compose.yml`:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ```yaml
+# ...
 services:
-  backend:
+  # ...
+  pmbot-server:
     # ...
-    volumes:
-      - /data/LICENSE.txt:/license.txt:ro
+    environment:
+      # ...
+      PMBOT_GITLAB_CLIENT_ID: <your-gitlab-application-id>
+      PMBOT_GITLAB_CLIENT_SECRET: <your-gitlab-application-secret>
+      PMBOT_GITLAB_URL: http://10.0.1.23:3003
+      # optionally if your Pmbot server uses a self-signed certificate
+      PMBOT_GITLAB_WEBHOOK_SSL_VERIFY: "false"
 ```
 
 </div>
+
+### Github
+
+In Github, go to **Settings / Developer Settings / OAuth Apps** and add a new OAuth app with the following settings:
+
+| Field | Value |
+| ---- | ---- |
+| Application name   | Pmbot | 
+| Homepage URL   | https://pmbot.io | 
+| Authorization callback URL | `<pmbot-server-url>/auth/github/oauth/callback` |
+
+Now, you can update your `docker-compose.yml`:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+# ...
+services:
+  # ...
+  pmbot-server:
+    # ...
+    environment:
+      # ...
+      PMBOT_GITHUB_CLIENT_ID: <your-github-oauth-app-client-id>
+      PMBOT_GITHUB_CLIENT_SECRET: <your-github-oauth-app-client-secret>
+      PMBOT_GITHUB_URL: http://10.0.1.23:3003
+      # optionally if your Pmbot server uses a self-signed certificate
+      PMBOT_GITHUB_WEBHOOK_SSL_VERIFY: "false"
+```
+
+</div>
+
+## 3. Configure your CI provider
+
+### Gitlab CI
+
+If you use Gitlab as a Git server, you don't need to configure anything else for using Gitlab CI.
+
+### Drone CI
+
+In your `docker-compose.yml`:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+# ...
+services:
+  # ...
+  pmbot-server:
+    # ...
+    environment:
+      # ...
+      PMBOT_DRONE_URL: http://drone.company.com
+```
+
+</div>
+
+When you first open the UI, you'll be asked to set your Drone user token so Pmbot can authenticate when using Drone's API. You can get this token in your Drone instance:
+
+![](../../../images/drone/drone-user-token.gif)
+
+## 4. Run Pmbot
+
+Run `docker-compose up -d`, and browse [http://localhost:3000](http://localhost:3000).

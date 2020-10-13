@@ -50,6 +50,8 @@ const plugins = [
           resolve: `gatsby-remark-autolink-headers`,
           options: {
             elements: [`h1`, `h2`, `h3`, `h4`, `h5`],
+            icon: '<span class="anchor-handle">#</span>',
+            className: 'header-link',
           },
         },
         {

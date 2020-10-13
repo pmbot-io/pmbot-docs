@@ -3,7 +3,7 @@ title: 'Create merge request'
 excerpt: ''
 ---
 
-# Create issue
+# Create merge request
 
 This plugin allows you to open a merge request.
 

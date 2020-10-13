@@ -88,10 +88,10 @@ packageManagers:
 ## settingsPath
 
 **Default:**
-- `~/.m2/settings.xml`
 - `.m2/settings.xml`
+- `~/.m2/settings.xml`
 
-Path to a maven `settings.xml` file which contains credentials for private repositories.
+Path to a maven `settings.xml` file which contains credentials for private repositories. We visit all locations.
 
 ## Environment variables
 

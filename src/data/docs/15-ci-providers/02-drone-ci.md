@@ -9,38 +9,13 @@ Drone CI is natively supported in Pmbot.
 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
-Done CI does not support projects with names containing more than one `/`. Github projects are always formatted as `<workspace>/<project-name>`, but Gitlab projects can have sub-groups such as `group1/group2.project1`. Hence, Pmbot will not work with those. More info [here](https://github.com/drone/drone/issues/2009).
+Done CI does not support repos with names containing more than one `/`. Github projects are always formatted as `<workspace>/<project-name>`, but Gitlab projects can have sub-groups such as `group1/group2.project1`. Hence, Pmbot will not work with those. More info [here](https://github.com/drone/drone/issues/2009).
  
 </div> 
 
-## Provider settings
-
-| Field | Description |
-| --- | --- |
-| Name | The name of your CI provider |
-| Gitlab URL | The URL of your Gitlab instance. You must turn on the **self hosted** toggle for this parameter to be visible. |
-| Personal token | A drone API personal token, available in your Drone CI user settings. This token will be global, may be overridden at the project level. |
-
-## Project settings
-
-| Field | Description |
-| --- | --- |
-| Project path | The path of your project in the form `<workspace>/<project-name>`. |
-| Personal token | A drone API personal token, available in your Drone CI user settings. | 
-
-## Project Setup
-
-### CI config file
+## Repo setup
 
 You'll need to update your `.drone.yml`.
-
-The variables marked with `{{...}}` are prefilled in the code snippets provided in your [project setup](/core/projects#setup).
-
-| Variable | Description |
-| --- | --- |
-| `{{PMBOT_URL}}` | The URL of the Pmbot backend. |
-| `{{PMBOT_PROJECT_ID}}` | The ID of your Pmbot project. You can find this ID in the URL of your UI when you are on the project details page. |
-| `{{PROJECT_TOKEN}}` | Your [`PMBOT_TOKEN`](#pmbot_token) |
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"], "labels": [".drone.yml"] }'>
 
@@ -49,21 +24,16 @@ kind: pipeline
 type: docker
 name: default
 
-environment:
-  PMBOT_URL: {{PMBOT_URL}}
-  PMBOT_PROJECT_ID: {{PMBOT_PROJECT_ID}}
-  # !!!!! place this in a project secret variable !!!!!
-  # https://docs.drone.io/secret/repository/
-  PMBOT_TOKEN: {{PROJECT_TOKEN}}
-
 steps:
   - name: update
-    image: pmbot/bot
+    image: registry.dev.pmbot/bot:npm-geoffroy
     environment:
+      PMBOT_URL:
+        from_secret: PMBOT_URL
+      PMBOT_TOKEN:
+        from_secret: PMBOT_TOKEN
       PMBOT_SSH_PRIVATE_KEY:
         from_secret: PMBOT_SSH_PRIVATE_KEY
-      #PMBOT_TOKEN:
-      #  from_secret: PMBOT_TOKEN
     commands:
       # skip this job for standard pipelines
       - if [ -z $PMBOT ]; then exit 0; fi
@@ -78,21 +48,24 @@ steps:
     commands:
       # skip this job when an update is triggered
       - if [ ! -z $PMBOT ]; then exit 0; fi
-      - npm ci
-      - npm test
+      - echo "All tests passed"
 
   # notify pmbot of build status (must be the last step)
   - name: notify
-    image: pmbot/bot
+    image: registry.dev.pmbot/bot:npm-geoffroy
     when:
       status:
         - success
         - failure
     environment:
-      #PMBOT_TOKEN:
-      #  from_secret: PMBOT_TOKEN
+      PMBOT_TOKEN:
+        from_secret: PMBOT_TOKEN
+      PMBOT_URL:
+        from_secret: PMBOT_URL
+      PMBOT_REPO_ID:
+        from_secret: PMBOT_REPO_ID
     commands:
-      - pmbot notify --debug
+      - pmbot notify
 ```
 
 </div>

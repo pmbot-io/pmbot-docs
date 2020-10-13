@@ -3,9 +3,9 @@
 
   :global {
     .language-text {
-      color: $color-additional-3;
-      background-color: $color-additional-2;
-      border: 2px solid $color-additional-1;
+      color: $color-primary;
+      background-color: transparentize($color-accent-primary, 0.96);
+      border: 1px solid transparentize($color-accent-primary, 0.96);
       border-radius: 6px;
       padding: 1px 6px;
       margin-left: 3px;
@@ -14,23 +14,25 @@
   }
 
   h1 {
-    font-size: $font-size-lg;
+    font-size: $font-size-xl;
     line-height: $line-height-lg;
+    font-weight: 500;
   }
 
   h2 {
-    font-size: $doc-font-size-xl;
+    font-size: $doc-font-size-lg;
     line-height: $line-height-lg;
+    font-weight: 500;
   }
 
   h3 {
-    font-size: $doc-font-size-lg;
-    font-weight: 800;
+    font-size: $doc-font-size-md;
+    font-weight: 500;
   }
 
   h4 {
-    font-size: $doc-font-size-md;
-    font-weight: 800;
+    font-size: $doc-font-size-sm;
+    font-weight: 500;
   }
 
   h5 {
@@ -39,7 +41,7 @@
 
   ul {
     & > * + * {
-      margin-top: 10px;
+      margin-top: .25rem;
     }
   }
 
@@ -90,8 +92,12 @@
   table {
     border: 2px solid $color-additional-1;
     border-collapse: collapse;
-    margin: 30px 0;
+    margin: 1rem 0;
     width: 100%;
+
+    th, td {
+      padding: 10px 20px;
+    }
 
     thead {
       color: $color-additional-3;
@@ -100,7 +106,6 @@
 
       th {
         font-weight: 600;
-        padding: 12px 30px;
         text-align: left;
       }
     }
@@ -110,24 +115,9 @@
         border-top: 2px solid $color-additional-1;
       }
 
-      tr,
-      td {
-        padding: 20px 30px;
-      }
-
       tr {
         td {
           color: $color-secondary;
-
-          &:first-child {
-            color: $color-accent-primary;
-          }
-
-          :global {
-            .language-text {
-              color: $color-accent-primary;
-            }
-          }
         }
       }
     }

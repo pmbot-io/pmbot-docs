@@ -29,7 +29,7 @@
   right: 0;
   justify-content: flex-end;
   will-change: transform;
-  @include md-down {
+  @include sm-down {
     display: none;
   }
 }
