@@ -27,7 +27,7 @@ version: "3"
 
 services:
   ui:
-    image: pmbot/ui:latest
+    image: pmbot/ui-ce:latest
     restart: unless-stopped
     ports:
       - "3000:80"
@@ -35,7 +35,7 @@ services:
       PMBOT_SERVER_URL: http://10.0.1.23:3001
 
   server:
-    image: pmbot/server:latest
+    image: pmbot/server-ce:latest
     restart: unless-stopped
     ports:
       - "3001:80"
@@ -47,15 +47,6 @@ services:
       # Generated with "openssl rand 32 -hex"
       PMBOT_RUNNER_SECRET: 1f1b3c989bd7514797f5bc8da6a6dd8ac6acd08c3719acf47aa2a7f4aa1a7e57
       PMBOT_MONGO_URI: mongodb://mongo:27017/pmbot
-
-  runner-1:
-    image: pmbot/runner:latest
-    restart: unless-stopped
-    environment:
-      PMBOT_SERVER_ADDRESS: http://server
-      PMBOT_RUNNER_SECRET: 1f1b3c989bd7514797f5bc8da6a6dd8ac6acd08c3719acf47aa2a7f4aa1a7e57
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
 
   mongo:
     image: mongo:4.2-bionic
