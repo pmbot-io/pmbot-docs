@@ -5,7 +5,7 @@ excerpt: ''
 
 # Custom Docker image
 
-You can execute updates with a custom Docker image. Just make sure the [@pmbot/cli](https://www.npmjs.com/package/@pmbotio/cli) and Node 12 are available.
+You can execute updates with a custom Docker image. Just make sure the [@pmbotio/cli](https://www.npmjs.com/package/@pmbotio/cli) and Node 12 are available.
 
 Here is an example file:
 
@@ -13,7 +13,7 @@ Here is an example file:
 
 ```Dockerfile
 FROM node:12
-RUN npm install -g @pmbot/cli
+RUN npm install -g @pmbotio/cli
 # ... add whatever you need here
 ```
 
