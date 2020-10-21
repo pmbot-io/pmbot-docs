@@ -184,7 +184,7 @@ Host of your pmbot server. For example `pmbot.company.com:3000`. You can include
 
 **Description**:
 
-Host that can be used by local docker containers to reach your Pmbot server. This is useful when you are working locally as you've probably set [`PMBOT_HOST`](#pmbot_host) to `localhost`. When our bot calls Pmbot server from your CI, `localhost` will point to itself. The solution is to set `PMBOT_LOCAL_HOST` to `host.docker.internal` (OS X) or to your IP.
+Host that can be used by local docker containers to reach your Pmbot server. This is useful when you are working locally as you've probably set [`PMBOT_HOST`](#pmbot_host) to `localhost`. When our bot calls Pmbot server from your CI, `localhost` will point to itself. The solution is to set `PMBOT_PUBLIC_HOST` to `host.docker.internal` (OS X) or to your IP.
 
 ## PMBOT\_MIGRATE\_ROLLBACK
 
