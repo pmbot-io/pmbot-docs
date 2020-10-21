@@ -96,6 +96,16 @@ Gitlab application secret (see [here](https://docs.gitlab.com/ee/integration/oau
 
 Whether to enable [Gitlab webhook SSL verification](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#ssl-verification) for hooks created by Pmbot.
 
+## PMBOT\_GITLAB\_CI\_FILE
+
+**Default**: .gitlab-ci.yml
+
+**Type**: string
+
+**Description**:
+
+The name of the Gitlab CI configuration file. We use this variable to detect CI in your repositories.
+
 ## PMBOT\_GITEA\_URL
 
 **Default**: none
@@ -158,7 +168,7 @@ Client secret of a Github OAuth app.
 
 ## PMBOT\_PORT
 
-**Default**: 3000 (local development) / 80 (Dockerfile)
+**Default**: 3001 (local development) / 80 (Dockerfile)
 
 **Type**: number
 
@@ -205,6 +215,26 @@ Forces the server to rollback the last migration, then exit. Use this when you'r
 **Description**:
 
 How often (in seconds) user repositories should be synchronized.
+
+## PMBOT\_SYNC\_TASK\_INTERVAL
+
+**Default**: 10
+
+**Type**: number
+
+**Description**:
+
+How often (in seconds) we should check for users awaiting synchronization.
+
+## PMBOT\_SYNC\_TASK\_ENABLED
+
+**Default**: true
+
+**Type**: boolean
+
+**Description**:
+
+Whether the server should automatically synchronize repositories (on a regular basis).
 
 ## PMBOT\_ORGS
 
@@ -294,6 +324,16 @@ Allows you to set the [Secure](https://developer.mozilla.org/en-US/docs/Web/HTTP
 
 The **content** of your Pmbot license file.
 
+## PMBOT\_DRONE\_ENABLED
+
+**Default**: false
+
+**Type**: boolean
+
+**Description**:
+
+Whether Drone CI should be enabled.
+
 ## PMBOT\_DRONE\_URL
 
 **Default**: none
@@ -304,7 +344,57 @@ The **content** of your Pmbot license file.
 
 URL of your Drone CI server.
 
-## PMBOT_SCHEDULE_MIN_INTERVAL
+## PMBOT\_DRONE\_FILE
+
+**Default**: .drone.yml
+
+**Type**: string
+
+**Description**:
+
+The name of your Drone CI config file. This is used to detect Drone in your repositories.
+
+## PMBOT\_CIRCLE\_ENABLED
+
+**Default**: false
+
+**Type**: boolean
+
+**Description**:
+
+Whether Drone CI should be enabled.
+
+## PMBOT\_CIRCLE\_URL
+
+**Default**: https://circleci.com
+
+**Type**: string
+
+**Description**:
+
+Circle CI URL. Used as base URL for API calls.
+
+## PMBOT\_CIRCLE\_APP\_URL
+
+**Default**: https://app.circleci.com
+
+**Type**: string
+
+**Description**:
+
+Circle CI app URL. Used as base URL for creating links to Circle CI UI (pipelines...).
+
+## PMBOT\_CIRCLE\_FILE
+
+**Default**: .circleci/config.yml
+
+**Type**: string
+
+**Description**:
+
+The name of your Circle CI config file. This is used to detect Circle CI in your repositories.
+
+## PMBOT\_SCHEDULE\_MIN\_INTERVAL
 
 **Default**: 300 (5 minutes)
 
@@ -314,7 +404,7 @@ URL of your Drone CI server.
 
 The minimum amount of time (in seconds) between two updates of a given schedule. For example, if your schedule defines an update ever minute, in practice you will get an update every `PMBOT_SCHEDULE_MIN_INTERVAL` minutes. 
 
-## PMBOT_DEFAULT_BRANCH_FALLBACK
+## PMBOT\_DEFAULT\_BRANCH\_FALLBACK
 
 **Default**: master
 
@@ -324,7 +414,7 @@ The minimum amount of time (in seconds) between two updates of a given schedule.
 
 When the server cannot determine the default branch of a repository, it uses this fallback.
 
-## PMBOT_REMOVE_SCHEDULES_WHEN_DISABLE_REPO
+## PMBOT\_REMOVE\_SCHEDULES\_WHEN\_DISABLE\_REPO
 
 **Default**: false
 
@@ -334,9 +424,9 @@ When the server cannot determine the default branch of a repository, it uses thi
 
 Whether schedules of a repo should be removed when disabling it.
 
-## PMBOT_UPDATE_SCHEDULER_INTERVAL
+## PMBOT\_UPDATE\_SCHEDULER\_INTERVAL
 
-**Default**: 5 (seconds)
+**Default**: 10 (seconds)
 
 **Type**: string
 
@@ -344,7 +434,7 @@ Whether schedules of a repo should be removed when disabling it.
 
 The interval (in seconds) between each time the server checks for expired schedules. 
 
-## PMBOT_UPDATE_TIMEOUT
+## PMBOT\_UPDATE\_TIMEOUT
 
 **Default**: 86400 (1 day)
 
@@ -354,7 +444,7 @@ The interval (in seconds) between each time the server checks for expired schedu
 
 When an update has started, it will be locked after this amount of time (in seconds). The bot will not be able to change its status or write to it. 
 
-## PMBOT_UPDATE_TIMEOUT_AFTER_END
+## PMBOT\_UPDATE\_TIMEOUT\_AFTER\_END
 
 **Default**: 300 (5 minutes)
 

@@ -60,7 +60,13 @@ volumes:
 
 </div>
 
-## 2. Register Pmbot in your Git server
+## 2. Register Pmbot in your Git server(s)
+
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+As of Pmbot Server v2, you can enable multiple Git servers.
+
+</div>
 
 ### Gitea
 
@@ -169,15 +175,21 @@ services:
 
 </div>
 
-## 3. Configure your CI provider
+## 3. Configure your CI provider(s)
+
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+As of Pmbot Server v2, you can enable multiple CI providers.
+
+</div>
 
 ### Gitlab CI
 
-If you use Gitlab as a Git server, you don't need to configure anything else for using Gitlab CI.
+Gitlab CI is enabled when you use Gitlab as a Git server. You don't need to configure anything else, but you can change things like CI file name using [server environment variables](https://docs.pmbot.io/environment-reference/server-environment-reference).
 
 ### Drone CI
 
-In your `docker-compose.yml`:
+Update your `docker-compose.yml`:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
@@ -189,14 +201,43 @@ services:
     # ...
     environment:
       # ...
+      PMBOT_DRONE_ENABLED: "true"
+      # optional (default https://cloud.drone.io)
       PMBOT_DRONE_URL: http://drone.company.com
 ```
 
 </div>
 
-When you first open the UI, you'll be asked to set your Drone user token so Pmbot can authenticate when using Drone's API. You can get this token in your Drone instance:
+In the UI, you'll be asked to set your Drone personal user token so Pmbot can authenticate when using Drone's API. You can get this token in your Drone instance:
 
-![](../../../images/drone/drone-user-token.gif)
+![](/images/get-drone-token.gif)
+
+You can tune things using [server environment variables](https://docs.pmbot.io/environment-reference/server-environment-reference).
+
+### Circle CI
+
+Update the `docker-compose.yml`:
+
+<div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
+
+```yaml
+# ...
+services:
+  # ...
+  pmbot-server:
+    # ...
+    environment:
+      # ...
+      PMBOT_CIRCLE_ENABLED: "true"
+```
+
+</div>
+
+In the UI, you'll be asked to set your personal user token so Pmbot can authenticate when using the Circle CI API. You can get this token in your Circle CI user settings:
+
+![](/images/get-circle-token.gif)
+
+You can tune things using [server environment variables](https://docs.pmbot.io/environment-reference/server-environment-reference).
 
 ## 4. Run Pmbot
 
