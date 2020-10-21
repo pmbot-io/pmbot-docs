@@ -184,7 +184,7 @@ Port on which pmbot is listening.
 
 **Description**:
 
-Host of your pmbot server. For example `pmbot.company.com:3000`. You can include host and port, but it should not contain protocol as this is handled internally. This value is used for providing correct redirect URL when doing OAuth flows and should 
+Host of your pmbot server. For example `pmbot.company.com:3001`. You can include host and port, but it should not contain protocol as this is handled internally. This value is used for providing correct redirect URL when doing OAuth flows and should 
 
 ## PMBOT\_LOCAL\_HOST
 
