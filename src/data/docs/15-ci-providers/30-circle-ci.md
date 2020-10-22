@@ -22,12 +22,9 @@ You'll need to update your `.circleci/config.yml`.
 ```yaml
 version: 2.1
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# This URL contains a token which is renewed every time you disable/enable a repo
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-notify:
-  webhooks:
-    - url: {{WEBHOOK_URL}}
+# use pmbot orb
+orbs:
+  pmbot: pmbot/webhook@0.1.0
 
 # parameters sent when we trigger an update
 parameters:
@@ -52,6 +49,13 @@ jobs:
             # install dependencies for the npm plugin
             npm ci
             pmbot update
+      - pmbot/webhook
+
+  another-job:
+    steps:
+      # ...
+      # add notify as last step
+      - pmbot/webhook
 
 workflows:
   update:
@@ -86,16 +90,14 @@ Define a secret named `PMBOT_TRUSTED_CA` which contains **the content** of your 
 <div class="code-group" data-props='{ "lineNumbers": ["true"] }'>
 
 ```yaml
-...
-
 steps:
   - name: update
-    ...
+    # ...
     environment:
       PMBOT_TRUSTED_CA:
         from_secret: PMBOT_TRUSTED_CA
     commands:
-      ...
+      # ...
       # output your trusted CA content to a file
       - echo $PMBOT_TRUSTED_CA > .ca-cert.pem
       # pass the trusted CA path via the --trusted-ca option
@@ -104,7 +106,7 @@ steps:
   ...
 
   - name: notify
-    ...
+    # ...
     environment:
       PMBOT_TRUSTED_CA:
         from_secret: PMBOT_TRUSTED_CA
