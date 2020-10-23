@@ -47,6 +47,8 @@ services:
       # Generated with "openssl rand 32 -hex"
       PMBOT_RUNNER_SECRET: 1f1b3c989bd7514797f5bc8da6a6dd8ac6acd08c3719acf47aa2a7f4aa1a7e57
       PMBOT_MONGO_URI: mongodb://mongo:27017/pmbot
+      # if you wish not to enabled automatic crash reporting with Sentry (https://sentry.io)
+      #PMBOT_SENTRY_ENABLED: "false"
 
   mongo:
     image: mongo:4.2-bionic

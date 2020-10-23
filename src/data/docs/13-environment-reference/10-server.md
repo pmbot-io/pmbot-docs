@@ -453,3 +453,13 @@ When an update has started, it will be locked after this amount of time (in seco
 **Description**:
 
 When an update has finished, the bot still has this amount of time (in seconds) to finish all its calls the server.
+
+## PMBOT\_SENTRY\_ENABLED
+
+**Default**: true
+
+**Type**: boolean
+
+**Description**:
+
+Whether to enabled [Sentry](https://sentry.io/) crash reporting.
