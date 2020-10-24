@@ -109,10 +109,10 @@ const HeaderMobile = props => {
                   Blog
                 </a>
                 <a
-                  href="https://github.com/pmbot-io/issues/issues"
+                  href="https://discourse.pmbot.io"
                   className={`link ${styles.link}`}
                 >
-                  Issues
+                  Support
                 </a>
                 <a
                   className={`button ${styles.navButton}`}

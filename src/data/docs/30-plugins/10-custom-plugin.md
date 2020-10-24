@@ -9,7 +9,7 @@ excerpt: ''
 When you don't find what you need in the [native plugins](/plugins/plugin-list), we suggest one of the folloing things:
 
 - create a custom plugin and reference it in your [`.pmbot.yml`](#pmbotyml)
-- open an issue on our [Github issue tracker](https://github.com/pmbot-io/issues/issues) so we can keep track of your request
+- open an issue on our [Github issue tracker](https://discourse.pmbot.io) so we can keep track of your request
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 

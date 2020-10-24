@@ -120,6 +120,6 @@ steps:
 
 <div class="blockquote" data-props='{ "mod": "info" }'>
 
-If any of you out there would like to suggest a shorter or more simple way to do the above, [let us know](https://github.com/pmbot-io/issues/issues) !
+If any of you out there would like to suggest a shorter or more simple way to do the above, [let us know](https://discourse.pmbot.io) !
 
 </div>
