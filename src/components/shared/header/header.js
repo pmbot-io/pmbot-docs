@@ -41,10 +41,10 @@ const Header = props => {
                   Documentation
                 </a>
                 <a
-                  href="https://github.com/pmbot-io/issues/issues"
+                  href="https://discourse.pmbot.io"
                   className={`link ${styles.link}`}
                 >
-                  Issues
+                  Support
                 </a>
                 <a className={`button ${styles.button}`} href="https://docs.pmbot.io/core/installation#installation">
                   Install

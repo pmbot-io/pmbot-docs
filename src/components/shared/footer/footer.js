@@ -30,8 +30,11 @@ const Footer = props => (
               </a>
             </div>
             <div>
-              <a href="https://github.com/pmbot-io/issues" className={`link ${styles.link}`}>
-                Issues
+              <a
+                href="https://discourse.pmbot.io"
+                className={`link ${styles.link}`}
+              >
+                Support
               </a>
             </div>
             <div>
