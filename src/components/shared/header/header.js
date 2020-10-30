@@ -4,6 +4,7 @@ import HeaderMobile from 'components/shared/header-mobile';
 import LogoInlineSvg from 'images/logo.inline.svg';
 
 import styles from './header.module.scss';
+import { BLOG_URL, CLOUD_URL, DOCS_URL, SUPPORT_URL } from '../../../constants/urls';
 
 const Header = props => {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
@@ -29,25 +30,28 @@ const Header = props => {
             <>
               <div className={styles.headerMenu}>
                 <a
-                  href="https://blog.pmbot.io"
+                  href={BLOG_URL}
                   className={`link ${styles.link}`}
                 >
                   Blog
                 </a>
                 <a
-                  href="https://docs.pmbot.io"
+                  href={DOCS_URL}
                   className={`link ${styles.link} ${styles.linkActive}`}
                 >
                   Documentation
                 </a>
                 <a
-                  href="https://discourse.pmbot.io"
+                  href={SUPPORT_URL}
                   className={`link ${styles.link}`}
                 >
                   Support
                 </a>
-                <a className={`button ${styles.button}`} href="https://docs.pmbot.io/core/installation#installation">
-                  Install
+                <a
+                  className={`button ${styles.button}`}
+                   href={CLOUD_URL}
+                >
+                  Sign in
                 </a>
               </div>
             </>

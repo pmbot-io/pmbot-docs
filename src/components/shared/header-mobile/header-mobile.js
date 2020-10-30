@@ -3,6 +3,7 @@ import {AnimatePresence, motion, useCycle} from 'framer-motion';
 import cl from 'classnames';
 import styles from './header-mobile.module.scss';
 import {MOTION_EASE} from 'constants/animation-variables';
+import { BLOG_URL, CLOUD_URL, DOCS_URL, SUPPORT_URL } from '../../../constants/urls';
 
 const backgroundAnimation = {
   open: {
@@ -97,26 +98,26 @@ const HeaderMobile = props => {
                 custom={1}
               >
                 <a
-                  href="https://docs.pmbot.io"
+                  href={DOCS_URL}
                   className={`link ${styles.link} ${styles.linkActive}`}
                 >
                   Documentation
                 </a>
                 <a
-                  href="https://blog.pmbot.io"
+                  href={BLOG_URL}
                   className={`link ${styles.link}`}
                 >
                   Blog
                 </a>
                 <a
-                  href="https://discourse.pmbot.io"
+                  href={SUPPORT_URL}
                   className={`link ${styles.link}`}
                 >
                   Support
                 </a>
                 <a
                   className={`button ${styles.navButton}`}
-                  href="https://app.pmbot.io"
+                  href={CLOUD_URL}
                 >
                   Sign in
                 </a>

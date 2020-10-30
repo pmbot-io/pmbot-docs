@@ -4,6 +4,7 @@ import LogoInlineSvg from 'images/logo.inline.svg';
 import styles from './footer.module.scss';
 
 import WavesSvgUrl from './waves.svg';
+import { BLOG_URL, SUPPORT_URL } from '../../../constants/urls';
 
 const Footer = props => (
   <footer className={styles.wrapper}>
@@ -31,14 +32,17 @@ const Footer = props => (
             </div>
             <div>
               <a
-                href="https://discourse.pmbot.io"
+                href={SUPPORT_URL}
                 className={`link ${styles.link}`}
               >
                 Support
               </a>
             </div>
             <div>
-              <a href="https://blog.pmbot.io" className={`link ${styles.link}`}>
+              <a
+                href={BLOG_URL}
+                className={`link ${styles.link}`}
+              >
                 Blog
               </a>
             </div>
@@ -63,7 +67,7 @@ const Footer = props => (
           </div>
           <div className={styles.section}>
             <div className={styles.sectionName}>Contact us</div>
-            <a href="https://docs.pmbot.io/faq/faq#how-to-get-support" className={`link ${styles.link}`}>
+            <a href={SUPPORT_URL} className={`link ${styles.link}`}>
               Support
             </a>
             <a
