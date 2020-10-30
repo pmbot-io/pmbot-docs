@@ -32,8 +32,6 @@ steps:
         from_secret: PMBOT_URL
       PMBOT_TOKEN:
         from_secret: PMBOT_TOKEN
-      PMBOT_SSH_PRIVATE_KEY:
-        from_secret: PMBOT_SSH_PRIVATE_KEY
     commands:
       # skip this job for standard pipelines
       - if [ -z $PMBOT ]; then exit 0; fi

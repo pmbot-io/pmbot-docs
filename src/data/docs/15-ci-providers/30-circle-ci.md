@@ -34,6 +34,9 @@ parameters:
   PMBOT_UPDATE_ID:
     type: string
     default: ''
+  PMBOT_SSH_PRIVATE_KEY:
+    type: string
+    default: ''
 
 jobs:
   # add this job
