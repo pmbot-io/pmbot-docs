@@ -9,13 +9,19 @@ Circle CI is natively supported in Pmbot. **You will need to use configuration 2
 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
-Pipeline URLs may not always be correct when your pipelines have multiple workflows. We save the URL of the first workflow.
+Pipeline URLs may not always be correct when your pipelines have multiple non-update workflows. We save the URL of the first workflow. We're in touch with Circle CI for providing a URL to the pipeline.
  
 </div>
 
 ## Repo setup
 
 You'll need to update your `.circleci/config.yml`.
+
+<div class="blockquote" data-props='{ "mod": "warning" }'>
+
+As our orb is in development, you will have to enable unauthorized orbs. We will soon have our orb certified so that you can use it without this feature activated. Make sure to use the latest version of [our CircleCI orb](https://circleci.com/developer/orbs/orb/pmbot/webhook).
+
+</div>
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"], "labels": [".drone.yml"] }'>
 
@@ -24,7 +30,7 @@ version: 2.1
 
 # use pmbot orb
 orbs:
-  pmbot: pmbot/webhook@0.1.0
+  pmbot: pmbot/webhook@0.3.0
 
 # parameters sent when we trigger an update
 parameters:
