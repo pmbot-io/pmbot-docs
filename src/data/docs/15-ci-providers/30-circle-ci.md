@@ -30,7 +30,7 @@ version: 2.1
 
 # use pmbot orb
 orbs:
-  pmbot: pmbot/webhook@0.3.0
+  pmbot: pmbot/webhook@1.0.0
 
 # parameters sent when we trigger an update
 parameters:
