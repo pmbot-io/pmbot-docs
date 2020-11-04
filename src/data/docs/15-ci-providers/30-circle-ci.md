@@ -51,6 +51,7 @@ jobs:
       - image: pmbot/bot
     environment:
       PMBOT_UPDATE_ID: << pipeline.parameters.PMBOT_UPDATE_ID >>
+      PMBOT_SSH_PRIVATE_KEY: << pipeline.parameters.PMBOT_SSH_PRIVATE_KEY >>
     steps:
       - checkout
       - run:
