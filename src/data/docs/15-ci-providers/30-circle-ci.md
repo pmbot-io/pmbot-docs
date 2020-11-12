@@ -15,7 +15,8 @@ Pipeline URLs may not always be correct when your pipelines have multiple non-up
 
 ## Repo setup
 
-You'll need to update your `.circleci/config.yml`.
+1. Activate the repo in Pmbot UI
+1. Update your `.circleci/config.yml`. Here is an example for updating Npm dependencies:
 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 

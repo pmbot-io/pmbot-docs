@@ -15,7 +15,8 @@ Done CI does not support repos with names containing more than one `/`. Github p
 
 ## Repo setup
 
-You'll need to update your `.drone.yml`.
+1. Activate the repo in Pmbot UI
+1. Update your `.drone.yml`. Here is an example for updating Npm dependencies:
 
 <div class="code-group" data-props='{ "lineNumbers": ["true"], "labels": [".drone.yml"] }'>
 

@@ -7,9 +7,8 @@ excerpt: ''
 
 ## Repo Setup
 
-You'll need to update in your `.gitlab-ci.yml`. 
-
-Here is an example for updating Npm dependencies:
+1. Activate the repo in Pmbot UI
+2. Update in your `.gitlab-ci.yml`. Here is an example for updating Npm dependencies:
 
 <div class="code-group" data-props='{ "lineNumbers": [true], "labels": [".gitlab-ci.yml"] }'>
 
