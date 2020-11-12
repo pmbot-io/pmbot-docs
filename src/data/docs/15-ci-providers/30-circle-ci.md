@@ -128,9 +128,3 @@ steps:
 ```
 
 </div>
-
-<div class="blockquote" data-props='{ "mod": "info" }'>
-
-We were not able to find a way to hide the webhook token. If you know of any, [let us know](https://discourse.pmbot.io) !
-
-</div>
