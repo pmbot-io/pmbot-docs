@@ -19,7 +19,7 @@ You'll need to update your `.circleci/config.yml`.
 
 <div class="blockquote" data-props='{ "mod": "warning" }'>
 
-As our orb is in development, you will have to enable unauthorized orbs. We will soon have our orb certified so that you can use it without this feature activated. Make sure to use the latest version of [our CircleCI orb](https://circleci.com/developer/orbs/orb/pmbot/webhook).
+Make sure to use the latest version of [our CircleCI orb](https://circleci.com/developer/orbs/orb/pmbot/webhook)
 
 </div>
 
