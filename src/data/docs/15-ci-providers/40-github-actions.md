@@ -14,6 +14,12 @@ Requires:
  
 </div>
 
+<div class="blockquote" data-props='{ "mod": "info" }'>
+
+For technical reasons, the status of update workflows will not be displayed in Pmbot UI.
+ 
+</div>
+
 ## Repo setup
 
 1. Activate the repo in Pmbot UI
