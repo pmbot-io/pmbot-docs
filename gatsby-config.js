@@ -126,7 +126,7 @@ module.exports = {
     // pathPrefix: "",
     siteImage: '/images/social-preview.jpg',
     siteLanguage: 'en',
-    siteUrl: process.env.GATSBY_DEFAULT_SITE_URL,
+    siteUrl: process.env.GATSBY_SITE_URL,
     /* author */
     authorName: 'Pmbot',
     authorTwitterAccount: '@pmbot_io',
