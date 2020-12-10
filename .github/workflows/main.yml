@@ -1,7 +1,7 @@
 name: main
 on: [ push ]
 env:
-  GATSBY_SITE_URL: "https://docs.pmbpt.io"
+  GATSBY_SITE_URL: "https://docs.pmbot.io"
   GATSBY_GITHUB_DOCS_URL: "https://github.com/pmbot-io/docs/tree/master/src/data"
   GATSBY_ALGOLIA_APP_ID: "3N9UA9H1T1"
   GATSBY_ALGOLIA_INDEX_NAME: "prod_PMBOT"
