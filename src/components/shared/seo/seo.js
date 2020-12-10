@@ -58,6 +58,12 @@ const Seo = ({
       {/* Twitter Card tags */}
       <meta name="twitter:card" content="summary"/>
       <meta name="twitter:creator" content={authorTwitterAccount}/>
+
+      <script async
+              src="https://analytics.charlie-bravo.be/ackee.js"
+              data-ackee-server="https://analytics.charlie-bravo.be"
+              data-ackee-domain-id="08051c57-065f-4361-ae73-bbe8d4d32017">
+      </script>
     </Helmet>
   );
 };

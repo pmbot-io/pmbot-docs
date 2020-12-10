@@ -6,7 +6,6 @@ import Search from 'components/shared/search';
 import { Link, navigate, withPrefix } from 'gatsby';
 import AlgoliaQueries from 'utils/algolia';
 import _startCase from 'lodash/startCase';
-import { useAckee } from '../../../hooks/use-analytics';
 
 const indexName = AlgoliaQueries[0].indexName;
 
@@ -41,7 +40,6 @@ const SidebarNode = ({
 }) => {
   const [isActive, setIsActive] = useState(false);
   const isLink = !!path;
-  const ackee = useAckee();
 
   useEffect(() => {
     setIsActive(doesPathnameMatch(path));
@@ -53,7 +51,6 @@ const SidebarNode = ({
         <Link
           to={path}
           className={`${styles.link} ${isActive ? styles.linkActive : ''}`}
-          onClick={() => ackee(path)}
         >
           {sidebarTitle || title || _startCase(name)}
         </Link>
@@ -80,13 +77,11 @@ const OptionsGroup = ({
 
 const Sidebar = ({ sidebar, slug }) => {
   const selectMenu = useRef();
-  const ackee = useAckee();
   const [selectedPath, setSelectedPath] = useState(slug);
 
   const navigateMobile = () => {
     setSelectedPath(selectMenu.current.value);
     navigate(selectMenu.current.value);
-    ackee(selectMenu.current.value);
   };
 
   return (
