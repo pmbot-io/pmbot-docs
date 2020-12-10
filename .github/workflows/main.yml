@@ -1,0 +1,32 @@
+name: main
+on: [ push ]
+env:
+  GATSBY_SITE_URL: "https://docs.pmbpt.io"
+  GATSBY_GITHUB_DOCS_URL: "https://github.com/pmbot-io/docs/tree/master/src/data"
+  GATSBY_ALGOLIA_APP_ID: "3N9UA9H1T1"
+  GATSBY_ALGOLIA_INDEX_NAME: "prod_PMBOT"
+  GATSBY_ALGOLIA_SEARCH_ONLY_KEY: "52eae96101b4ae13360a60eb7e29512e"
+  MELI_SITE: "6d09389c-5cb7-4839-ba4b-a0ff75c12851"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: "install dependencies"
+        run: npm ci
+      - name: "build"
+        run: npm run build
+        env:
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+      - name: "publish"
+        run: |
+          npx @getmeli/cli@next upload \
+            --url "https://cloud.meli.sh" \
+            --site "$MELI_SITE" \
+            --token "$MELI_TOKEN" \
+            ./public
+        env:
+          MELI_TOKEN: ${{ secrets.MELI_TOKEN }}
